@@ -1,0 +1,59 @@
+---
+title: Authentication
+description: 'Set up OAuth2 or API key authentication for the Postiz CLI'
+icon: 'key'
+---
+
+## OAuth2 (Recommended)
+
+Authenticate using the device flow, no client ID or secret needed:
+
+```bash
+postiz auth:login
+```
+
+This will:
+1. Display a one-time code in your terminal
+2. Open your browser to authorize
+3. Automatically save credentials to `~/.postiz/credentials.json`
+
+### Auth Commands
+
+```bash
+# Check current auth status (verifies credentials are still valid)
+postiz auth:status
+
+# Remove stored credentials
+postiz auth:logout
+```
+
+## API Key
+
+Alternatively, set your Postiz API key as an environment variable:
+
+```bash
+export POSTIZ_API_KEY=your_api_key_here
+```
+
+You can get your API key from the Postiz Settings page.
+
+<Note>
+OAuth2 credentials take priority over the API key when both are present.
+</Note>
+
+## Environment Variables
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `POSTIZ_API_KEY` | No* | - | Your Postiz API key |
+| `POSTIZ_API_URL` | No | `https://api.postiz.com` | Custom API endpoint (for self-hosted Postiz) |
+| `POSTIZ_AUTH_SERVER` | No | `https://cli-auth.postiz.com` | Custom auth server URL (for self-hosted auth server) |
+
+*Either OAuth2 (via `postiz auth:login`) or `POSTIZ_API_KEY` is required.
+
+## Self-hosting the auth server
+
+`postiz auth:login` uses a hosted auth server by default, which works whether
+your Postiz is cloud or self-hosted. If you would rather run that piece
+yourself, see
+[Self-hosting the CLI auth server](/self-host/cli-auth-server).
