@@ -9,6 +9,10 @@
 - **社区准则**（2026-09-24 生效）：禁止用自动化运营多个账号、发重复内容；搬运或轻微编辑的非原创内容不进推荐流。
 - **AI 标注**：写实类 AI 内容需标注，接口字段为 `post_info.is_aigc=true`。
 
+## Postiz 源码与文档
+
+已完整并入 [`../../third_party/postiz/`](../../third_party/postiz/)（AGPL-3.0）和 [`../../third_party/postiz-docs/`](../../third_party/postiz-docs/)（MIT），入口文件见 [third_party/README.md](../../third_party/README.md)。
+
 ## 方案候选
 
 - 自托管 [Postiz](https://github.com/gitroomhq/postiz-app)：AGPL-3.0，走官方 API，有 Public API 和 MCP；需自行在 TikTok 开发者平台申请应用审核。

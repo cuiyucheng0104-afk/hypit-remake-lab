@@ -30,6 +30,7 @@
 | [tools/](tools/) | 估价、账本、AutoDL 实例开关机、市场 API、方舟素材库上传、ComfyUI 调试脚本 |
 | [hypit.runtime.example.json](hypit.runtime.example.json) | Runtime Profile 示例：Endpoint 绑定，不含令牌 |
 | [examples/](examples/) | 其它实验工程：讲解员替换、市场 Provider 的离线假服务器测试、早期 remake-kit 工程 |
+| [third_party/](third_party/) | Postiz 完整源码与文档（AGPL / MIT）；PromptHMR 子模块引用（非商业，不含源码） |
 | [docs/](docs/) | Hypit 研究笔记、自有 Provider 接入、云端 ComfyUI、S01 实测评估、平台与接口调研 |
 
 ## 环境
