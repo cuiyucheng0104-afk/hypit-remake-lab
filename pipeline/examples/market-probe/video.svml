@@ -1,0 +1,17 @@
+<?svml using="@hypit/markup@1"?>
+<svml>
+  <import as="asset" from="@hypit/media@1"/>
+  <import as="text" from="@hypit/text@1"/>
+  <import as="h3" from="@hypit/minimax-h3@1"/>
+  <asset:Image id="hero" src="../ref105-remake/s01/hero_face.png"/>
+  <asset:Image id="hench" src="../ref105-remake/export/characters/图片3_配角群.jpg"/>
+  <asset:Video id="clip" src="../ref105-remake/trial/clips/T2_S03_group.mp4"/>
+  <asset:Image id="scene" src="../ref105-remake/export/characters/图片4_场景.jpg"/>
+  <text:Value id="p">雨夜院落，束发髻、黑色暗纹长袍的男子在一群戴竹斗笠的刺客中拔剑。</text:Value>
+  <h3:ReferenceVideo id="shot" prompt={p} duration="4" aspect-ratio="16:9">
+    <h3:Reference image={hero}/>
+    <h3:Reference image={hench}/>
+    <h3:Reference image={scene}/>
+    <h3:Reference video={clip}/>
+  </h3:ReferenceVideo>
+</svml>

@@ -1,0 +1,43 @@
+<?svml using="@hypit/markup@1"?>
+<svml>
+  <import from="@hypit/script@1"/>
+  <import as="media" from="@hypit/media@1"/>
+  <import as="pipeline" from="@hypit/media-pipeline@1"/>
+  <import as="time" from="@hypit/timeline-author@1"/>
+  <import as="whisperx" from="@hypit/whisperx@1"/>
+  <import as="media-track" from="@hypit/media-track@1"/>
+  <import as="space" from="@hypit/spatial@1"/>
+  <import as="film" from="@hypit/film@1"/>
+  <import as="render" from="@hypit/render-hyperframes@1"/>
+  <import as="recipes" source="../recipes.svs"/>
+
+  <script id="story"><empty></empty></script>
+  <space:Canvas id="vertical" width="720" height="1280"/>
+  <time:Clock id="clock" frame-rate="30"/>
+  <media:Image id="still" src="../assets/probe-bg.png"/>
+  <media:Video id="clip" src="../../../references/lanv-30s/source.mp4"/>
+  <pipeline:Normalize id="clip-media" source={clip} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <space:Frame id="full" within={vertical} left="0px" top="0px" right="720px" bottom="1280px"/>
+  <pipeline:StillVideo id="duration" source={still} duration="1" clock={clock}/>
+  <pipeline:Normalize id="duration-media" source={duration.video} clock={clock}
+    video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t" narrative={story} segment={story.segment.empty} media={duration-media.media}/>
+  <time:Timeline id="program" clock={clock}><time:Take source={t.take}/></time:Timeline>
+
+  <space:Frame id="box-a" within={vertical} left="100px" top="300px" right="228px" bottom="560px"/>
+  <space:Path id="arrow-a"><space:Move x="142" y="310"/><space:Line x="186" y="310"/><space:Line x="186" y="480"/><space:Line x="218" y="480"/><space:Line x="164" y="546"/><space:Line x="110" y="480"/><space:Line x="142" y="480"/><space:Close/></space:Path>
+  <space:Frame id="box-b" within={vertical} left="400px" top="300px" right="528px" bottom="560px"/>
+
+  <media-track:Track id="under" timeline={program.timeline} canvas={vertical}>
+    <media-track:Item id="video" media={clip-media.media} frame={full} appearance={recipes.media.demo} during="program"/>
+  </media-track:Track>
+  <media-track:Track id="pointers" timeline={program.timeline} canvas={vertical}>
+    <media-track:Item id="clipped" frame={box-a} clip={arrow-a} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-2} start="0.3s" end="0.9s"><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="plain" frame={box-b} appearance={recipes.media.pointer-fill} motion={recipes.motion.circle} start="0.3s" end="0.9s"><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+  </media-track:Track>
+  <film:Film id="main" canvas={vertical} timeline={program.timeline} appearance={recipes.film.vertical}>
+    <film:Track source={under.visual}/>
+    <film:Track source={pointers.visual}/>
+  </film:Film>
+  <render:Video id="final" composition={main.composition} timeline={program.timeline}/>
+</svml>

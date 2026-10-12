@@ -1,0 +1,108 @@
+{
+ "_说明": "S01 单段：8.3 秒，一次 H3 请求（9 秒）裁回 8.3 秒",
+ "beats": [
+  {
+   "id": "s01",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "hero_full",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "{hero} stands alone against {henchmen} in a rain-soaked courtyard: a tense standoff told in quick shot-reverse-shot that breaks into a charge and the first clash.",
+   "note": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打（原片 13 镜，H 0.23s 模糊碎片并入 I）",
+   "shots": [
+    {
+     "start": 0,
+     "end": 27,
+     "camera": "Medium close-up, static camera at eye level",
+     "action": "{hero} stands alone under the eaves in front of a dark lattice window, rain falling behind him. He lifts his eyes to the camera, calm and cold, weighing the danger without fear.",
+     "dialogue": ""
+    },
+    {
+     "start": 27,
+     "end": 42,
+     "camera": "Side-profile close-up on a telephoto lens, shallow focus",
+     "action": "A row of {henchmen} seen in profile, the nearest one large and out of focus in the foreground, rain streaking across them as they stare toward the lone man.",
+     "dialogue": ""
+    },
+    {
+     "start": 42,
+     "end": 66,
+     "camera": "High-angle wide shot",
+     "action": "{henchmen} spread across the wet stone courtyard in loose ranks, sabres drawn, closing in step by step.",
+     "dialogue": ""
+    },
+    {
+     "start": 66,
+     "end": 88,
+     "camera": "Tight close-up, his face filling the right half of the frame",
+     "action": "{hero} turns his head slightly; his eyes narrow with quiet resolve.",
+     "dialogue": ""
+    },
+    {
+     "start": 88,
+     "end": 104,
+     "camera": "Insert close-up of the hand",
+     "action": "{hero} draws his sword and settles it into a reverse grip, the blade laid back along his forearm: he means to punish, not to kill.",
+     "dialogue": ""
+    },
+    {
+     "start": 104,
+     "end": 114,
+     "camera": "Overhead shot looking straight down",
+     "action": "{hero} stands alone on the rain-dark paving, a small still figure in the middle of the courtyard.",
+     "dialogue": ""
+    },
+    {
+     "start": 114,
+     "end": 128,
+     "camera": "Wide shot over the backs of the crowd",
+     "action": "The backs of {henchmen} fill the foreground; far away at the centre, {hero} stands at the top of the stone steps facing them.",
+     "dialogue": ""
+    },
+    {
+     "start": 128,
+     "end": 147,
+     "camera": "Handheld medium close-up with motion blur",
+     "action": "{henchmen} surge forward with a roar, teeth bared and sabres raised, rushing straight at the camera.",
+     "dialogue": ""
+    },
+    {
+     "start": 147,
+     "end": 161,
+     "camera": "Close-up, his face filling the frame",
+     "action": "{hero} holds perfectly still, unmoved, rain running down his face.",
+     "dialogue": ""
+    },
+    {
+     "start": 161,
+     "end": 171,
+     "camera": "Insert close-up of the hand",
+     "action": "His fingers tighten on the reversed grip.",
+     "dialogue": ""
+    },
+    {
+     "start": 171,
+     "end": 191,
+     "camera": "Low-angle wide shot close to the ground",
+     "action": "{henchmen} sprint across the flooded courtyard, feet splashing; {hero} launches forward to meet them.",
+     "dialogue": ""
+    },
+    {
+     "start": 191,
+     "end": 249,
+     "camera": "Fast lateral tracking medium shot with motion blur",
+     "action": "{hero} spins through the first attackers, deflecting sabres with the reversed blade and knocking two men down; the fight begins in a burst of spray.",
+     "dialogue": ""
+    }
+   ],
+   "fit": "retime",
+   "pin": {
+    "build": "bld_20260930T160208226Z_D0EA970CE4",
+    "output": "g-s01.video"
+   }
+  }
+ ]
+}

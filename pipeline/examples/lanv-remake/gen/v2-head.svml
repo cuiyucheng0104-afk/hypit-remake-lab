@@ -1,0 +1,62 @@
+<?svml using="@hypit/markup@1"?>
+<!-- 新版蓝V认证教程 · 前 30 秒复刻
+     保留：俯拍手机的操作画面、操作段原配音。
+     重做：开场讲解员（H3 生成）、标题、字幕、红色指引（全部挂在台词上）。 -->
+<svml>
+  <import as="asset" from="@hypit/media@1"/>
+  <import as="text" from="@hypit/text@1"/>
+  <import as="pipeline" from="@hypit/media-pipeline@1"/>
+  <import as="h3" from="@hypit/minimax-h3@1"/>
+  <import as="time" from="@hypit/timeline-author@1"/>
+  <import from="@hypit/script@1"/>
+  <import as="whisperx" from="@hypit/whisperx@1"/>
+  <import as="space" from="@hypit/spatial@1"/>
+  <import as="performance" from="@hypit/performance@1"/>
+  <import as="sound" from="@hypit/sound@1"/>
+  <import as="media-track" from="@hypit/media-track@1"/>
+  <import as="typo" from="@hypit/typography-track@1"/>
+  <import as="caption-fine" from="@hypit/caption-fine@1"/>
+  <import as="fonts" from="@hypit/fonts-open@1"/>
+  <import as="film" from="@hypit/film@1"/>
+  <import as="render" from="@hypit/render-hyperframes@1"/>
+  <import as="recipes" source="./recipes.svs"/>
+
+  <time:Clock id="clock" frame-rate="30"/>
+
+  <!-- 参考片与讲解员形象 -->
+  <asset:Video id="reference" src="../../references/lanv-30s/source.mp4"/>
+  <asset:Video id="presenter-look" src="./assets/tk-presenter.mp4"/>
+
+  <!-- 讲解员形象：取绿幕素材里正对镜头的一帧 -->
+  <pipeline:ExtractFrame id="presenter-still" source={presenter-look}
+    video="primary-moving" at="time:9.5s"/>
+
+  <!-- 原开场的声音，作为新讲解员的音色参考 -->
+  <pipeline:Normalize id="reference-media" source={reference} clock={clock}
+    video="primary-moving" audio="default" span-authority="video"/>
+  <pipeline:Transform id="opening-cut" source={reference-media.media}>
+    <pipeline:Trim end="2.2s"/>
+  </pipeline:Transform>
+  <pipeline:ExtractAudio id="opening-voice" source={opening-cut.video} audio="default"/>
+
+  <!-- 新讲解员：办公室中近景，对镜头说开场白 -->
+  <text:Value id="presenter-prompt">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the young woman from &lt;Picture 1&gt;, with long black hair gathered into a low updo with loose strands framing her face, fair skin, soft natural makeup, a white satin long-sleeve blouse and a black high-waisted pencil skirt.",
+    "&lt;Audio 1&gt; is the voice of &lt;Subject 1&gt;: a bright, clear young female Mandarin voice with a quick, friendly delivery."
+  ],
+  "summary": "[reference generation] A 5-second single-shot medium close-up in a bright modern office, where &lt;Subject 1&gt; looks into the camera and introduces a phone tutorial.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt; (appears in [Shot 1]): fully_preserved - face, hairstyle, white satin blouse and black skirt are retained; the green backdrop of &lt;Picture 1&gt; is replaced by the office."
+  ],
+  "detailed_description": "Photorealistic vertical-video vlog style, natural daylight from office windows, sharp focus on the face.\n\n[Shot 1] Medium close-up, static camera at eye level (00:00.000 - 00:05.000). &lt;Subject 1&gt; sits at a white office desk in a bright open-plan office, with computer monitors, green potted plants and softly blurred colleagues behind her. From the very first frame she is already facing the camera mid-breath and starts talking at 00:00.200 without any pause, at a brisk, energetic pace, lifting one hand in a small open gesture. (S1) in the voice of &lt;Audio 1&gt;, &lt;d&gt;[Chinese] 这边是新版蓝V的认证，我带大家操作一遍。&lt;/d&gt; The whole line is finished by 00:03.200, ending clearly on the word 一遍. From 00:03.200 to 00:05.000 she stays silent, smiling at the camera and lowering her hand. No text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Quiet office room tone and a clear close-miked female voice.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="presenter" prompt={presenter-prompt} duration="5"
+    resolution="768P" aspect-ratio="1:1">
+    <h3:Reference image={presenter-still.image}/>
+    <h3:Reference audio={opening-voice.audio}/>
+  </h3:ReferenceVideo>
+
+</svml>

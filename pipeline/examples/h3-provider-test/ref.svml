@@ -1,0 +1,23 @@
+<?svml using="@hypit/markup@1"?>
+<svml>
+  <import as="asset" from="@hypit/media@1"/>
+  <import as="text" from="@hypit/text@1"/>
+  <import as="h3" from="@hypit/minimax-h3@1"/>
+
+  <asset:Image id="hero" src="../ref105-remake/assets/hero.jpg"/>
+  <asset:Video id="s07" src="../ref105-remake/export/refclips/S07.mp4"/>
+
+  <text:Value id="prompt">
+{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the swordsman from &lt;Picture 1&gt;: a lean man with a black topknot, a few wet strands over his forehead, an old scar across one brow, wearing a dark indigo robe embroidered with faint silver carp and wave patterns, a dark scabbard at his waist, no hat."
+  ],
+  "summary": "[reference generation] Recreate &lt;Video 1&gt; shot by shot: keep its exact action, timing, camera framing, camera movement and cuts. Replace the blue-robed protagonist in &lt;Video 1&gt; with &lt;Subject 1&gt;. Keep the rainy night ancient courtyard, heavy rain, splashing water and the white water-splash flash at the end.",
+  "style": "Cinematic, photorealistic, cold blue night tones, visible rain streaks, no text, no subtitles, no watermark."
+}
+  </text:Value>
+  <h3:ReferenceVideo id="s07-remake" prompt={prompt} duration="5" aspect-ratio="16:9">
+    <h3:Reference image={hero}/>
+    <h3:Reference video={s07}/>
+  </h3:ReferenceVideo>
+</svml>

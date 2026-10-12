@@ -1,0 +1,85 @@
+<?svml using="@hypit/markup@1"?>
+<!-- 由 remake-kit/remake.py compose 从 remake.json / cast.json / beats.json 生成，别手改；改那三份再 compose。 -->
+<svml>
+  <import as="asset" from="@hypit/media@1"/>
+  <import as="text" from="@hypit/text@1"/>
+  <import as="pipeline" from="@hypit/media-pipeline@1"/>
+  <import as="h3" from="@hypit/minimax-h3@1"/>
+  <import as="time" from="@hypit/timeline-author@1"/>
+  <import from="@hypit/script@1"/>
+  <import as="whisperx" from="@hypit/whisperx@1"/>
+  <import as="space" from="@hypit/spatial@1"/>
+  <import as="performance" from="@hypit/performance@1"/>
+  <import as="sound" from="@hypit/sound@1"/>
+  <import as="audio" from="@hypit/audio-track@1"/>
+  <import as="film" from="@hypit/film@1"/>
+  <import as="render" from="@hypit/render-hyperframes@1"/>
+  <import as="recipes" source="../recipes/remake.svs"/>
+
+  <time:Clock id="clock" frame-rate="30"/>
+  <asset:Video id="source" src="../../../references/ref-105/source.mp4"/>
+  <asset:Image id="cast-henchmen" src="../cast/henchmen.jpg"/>
+  <asset:Image id="cast-hero" src="../cast/hero_face.png"/>
+  <asset:Image id="cast-hero_full" src="../cast/hero_full.png"/>
+  <asset:Image id="cast-scene" src="../cast/scene.jpg"/>
+
+  <!-- 每个段落一个空 Segment：没有台词，时长由这一段的画面决定。 -->
+  <script id="story">
+    <s01/>
+  </script>
+
+  <!-- ===== s01 · 原片 0–249 帧（8.30 秒，12 镜）· h3-reference ===== -->
+  <text:Value id="p-s01">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Picture 2&gt; shows the same man's full-length costume: near-black robe, leather belt and a long sword in a dark scabbard at his waist.",
+    "&lt;Subject 2&gt; are the group in &lt;Picture 3&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 4&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] &lt;Subject 1&gt; stands alone against &lt;Subject 2&gt; in a rain-soaked courtyard: a tense standoff told in quick shot-reverse-shot that breaks into a charge and the first clash.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, falling rain and wet reflective stone, fast practical sword fighting with clear contact.\n\n[Shot 1] Medium close-up, static camera at eye level (00:00.000 - 00:00.976). &lt;Subject 1&gt; stands alone under the eaves in front of a dark lattice window, rain falling behind him. He lifts his eyes to the camera, calm and cold, weighing the danger without fear.\n\n[Shot 2] Side-profile close-up on a telephoto lens, shallow focus (00:00.976 - 00:01.518). A row of &lt;Subject 2&gt; seen in profile, the nearest one large and out of focus in the foreground, rain streaking across them as they stare toward the lone man.\n\n[Shot 3] High-angle wide shot (00:01.518 - 00:02.386). &lt;Subject 2&gt; spread across the wet stone courtyard in loose ranks, sabres drawn, closing in step by step.\n\n[Shot 4] Tight close-up, his face filling the right half of the frame (00:02.386 - 00:03.181). &lt;Subject 1&gt; turns his head slightly; his eyes narrow with quiet resolve.\n\n[Shot 5] Insert close-up of the hand (00:03.181 - 00:03.759). &lt;Subject 1&gt; draws his sword and settles it into a reverse grip, the blade laid back along his forearm: he means to punish, not to kill.\n\n[Shot 6] Overhead shot looking straight down (00:03.759 - 00:04.120). &lt;Subject 1&gt; stands alone on the rain-dark paving, a small still figure in the middle of the courtyard.\n\n[Shot 7] Wide shot over the backs of the crowd (00:04.120 - 00:04.627). The backs of &lt;Subject 2&gt; fill the foreground; far away at the centre, &lt;Subject 1&gt; stands at the top of the stone steps facing them.\n\n[Shot 8] Handheld medium close-up with motion blur (00:04.627 - 00:05.313). &lt;Subject 2&gt; surge forward with a roar, teeth bared and sabres raised, rushing straight at the camera.\n\n[Shot 9] Close-up, his face filling the frame (00:05.313 - 00:05.819). &lt;Subject 1&gt; holds perfectly still, unmoved, rain running down his face.\n\n[Shot 10] Insert close-up of the hand (00:05.819 - 00:06.181). His fingers tighten on the reversed grip.\n\n[Shot 11] Low-angle wide shot close to the ground (00:06.181 - 00:06.904). &lt;Subject 2&gt; sprint across the flooded courtyard, feet splashing; &lt;Subject 1&gt; launches forward to meet them.\n\n[Shot 12] Fast lateral tracking medium shot with motion blur (00:06.904 - 00:09.000). &lt;Subject 1&gt; spins through the first attackers, deflecting sabres with the reversed blade and knocking two men down; the fight begins in a burst of spray.\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Steady rain, low tension, the scrape of a drawn blade, a roar as the crowd charges, splashing footsteps and clashing steel.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s01" prompt={p-s01} duration="9" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-hero_full}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s01" source={g-s01.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s01" source={gm-s01.media}>
+    <pipeline:Retime rate="1.084337" pitch="preserve"/>
+    <pipeline:Trim end="8.3s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s01" source={cut-s01.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s01" narrative={story} segment={story.segment.s01} media={m-s01.media}/>
+
+  <!-- 每段放回它在原片里的位置（帧），整片长度与原片复刻区间一致。 -->
+  <time:Timeline id="program" clock={clock} end="249f">
+    <time:Take source={t-s01.take} at="0f"/>
+  </time:Timeline>
+
+  <space:Canvas id="canvas" width="1280" height="720"/>
+  <space:Frame id="full" within={canvas} left="0px" top="0px" right="1280px" bottom="720px"/>
+  <performance:Style id="shot-view" frame={full} appearance={recipes.media.shot}/>
+  <performance:Track id="picture" timeline={program.timeline} canvas={canvas}>
+    <performance:Use style={shot-view}/>
+  </performance:Track>
+
+  <!-- 声音：整段用参考片原声（音乐、音效、节奏都跟原切点对齐），生成画面静音。 -->
+  <pipeline:Normalize id="source-audio" source={source} clock={clock} video="none" audio="default" span-authority="audio"/>
+  <audio:Track id="soundtrack" timeline={program.timeline}>
+    <audio:Item id="source-soundtrack" source={source-audio.media} during="program" playback="once-start"/>
+  </audio:Track>
+
+  <film:Film id="main" canvas={canvas} timeline={program.timeline} appearance={recipes.film.main}>
+    <film:Track source={picture.visual}/>
+    <film:Track source={soundtrack.audio}/>
+  </film:Film>
+  <render:Video id="final" composition={main.composition} timeline={program.timeline}/>
+</svml>

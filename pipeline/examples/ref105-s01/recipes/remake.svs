@@ -1,0 +1,7 @@
+<?svml using="@hypit/svs@1"?>
+
+<sheet version="1">
+  film.main { background: #000000; }
+  /* 生成画面铺满画布，比例不同时裁边不留黑。 */
+  media.shot { stack-order: 0; fit: cover; }
+</sheet>

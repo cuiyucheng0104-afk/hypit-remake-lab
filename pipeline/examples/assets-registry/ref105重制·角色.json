@@ -1,0 +1,71 @@
+[
+ {
+  "name": "主角",
+  "file": "productions/ref105-remake/assets/hero.jpg",
+  "asset_id": "asset-20260929020448-4m7kk",
+  "ref": "asset://asset-20260929020448-4m7kk",
+  "status": "Active",
+  "group": "ref105重制·角色",
+  "group_id": "group-20260929020444-c24xj",
+  "project": "default",
+  "detail": {
+   "AssetType": "Image",
+   "CreateTime": "2026-09-28T18:04:50Z",
+   "GroupId": "group-20260929020444-c24xj",
+   "Id": "asset-20260929020448-4m7kk",
+   "Moderation": {
+    "Strategy": "Default"
+   },
+   "Name": "主角",
+   "ProjectName": "default",
+   "Status": "Active",
+   "UpdateTime": "2026-09-28T18:04:52Z"
+  }
+ },
+ {
+  "name": "反派头目",
+  "file": "productions/ref105-remake/assets/villain-boss.jpg",
+  "asset_id": "asset-20260929020452-jhkwh",
+  "ref": "asset://asset-20260929020452-jhkwh",
+  "status": "Active",
+  "group": "ref105重制·角色",
+  "group_id": "group-20260929020444-c24xj",
+  "project": "default",
+  "detail": {
+   "AssetType": "Image",
+   "CreateTime": "2026-09-28T18:04:53Z",
+   "GroupId": "group-20260929020444-c24xj",
+   "Id": "asset-20260929020452-jhkwh",
+   "Moderation": {
+    "Strategy": "Default"
+   },
+   "Name": "反派头目",
+   "ProjectName": "default",
+   "Status": "Active",
+   "UpdateTime": "2026-09-28T18:04:55Z"
+  }
+ },
+ {
+  "name": "配角群",
+  "file": "productions/ref105-remake/assets/henchmen.jpg",
+  "asset_id": "asset-20260929020455-bd7gt",
+  "ref": "asset://asset-20260929020455-bd7gt",
+  "status": "Active",
+  "group": "ref105重制·角色",
+  "group_id": "group-20260929020444-c24xj",
+  "project": "default",
+  "detail": {
+   "AssetType": "Image",
+   "CreateTime": "2026-09-28T18:04:56Z",
+   "GroupId": "group-20260929020444-c24xj",
+   "Id": "asset-20260929020455-bd7gt",
+   "Moderation": {
+    "Strategy": "Default"
+   },
+   "Name": "配角群",
+   "ProjectName": "default",
+   "Status": "Active",
+   "UpdateTime": "2026-09-28T18:04:58Z"
+  }
+ }
+]

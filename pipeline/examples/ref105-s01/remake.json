@@ -1,0 +1,22 @@
+{
+ "source": "../../references/ref-105/source.mp4",
+ "range": [
+  0.0,
+  8.3
+ ],
+ "fps": 30,
+ "width": 1280,
+ "height": 720,
+ "aspect": "16:9",
+ "resolution": null,
+ "audio": "source",
+ "style": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, falling rain and wet reflective stone, fast practical sword fighting with clear contact.",
+ "soundscape": "Steady rain, low tension, the scrape of a drawn blade, a roar as the crowd charges, splashing footsteps and clashing steel.",
+ "music": "N/A",
+ "dialogue_language": "Chinese",
+ "beat_seconds": [
+  4,
+  8
+ ],
+ "fit": "trim"
+}

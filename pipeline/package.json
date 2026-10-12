@@ -1,0 +1,10 @@
+{
+  "name": "hypit-projects",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@local/provider-comfy-h3": "file:packages/provider-comfy-h3",
+    "@local/provider-autodl-market": "file:packages/provider-autodl-market"
+  }
+}

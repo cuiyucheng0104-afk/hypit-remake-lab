@@ -1,0 +1,780 @@
+[
+ {
+  "id": "data-api",
+  "findings": [
+   {
+    "item": "FastMoss 是否开放程序化接口",
+    "fact": "FastMoss 开发者中心（developers.fastmoss.com）同时提供 MCP、CLI 和 REST API，三者共用一个 Key 和一个余额。页面写明 REST API 有 55 个接口，用于数据管道、BI 和 SaaS；CLI 能调用同一组 55 个工具。官网会员页把它标为“API数据接口：接入您的系统，低至$0.01/次”。",
+    "price": "低至 USD 0.01/次（官网会员页标注）",
+    "grade": "官方",
+    "source": "https://developers.fastmoss.com/zh/home ；https://www.fastmoss.com/zh/pricing（页面源码中的 apiPrice 字段）",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "FastMoss OpenAPI 按接口计价（核心预算依据）",
+    "fact": "官方定价接口 /developer/payment/endpointsList 列出 30 个可单独购买的接口，计量单位为 requests/$，每个接口默认 1000 次。按类别：Product 9 个、Shop 8 个、Creator 8 个、LIVE 3 个、Agency 2 个、Video 只有 1 个（/video/v1/search）。计费规则：单次调用价格对应 pagesize≤10；pagesize 大于 10 时，消耗额度 = ceil(pagesize/10)；返回 0 条不扣费。免费试用总共 500 次；企业定制版需联系销售，请求量不限。列表里没有看到话题（hashtag）、音乐趋势或视频下载类接口。",
+    "price": "Product/Shop/Video/LIVE 类大多为 USD 0.01/次；Creator 类和部分关联达人接口为 USD 0.02/次；默认包 1000 次（相当于每个接口 USD 10–20）；免费 500 次；Enterprise 价格需联系销售",
+    "grade": "官方",
+    "source": "https://developers.fastmoss.com/zh/pricing ；https://developers.fastmoss.com/developer/payment/endpointsList ；https://developers.fastmoss.com/developer/payment/itemList?month=12",
+    "date": "2026-10-05 查询（公开 GET 接口实时返回）"
+   },
+   {
+    "item": "FastMoss MCP/CLI 积分套餐",
+    "fact": "官方套餐接口 /developer/mcp/payment/plans 返回（美区，USD）：Free Trial $0，300 积分，3 天，40 次/分钟；一次性充值包 Starter $12（1,000 积分）、Booster $29（6,000 积分）、Power $69（15,000 积分）；月订阅 Basic $19（5,000 积分/月，60 次/分钟，3 个 Key）、Pro $59（15,000 积分/月，80 次/分钟）、Max $129（35,000 积分/月，120 次/分钟，10 个 Key）；年付 Basic $192、Pro $588、Max $1,308（约 8 折）。注意：接口里的 included_credits 字段（如 Basic 为 500）和 benefits 文案（5,000 credits/month）对不上，以哪个为准要向官方确认。积分和调用次数怎么换算未查到。",
+    "price": "USD 19 / 59 / 129 每月；年付 USD 192 / 588 / 1,308；充值包 USD 12 / 29 / 69",
+    "grade": "官方",
+    "source": "https://developers.fastmoss.com/developer/mcp/payment/plans",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "FastMoss 网页会员（人工分析用）",
+    "fact": "官网中文页有标准版、专业版、旗舰版三档，另有“企业定制API服务”。标准版：近 90 天历史、导出 10 次/月；专业版：近 180 天、导出 100 次/月、视频监控 200 次/月；旗舰版：最高 1200 天以上、导出 150 次/月。英文页写有视频下载器（30 或 300 个/月）、视频转写和脚本生成等 AI 额度。官方 FAQ 原话：“订阅方案是按地区划分的，如需访问多个地区，需要分别订阅”。会员页渲染时价格为空，具体价格未在官方页面直接取到。",
+    "price": "官方页面价格未取到。第三方 getpulsesignal（2026-09-28 核验）：Basic USD 49/月或年付折合 USD 47/月（USD 558/年）；Pro USD 89/月或年付 USD 854/年；Ultimate USD 139/月或年付 USD 1,084/年；加席位 Pro USD 30/月、Ultimate USD 70/月。官方横幅：美区“会员低至 $22/月”（周年活动，活动期标为 8.3–9.9，可能已结束）",
+    "grade": "官方",
+    "source": "https://www.fastmoss.com/zh/pricing ；https://www.fastmoss.com/pricing ；第三方价格：https://getpulsesignal.com/pricing/fastmoss",
+    "date": "2026-10-05 查询；第三方页面 2026-09-28"
+   },
+   {
+    "item": "FastMoss 数据范围和覆盖国家",
+    "fact": "会员页数据模块包括商品、达人、店铺、直播、视频与素材、广告、广告主、MCN 机构。官方 FAQ 列出的市场：美国、英国、印尼、菲律宾、越南、泰国、马来西亚、墨西哥、西班牙；页面另一处写“全球版覆盖 20 个数据市场”“东南亚 6 个市场”，还列了德、法、意、巴西、日本等。宣传口径为商品/店铺 6.2 亿以上、达人 3.8 亿以上、历史数据 1500 天以上（另一处写 1200 天以上，两处口径不一致）。运营主体为北京有乐今天科技有限公司（京ICP备2022001863号-5）。",
+    "price": "—",
+    "grade": "官方",
+    "source": "https://www.fastmoss.com/zh/pricing（页面文本和源码）",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "FastMoss 用户协议和数据再利用条款",
+    "fact": "开发者中心付款时要求勾选《用户协议》和《支付协议》，但协议原文是 JS 渲染的，抓取失败。数据能否商用、能否再分发、能否用于训练，均未查到原文。",
+    "price": "—",
+    "grade": "官方",
+    "source": "https://developers.fastmoss.com/assets/app.I9oegw9o.js（只看到协议名称）；https://www.fastmoss.com/zh/docs/user-agreement（未能渲染）",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "EchoTik 网页会员",
+    "fact": "官网 Pricing 页列出：Free $0；Basic 年付 USD 9.9/人/月，月付 USD 13.9；Pro 年付 USD 19.1，月付 USD 29；Enterprise 年付 USD 29.1，月付 USD 57。Enterprise 每天可导出商品最多 6 万条、其他数据最多 5 千条。页面写可提供 7 天无条件退款，并可做定制方案和 API 服务。",
+    "price": "USD 9.9 / 19.1 / 29.1 每人每月（年付）；USD 13.9 / 29 / 57（月付）",
+    "grade": "官方",
+    "source": "https://echotik.live/pricing",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "EchoTik API",
+    "fact": "官方 API 文档写明单次请求“低至 $0.001”，注册送 100 次测试调用。接口分两类：一类是 EchoTik 自有库（达人、商品、店铺、视频、直播、话题的列表、趋势和榜单）；另一类是“实时接口”，文档自述直接从 TikTok 公开接口抓取，包括视频详情、字幕和文本提取、视频下载链接、热门话题、推荐视频流、音乐和贴纸排行。宣传覆盖 13 个以上国家（第三方博客口径）。具体套餐价格表未查到，需要登录控制台查看。",
+    "price": "低至 USD 0.001/次（官方文案）；具体套餐未查到",
+    "grade": "官方",
+    "source": "https://opendocs.echotik.live/en ；https://echotik.live/en/api-service",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "Kalodata",
+    "fact": "官网 pricing 页有 Cloudflare 校验加 JS 渲染，官方价格没有取到。第三方 Creatify 博客（2026-10-03）引用 App Store 和日本代理商资料：Starter USD 49.99/月（日本 ¥7,800/月）；Standard/Professional USD 61.99–129.99/月；Enterprise 约 USD 569–599.99/月（日本 ¥63,800/月）；覆盖 15 个国家，分区域购买。同一篇文章对 API 的说法自相矛盾：一处说 Professional 及以上含 API，另一处说只有 Enterprise 含。",
+    "price": "第三方口径：USD 49.99 至约 USD 599.99 每月；API 只在高档或企业版提供（未经官方确认）",
+    "grade": "第三方",
+    "source": "https://creatify.ai/blog/kalodata-pricing-plans-and-what-you-ll-actually-pay-in-2026",
+    "date": "页面 2026-10-03；查询 2026-10-05"
+   },
+   {
+    "item": "Tabcut",
+    "fact": "官网 pricing 页是 JS 渲染，官方价格和 API 情况均未查到。第三方口径：起价约 USD 39/月，档位约 USD 48–172/月；是否有 API 未查到。",
+    "price": "第三方：约 USD 39–172 每月",
+    "grade": "第三方",
+    "source": "https://virlo.ai/compare/virlo-vs-tabcut ；https://www.copyfy.io/alternatives/5-best-tabcut-alternatives（只看了搜索摘要）",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "TikTok Creative Center（趋势）",
+    "fact": "官方帮助文档称 Creative Center 是“免费、公开”的创意资源中心，包括 Top Ads、趋势（热门话题等）、Keyword Insights 和 Symphony 创作工具。没有看到面向趋势数据的官方程序化 API。第三方说法：话题趋势分析需要登录。",
+    "price": "免费",
+    "grade": "官方",
+    "source": "https://ads.tiktok.com/help/article/creative-center",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "TikTok Research API",
+    "fact": "仅向以下机构开放：美国、EEA、英国、加拿大、瑞士的学术机构；欧盟非营利研究机构（部分国家在 beta）；研究青少年安全的巴西学术或非营利机构。申请方必须独立于商业利益，并提交伦理审查材料。FAQ 明确写：创作者、广告主、商业用户没有资格。配额为每天 1000 次请求、最多 10 万条记录；审批一般约 4 周；视频统计数据最多滞后 10 天。",
+    "price": "免费，但本项目不符合申请资格",
+    "grade": "官方",
+    "source": "https://developers.tiktok.com/products/research-api/ ；https://developers.tiktok.com/docs/en/research-api-faq",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "TikTok Commercial Content API",
+    "fact": "提供广告和广告主的公开数据（广告库）。现阶段只包含欧盟国家的数据，申请人可以在任何国家；约 2 个工作日给出答复。",
+    "price": "官方未标价（未查到收费信息）",
+    "grade": "官方",
+    "source": "https://developers.tiktok.com/products/commercial-content-api",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "TikTok Shop 开放平台（Partner Center）",
+    "fact": "第三方资料：Open API 覆盖订单、商品、库存、联盟达人、结算等，需要商家逐一做 OAuth 授权，只能拿到已授权店铺的自有数据；分美区和 Global 两个 Partner Portal。没有看到能提供全平台趋势、竞品数据的官方说明。API 是否收费，官方说明未查到。",
+    "price": "未查到",
+    "grade": "第三方",
+    "source": "https://www.keyapi.ai/blog/tiktok-shop-api-integration-guide-sellers ；https://truto.one/integrations/detail/tiktokshoppartner/",
+    "date": "2026-10-05 查询"
+   },
+   {
+    "item": "TikTok 服务条款里的抓取和商用限制",
+    "fact": "美国版 ToS（最后更新 2026-07-15，主体为 TikTok USDS Joint Venture）禁止用任何自动化系统抓取、爬取或导出平台数据，除非有书面许可；禁止把 TikTok 内容、他人内容或生成式 AI 功能用于商业目的，除非获得许可。其他地区版本写明服务仅供“私人、非商业使用”，禁止用自动脚本采集信息，未经书面同意不得用于商业目的。",
+    "price": "—",
+    "grade": "官方",
+    "source": "https://www.tiktok.com/legal/page/us/terms-of-service/en ；https://www.tiktok.com/legal/page/row/terms-of-service/en",
+    "date": "美国版 2026-07-15；查询 2026-10-05"
+   }
+  ],
+  "risks": [
+   "合规风险（最高）：TikTok 官方 ToS 禁止未经书面许可的自动化抓取，并禁止未经许可把 TikTok 内容或他人内容用于商业目的。第三方数据商（FastMoss、EchoTik 等）的数据来源都不是 TikTok 官方授权接口，EchoTik 文档还自述其“实时接口”直接取自 TikTok 公开接口。下游有被封号、被追责的连带风险，立项书不宜写成“官方数据源”。",
+   "复刻版权风险：管线要下载爆款视频再做 AI 复刻（EchoTik 提供视频下载链接和字幕提取，FastMoss 网页版有视频下载器）。原视频版权归创作者；TikTok ToS 限制把他人内容商用。“复刻”要界定为结构和脚本层面的借鉴，不能复制素材。",
+   "官方渠道走不通：Research API 明确排除商业用户；Commercial Content API 只有欧盟广告数据；Shop Open API 只能拿到授权店铺的自有数据。趋势层基本只能依赖第三方付费数据商，这是单一供应商依赖。",
+   "FastMoss 条款未知：用户协议和支付协议原文没取到，数据能否再分发、能否给客户看、能否进训练集都不清楚。签约前要拿到书面条款或企业合同。",
+   "FastMoss 计费有坑：pagesize 大于 10 按 ceil(pagesize/10) 倍计费；会员按地区订阅，多国要分别买；MCP 套餐里的 included_credits 字段和文案相差 10 倍，需要官方确认。",
+   "FastMoss OpenAPI 的视频类只有 1 个搜索接口，没有话题、音乐趋势和视频下载接口。做视频趋势分析可能要配合 EchoTik 的实时接口或网页会员，费用和合规风险会叠加。",
+   "价格波动：FastMoss 有周年、首月等促销；Kalodata 按区域定价，而且第三方口径之间有矛盾。预算应按原价加上浮比例编制。"
+  ],
+  "budget_implications": "建议预算科目“数据采购费（第三方 TikTok 电商数据服务）”拆成三块。\n（1）程序化 API 调用费【官方单价】：FastMoss OpenAPI 每次 USD 0.01–0.02，pagesize≤10 计 1 次，空结果不扣费。示例【推断】：每天跑 2,000 次（商品、视频、达人混合，平均 USD 0.015/次），约 USD 30/天、USD 900/月。若每次 pagesize=50，按规则费用乘 5，约 USD 4,500/月。所以采集策略（每次取几条）决定预算规模，申报时要写清假设。\n（2）MCP/CLI 积分订阅【官方】：调研和 agent 交互阶段可选 Basic USD 19/月到 Max USD 129/月，年付 Max 为 USD 1,308/年。\n（3）人工分析用网页会员【第三方价格】：FastMoss 约 USD 49–139/月，按单个地区计，多国乘以国家数。EchoTik 网页会员 USD 9.9–29.1/人/月（年付）【官方】，可作补充或备选；EchoTik API 单价低至 USD 0.001/次【官方文案】，套餐价未查到。\n【推断】按单一国家（美区）试点 12 个月：FastMoss API 加 MCP 加一个会员，约 USD 1.3 万–5.5 万/年，约合人民币 9–40 万（汇率按 7.1 估算，非查询结果），上下限主要取决于调用量和 pagesize。若要拿到明确的条款授权和商用许可，FastMoss Enterprise 需联系销售，价格未查到，建议预算单列“企业数据授权（询价）”，预留不确定项。\nTikTok 官方渠道（Creative Center 免费、Research API 免费但无资格）无法替代第三方，预算里不能用“官方免费数据”抵扣。另建议预留法务科目，用于审阅数据商协议和视频复刻版权边界。",
+  "gaps": "以下内容未查到：\n- FastMoss 网页会员的官方价格（页面渲染时价格为空，现用第三方数字）。\n- FastMoss 用户协议和支付协议原文，因此商用和再分发条款未知。\n- FastMoss MCP 积分与调用次数的换算，以及 included_credits 和文案的矛盾。\n- FastMoss Enterprise API 报价。\n- EchoTik API 具体套餐和价格表（需要登录控制台）。\n- Kalodata 官方价格和 API 条款（被 Cloudflare 拦截，现用第三方 2026-10-03 口径，而且有内部矛盾）。\n- Tabcut 官方价格和是否有 API（只有第三方摘要）。\n- TikTok Shop Open API 是否收费的官方说明，以及 Partner Center 官方文档原文。\n- Creative Center 专属使用条款，以及是否禁止对其趋势数据做程序化采集。\n- 各数据商的数据来源合法性声明。\n未覆盖：\n- 汇率（人民币换算为估算，不是查询结果）。\n- 国内数据商（如蝉妈妈海外版等）未纳入对比。"
+ },
+ {
+  "id": "tiktok-posting",
+  "findings": [
+   {
+    "item": "Content Posting API - 未审核客户端",
+    "fact": "未审核的 API 客户端发布的内容只能私密可见（SELF_ONLY）。24 小时内最多允许 5 个用户发帖，且这些账号发帖时必须设为私密账号。要公开发布，客户端必须先通过审核（audit），证明符合服务条款。",
+    "price": "文档未列 API 费用（未查到收费项）",
+    "grade": "官方",
+    "source": "https://developers.tiktok.com/doc/content-sharing-guidelines ; https://developers.tiktok.com/doc/content-posting-api-get-started",
+    "date": "页面标注 Last updated August 4, 2026；查询 2026-10-05"
+   },
+   {
+    "item": "Direct Post - 每日发帖上限",
+    "fact": "每个创作者账号通过 Direct Post 在 24 小时内的发帖数有上限，因创作者而异，官方写的是“通常约 15 条/天/账号”，而且这个额度由所有使用 Direct Post 的 API 客户端共享。另外，每个 API 客户端有“24 小时活跃创作者数”上限，按审核申请表里填报的用量估算核定。审核与未审核客户端都受这两项限制。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://developers.tiktok.com/doc/content-sharing-guidelines",
+    "date": "Last updated August 4, 2026；查询 2026-10-05"
+   },
+   {
+    "item": "Direct Post - 接口频率与错误码",
+    "fact": "/v2/post/publish/video/init/ 的限制是每个用户 access_token 每分钟 6 次请求。相关错误码：spam_risk_too_many_posts（该用户当日 API 发帖额度已满）、spam_risk_user_banned_from_posting（用户被禁止发帖）、reached_active_user_cap（客户端当日活跃发布用户额度已满）、unaudited_client_can_only_post_to_private_accounts（未审核客户端只能发到私密账号）、429 rate_limit_exceeded（超出频率限制）。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://developers.tiktok.com/doc/content-posting-api-reference-direct-post",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "Direct Post - 用途限制（与本项目直接冲突）",
+    "fact": "Intended Use 一节明确列为不可接受的两类：一是从其他平台复制任意内容到 TikTok 的应用；二是帮你或你的团队给自己管理的账号上传内容的工具。API 客户端必须面向广泛受众，不能只供内部或私人使用。另外，应用不得在内容上叠加品牌、logo、水印或推广链接。UX 方面要求：上传页显示创作者昵称、发布前可预览、由用户手动选择隐私设置（不得预设默认值）、用户明确同意后才能开始上传。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://developers.tiktok.com/doc/content-sharing-guidelines",
+    "date": "Last updated August 4, 2026；查询 2026-10-05"
+   },
+   {
+    "item": "Direct Post - AIGC 字段",
+    "fact": "post_info 里有 is_aigc（bool）字段，设为 true 后视频描述会带上“Creator labeled as AI-generated”标签。同时还有 brand_content_toggle（为第三方做的付费合作推广）和 brand_organic_toggle（推广创作者自己的业务）两个字段。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://developers.tiktok.com/doc/content-posting-api-reference-direct-post",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "社区准则 - 自动化/多账号/垃圾内容",
+    "fact": "现行版本 2026H2update：2026-08-25 发布，2026-09-24 生效。Spam（垃圾内容）条款列出的行为包括：用自动化运营多个账号或发送重复内容、发布大量无关内容、买卖粉丝或互动、用机器人或脚本刷评论、点赞、分享。准则写明严格禁止用自动化工具、脚本或其他手段绕过平台系统，后果可能是删除内容或封号。处罚手段包括：封禁账号、封禁你另外新建的账号、限流（限制发帖、限制出现在搜索结果顶部和推荐流 FYF）。被限制或封禁后不得用其他账号规避。“用 AI 或机器人账号引流”也在禁止之列。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://www.tiktok.com/community-guidelines/en/integrity-authenticity",
+    "date": "Released 2026-08-25 / Effective 2026-09-24；查询 2026-10-05"
+   },
+   {
+    "item": "社区准则 - 非原创/重复内容",
+    "fact": "含有非原创或重复使用的素材、且没有加入新东西的内容，不进推荐流（FYF 不予推荐）。原文举例：未经创意编辑的搬运或非原创内容，比如带他人水印或 logo 的片段；低质量或只做了轻微编辑的内容。侵犯知识产权的内容会被删除。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://www.tiktok.com/community-guidelines/en/integrity-authenticity",
+    "date": "Effective 2026-09-24；查询 2026-10-05"
+   },
+   {
+    "item": "社区准则 - AIGC 标注",
+    "fact": "用 AI 生成或经过大幅编辑、呈现逼真场景或人物的内容，要求创作者标注。标注方式可以用平台的 AIGC label，也可以用清晰的字幕、贴纸或水印。准则对 AIGC 的定义包括动漫、卡通等风格化内容。即使已标注，误导公共事务或伤害个人的内容也不允许；未按规定标注的内容可能被删除、限流或由平台代为加标。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://www.tiktok.com/community-guidelines/en/integrity-authenticity",
+    "date": "Effective 2026-09-24；查询 2026-10-05"
+   },
+   {
+    "item": "C2PA 自动标注",
+    "fact": "TikTok 于 2024-05-09 宣布：对从其他平台上传、带有 C2PA Content Credentials 元数据的图片和视频自动打上 AIGC 标签；同时也给 TikTok 自己的内容附加 Content Credentials。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://newsroom.tiktok.com/en-us/partnering-with-our-industry-to-advance-ai-transparency-and-literacy",
+    "date": "2024-05-09；查询 2026-10-05"
+   },
+   {
+    "item": "隐形水印 + AIGC 推荐流开关",
+    "fact": "TikTok 新闻稿称：开始给用 TikTok 自家工具生成的 AI 内容，以及带 C2PA 凭证上传的内容加隐形水印，“只有 TikTok 能读取”，用来防止别人去掉 AI 标识。同时在“管理话题”里测试 AIGC 开关，用户可以调低推荐流里 AI 内容的比例。此条只看到了搜索摘要，未逐字核对原文。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://newsroom.tiktok.com/more-ways-to-spot-shape-and-understand-ai-content?lang=en",
+    "date": "2025-11-19；查询 2026-10-05"
+   },
+   {
+    "item": "国内《人工智能生成合成内容标识办法》",
+    "fact": "由国家网信办、工信部、公安部、广电总局联合发布，发布日期 2025-03-07，2025-09-01 施行，配套强制性国标同日施行。第二条：符合《互联网信息服务算法推荐管理规定》等规定情形的网络信息服务提供者开展标识活动适用本办法。要求有显式标识（第四条），以及在文件元数据中加隐式标识、鼓励加数字水印（第五条）。第十条：任何组织和个人不得恶意删除、篡改、伪造、隐匿标识。条文中没有“境外”或“境内公众”的表述。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm",
+    "date": "2025-03-14 发布；查询 2026-10-05"
+   },
+   {
+    "item": "上位法的地域范围（用于判断出海是否适用）",
+    "fact": "《互联网信息服务深度合成管理规定》第二条：适用于“在中华人民共和国境内应用深度合成技术提供互联网信息服务”，以及为深度合成服务提供技术支持的活动。《生成式人工智能服务管理暂行办法》第二条：适用于向中华人民共和国境内公众提供生成内容的服务；不向境内公众提供服务的研发和应用不适用。两条原文均取自搜索摘要，未逐字核对网信办原文。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://www.cac.gov.cn/2022-12/11/c_1672221949354811.htm ; https://www.ncsti.gov.cn/zcfg/flfg/202307/t20230714_127967.html",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "TikTok Ads 最低预算",
+    "fact": "日预算：广告系列（campaign）须高于 50，广告组（ad group）须高于 20。总预算：广告系列 50；广告组 = 投放天数（含已过天数）× 最低日预算，例如 31 天须 ≥ 620。页面以 $ 标示，但没说明币种和地区差异。",
+    "price": "campaign 日预算 ＞$50；ad group 日预算 ＞$20；币种页面未注明",
+    "grade": "官方",
+    "source": "https://ads.tiktok.com/help/article/budget",
+    "date": "页面约 2026-07 更新；查询 2026-10-05"
+   },
+   {
+    "item": "Spark Ads 授权",
+    "fact": "Spark Ads 用来把自然发布的帖子加热投放。投他人帖子需要对方授权，可走 Business Center 授权，或由创作者生成授权码，授权期可选 7、30、60 或 365 天，到期后广告停投。Spark Ads 没有单独的最低消费，沿用上面的 Ads 预算下限。此条为第三方资料，未找到官方帮助页原文。",
+    "price": "未查到单独价格",
+    "grade": "第三方",
+    "source": "https://insense.pro/blog/tiktok-spark-ads ; https://ads.tiktok.com/business/library/SparkAds.pdf（官方 PDF 未读取）",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "TikTok Shop 美区佣金 / 联盟佣金",
+    "fact": "多家第三方称：美区标准 referral fee 从 6% 涨到 8%，2026-08-04 生效，部分美妆和电子类目 9.5%–11%，食品约 5%。但同一来源也指出，官方公开的费率表仍写 6%，两者有出入。联盟达人佣金由卖家自定，常见 5%–25%，第三方统计平均约 13%。官方费率页未读取。",
+    "price": "referral fee 6%→8%（第三方，待官方确认）；达人佣金 5–25%（卖家自定）",
+    "grade": "第三方",
+    "source": "https://www.bebolddigital.com/news/tiktok-shop-8-percent-referral-fee ; https://www.fastmoss.com/blog/tiktok-shop-seller-costs-in-the-us-2026-fees-creator-commissions-fulfillment-returns-real-profit/",
+    "date": "查询 2026-10-05"
+   }
+  ],
+  "risks": [
+   "【官方】Content Posting API 用途条款明确不接受“帮你或你的团队给自己管理的账号上传内容的工具”，以及“从其他平台复制任意内容到 TikTok”的应用。本项目“自建管线给自有矩阵号自动发复刻视频”正好落在这两类里，Direct Post 很可能过不了审核；不过审就只能私密发布，且最多 5 个用户。",
+   "【官方】社区准则把“用自动化运营多个账号或发送重复内容”列为 Spam，并严格禁止用自动化工具或脚本绕过平台系统，处罚可以是封禁主账号连同新建的账号。用 GitHub 开源社媒 agent（尤其是模拟浏览器或非官方接口的那类）批量发帖，就在这个风险区内。",
+   "【官方】未经创意编辑的搬运或非原创内容不进推荐流（FYF）。“复刻爆款”如果和原视频相似度高，可能拿不到推荐流量，ROI 假设要打折；如果用了原素材、音乐或角色，还会触发知识产权删除。",
+   "【官方】逼真的 AI 内容必须标注，可以用 API 的 is_aigc 字段。带 C2PA 元数据的视频会被自动打标并加隐形水印；用户还能在推荐流里调低 AIGC 比例，影响触达。",
+   "【推断】国内《标识办法》的义务主体是“网络信息服务提供者”，上位法（深度合成规定、生成式 AI 暂行办法）都限定在境内或面向境内公众。本项目作为使用者、把内容发到境外平台给境外受众，大概率不直接受管。但如果用的是国内模型服务（如 MiniMax），其输出可能自带隐式标识，第十条禁止任何组织和个人恶意删除标识，处理成片时不要去除。",
+   "【官方】每个创作者账号通过 Direct Post 每天约 15 条，额度由所有客户端共享；每个 token 每分钟 6 次请求。产能规划不能指望单账号无限发帖。",
+   "【第三方】TikTok Shop 美区佣金 2026-08 疑似从 6% 调到 8%，官方表格未同步，带货模型的毛利测算存在 2 个百分点的不确定。"
+  ],
+  "budget_implications": "1）【官方】TikTok Content Posting API 文档里没有收费项，接口本身不构成直接费用。但要通过审核，需要做合规的 UX（昵称展示、预览、手动选隐私、明确同意），这是一笔研发工时。如果审核不过，可能要改走“Upload/草稿 + 人工确认发布”的半自动流程，或者给账号运营配人工成本，建议在预算里留出人工发布或审核岗位。【推断】\n2）【官方】投放科目：TikTok Ads 最低日预算为广告系列 ＞$50、广告组 ＞$20（页面未注明币种，按 $ 计）。按 1 个广告系列 × 1 个广告组连续 30 天算，最低约 $600（=$20×30）；但广告系列层级日预算也须 ＞$50，所以单广告系列实际门槛按 $50/天 × 30 = $1,500/月计更稳妥。【推断：按最低值算出的下限，不是建议投放额】\n3）【第三方】TikTok Shop 带货：referral fee 6%–8%，加达人联盟佣金 5%–25%（卖家自定），应作为按销售额计提的变动成本，不列入固定经费。\n4）【推断】合规科目建议单列：AIGC 标注与 C2PA 元数据处理（研发小项）、知识产权和素材授权（音乐、肖像），以及账号风险准备金（封号后重建账号和内容的成本）。\n5）【推断】多账号矩阵如果靠自动化批量运营，按官方准则属于高风险，不建议在申报材料里写“批量账号自动投放”，改写成“合规 API + 人工审核的内容分发”更利于立项评审。",
+  "gaps": "未查到：TikTok 开发者审核（audit）的周期和费用（文档没写费用）；每个开发者或客户端获批的“活跃创作者上限”具体数值（官方说按申请表估算核定）；TikTok Ads 最低预算的币种说明和人民币、其他币种对应值；Spark Ads 官方帮助页原文（只拿到第三方资料）；TikTok Shop 美区 referral fee 的官方费率页原文（第三方说 8%，又说官方表仍写 6%）；TikTok 支持中心 AIGC 标签页（JS 渲染没读到正文）；隐形水印新闻稿只有搜索摘要，未逐字核对；国内两部上位法第二条来自搜索摘要，未逐字核对网信办原文；MiniMax 等国内模型的输出是否自带隐式标识或水印，未调研。另外“国内《标识办法》对出海内容是否适用”没有官方解释，现结论为推断，建议咨询律师。"
+ },
+ {
+  "id": "oss-agents",
+  "findings": [
+   {
+    "item": "Postiz (gitroomhq/postiz-app)",
+    "fact": "约 3.67 万 stars，最近一次 push 2026-10-04，未归档；许可证 AGPL-3.0。支持 TikTok 等多平台；README 对比表写明自托管版要自己在各平台建开发者应用并过审（Meta、YouTube、TikTok 可能要数周），说明走的是平台官方 API。docker-compose 依赖 PostgreSQL 17 + Redis + Temporal。提供 Public API 和 MCP，可接 n8n/Make/Zapier。",
+    "price": "自托管免费（AGPL-3.0），只付自己的服务器费用；云版 Standard 29 美元/月（5 个频道）、Team 39 美元/月（10 个频道）、Pro 49 美元/月（30 个频道）、Ultimate 99 美元/月（100 个频道），7 天试用",
+    "grade": "官方",
+    "source": "gh api repos/gitroomhq/postiz-app；https://github.com/gitroomhq/postiz-app README 与 docker-compose.yaml；https://postiz.com/pricing",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "Mixpost (inovector/mixpost)",
+    "fact": "约 3776 stars，最近一次 push 2026-03-16；Lite 版 MIT。免费的 Lite 只支持 Facebook Pages、X、Mastodon，不含 TikTok；TikTok、YouTube、Instagram 只在付费的 Pro/Enterprise 里有。走官方 API（页面提到 TikTok 等平台有速率限制，可向平台申请提额）。自托管，基于 Laravel/PHP（技术栈为推断，页面没写）。",
+    "price": "一次性买断：Pro 299 美元，Enterprise 1199 美元，都含 1 年免费更新，之后可续费。Pro 许可证明确禁止拿来做 SaaS，做 SaaS 要买 Enterprise；不得再分发或转售源码",
+    "grade": "官方",
+    "source": "https://mixpost.app/pricing；gh api repos/inovector/mixpost",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "social-auto-upload (dreammis)",
+    "fact": "约 1.53 万 stars，最近一次 push 2026-09-02，MIT。支持抖音、B站、小红书、快手、视频号、百家号、支付宝生活号、微博、虎扑、TikTok、YouTube。README 写明多数平台走浏览器自动化，TikTok 示例走 Chrome 版实现，B站用 biliup；有 sau CLI、Agent Skill，支持无头模式和定时发布。不走官方 API。",
+    "price": "免费（MIT），没查到付费云版",
+    "grade": "官方",
+    "source": "https://github.com/dreammis/social-auto-upload README；gh api",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "MoneyPrinterTurbo (harry0703)",
+    "fact": "约 12.8 万 stars，最近一次 push 2026-10-04，MIT。功能是 LLM 写文案 + 素材库/文生图/文生视频（可接 MiniMax H3、Seedance、Wan 等）+ TTS 合成短视频。一键发布到 TikTok/Instagram/YouTube Shorts 是通过第三方 Upload-Post API（app/services/upload_post.py，API_BASE=https://api.upload-post.com）实现的，项目本身不直连平台。配置要求：最低 4 核 CPU、4GB 内存，GPU 可选（推荐 8 核、16GB、8GB 显存），支持 Docker。README 赞助位写着秘塔提供 MiniMax H3：768P 0.09 元/秒，2K 0.15 元/秒（这是广告位信息，不是官方价目表）。",
+    "price": "免费（MIT）；发布要付 Upload-Post 的费用",
+    "grade": "官方",
+    "source": "https://github.com/harry0703/MoneyPrinterTurbo README 与 app/services/upload_post.py；gh api",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "Upload-Post（MoneyPrinterTurbo 依赖的发布 API，闭源 SaaS）",
+    "fact": "一个 API 发 TikTok、Instagram、YouTube 等 20 多个平台，有 n8n/Make 集成和 Agent Skill。用户在弹窗里授权账号（推断走 OAuth/官方接口，页面没说明底层机制）。",
+    "price": "Free 0 美元/月（每月 10 次上传，2 个 profile）；Basic 16 美元/月（年付 192 美元，5 个 profile）；Professional 33 美元/月（年付 400 美元，25 个 profile）；另有一档 118 美元/月（年付 1411 美元，75 个 profile，档名没抓到）；Business 350 美元/月（年付 4205 美元，225 个 profile）",
+    "grade": "官方",
+    "source": "https://www.upload-post.com/pricing",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "Ayrshare（商业发布 API，对照项）",
+    "fact": "按活跃社媒 profile 计费的社媒发布 API，GitHub 上的 ayrshare/social-media-api 约 341 stars，只是 SDK/示例，没有 license。",
+    "price": "149 美元/月、299 美元/月（最多 10 个 profile）、从 599 美元/月起（含 30 个 profile，第 31 个起阶梯计价，最高 300 个）。档名没抓全",
+    "grade": "官方",
+    "source": "https://www.ayrshare.com/pricing；gh api repos/ayrshare/social-media-api",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "ShortGPT (RayVentura)",
+    "fact": "约 8000 stars，MIT，但最近一次 push 是 2025-02-10，已停更约 20 个月。属于短视频生成框架，不是投放工具。",
+    "price": "免费，没查到云版",
+    "grade": "官方",
+    "source": "gh api repos/RayVentura/ShortGPT",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "MoneyPrinter (FujiwaraChoki)",
+    "fact": "约 1.4 万 stars，MIT，最近一次 push 2026-03-26。MoneyPrinterTurbo 的原型，生成 YouTube Shorts。",
+    "price": "免费",
+    "grade": "官方",
+    "source": "gh api repos/FujiwaraChoki/MoneyPrinter",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "TiktokAutoUploader (makiisthenes)",
+    "fact": "约 1182 stars，最近一次 push 2026-10-04，AGPL-3.0。README 写明它调用 TikTok 网页上传接口（非开放平台 API），在无头 Chromium 里计算请求签名，支持每账号单独代理，可接 Browserbase/Steel 云浏览器。属于逆向/自动化路线。",
+    "price": "免费；云浏览器 Browserbase/Steel 另外收费（价格没查）",
+    "grade": "官方",
+    "source": "https://github.com/makiisthenes/TiktokAutoUploader README；gh api",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "tiktok-uploader (wkaisertexas)",
+    "fact": "约 778 stars，最近一次 push 2026-02-12，MIT。基于 Playwright 的 TikTok 浏览器自动化上传，需要 cookie。",
+    "price": "免费",
+    "grade": "官方",
+    "source": "https://github.com/wkaisertexas/tiktok-uploader README；gh api",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "AI-Youtube-Shorts-Generator (Anil-matcha)",
+    "fact": "约 5240 stars，最近一次 push 2026-09-29，MIT。把长视频切成 Shorts，属于剪辑工具，不负责投放。",
+    "price": "免费",
+    "grade": "官方",
+    "source": "gh api repos/Anil-matcha/AI-Youtube-Shorts-Generator",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "elizaOS/eliza（通用社媒 agent 框架）",
+    "fact": "约 1.95 万 stars，最近一次 push 2026-10-04，MIT。是通用 AI agent 框架，常用于 X/Discord 等社交 agent；没核实有没有 TikTok 发布插件。",
+    "price": "免费",
+    "grade": "官方",
+    "source": "gh api repos/elizaOS/eliza",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "TikTok Content Posting API 未审核限制",
+    "fact": "官方文档：未审核客户端发的所有内容只能私密可见（只有 SELF_ONLY）；要公开发布，API 客户端必须通过 TikTok 的服务条款合规审核。文档里没写日发帖上限和用户数上限（WebFetch 摘要结果）。",
+    "price": "文档里没写费用",
+    "grade": "官方",
+    "source": "https://developers.tiktok.com/doc/content-posting-api-get-started",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "TikTok 服务条款对自动化的禁止",
+    "fact": "第 5 节禁止“use automated scripts to collect information from or otherwise interact with the Services”。条款最后更新于 2025-12-01（ROW 版）。",
+    "price": "不涉及",
+    "grade": "官方",
+    "source": "https://www.tiktok.com/legal/page/row/terms-of-service/en",
+    "date": "条款页面日期 2025-12-01；查询 2026-10-05"
+   }
+  ],
+  "risks": [
+   "封号与合规：social-auto-upload、TiktokAutoUploader、tiktok-uploader 都走浏览器自动化或逆向网页接口，和 TikTok 条款第 5 节禁止自动化脚本交互的规定冲突（官方条款原文）。商用矩阵一旦被识别，可能封号或连带关联账号，具体处置尺度没查到。",
+   "官方 API 有审核门槛：走官方 Content Posting API，不过审只能私密发布，不能真正投放；自托管 Postiz 要自己申请各平台开发者应用，README 写 TikTok/Meta/YouTube 审核可能要数周，立项排期要留出这段时间。审核能否通过、要多久，没有官方承诺。",
+   "AGPL 风险：Postiz、TiktokAutoUploader 是 AGPL-3.0。如果修改后作为网络服务提供给外部客户（SaaS），必须向用户公开修改后的源码；只在内部自用，风险较低（这是对 AGPL 的一般解读，属推断，商用前建议法务确认）。",
+   "Mixpost 许可限制：免费的 Lite 不支持 TikTok；Pro 许可明确禁止做 SaaS，对外提供服务必须买 Enterprise（1199 美元，含 1 年更新）。",
+   "依赖第三方闭源 SaaS：MoneyPrinterTurbo 的一键发布依赖 Upload-Post，等于把账号授权和发布链路交给第三方，有数据和供应商风险；Upload-Post 底层是否全走官方 API，没查到。",
+   "项目停更：ShortGPT 自 2025-02 起没有 push，不宜作为商用依赖。",
+   "AI 生成内容与复刻爆款涉及版权、AIGC 标识等平台规则，这部分不在本次调研范围内，没查。"
+  ],
+  "budget_implications": "【有出处的金额】可直接写进预算的“软件/云服务费”科目：(1) Postiz 云版 29/39/49/99 美元/月（5/10/30/100 个频道）；也可以自托管 Postiz，软件 0 元，只算服务器费用（PostgreSQL + Redis + Temporal + 应用，服务器规格和价格本次没查）。(2) Mixpost Enterprise 一次性 1199 美元（如需做对外 SaaS），Pro 299 美元（只限内部使用），续费价没查到。(3) 发布 API：Upload-Post 16/33/118/350 美元/月（5/25/75/225 个 profile，年付 192/400/1411/4205 美元）；Ayrshare 149/299 美元/月起，30 个 profile 起 599 美元/月。(4) MoneyPrinterTurbo 本身免费，最低 4 核 CPU、4GB 内存即可跑；文生视频按量付费（README 广告位写 MiniMax H3 768P 0.09 元/秒，要以供应商官方价为准）。\n\n【推断】(a) 商用立项建议把“投放”拆成两档预算：A 档是合规主路径，自托管 Postiz（AGPL，内部自用）或 Upload-Post/Ayrshare 付费 API，加上 TikTok 开发者应用审核的人力和时间成本；B 档是浏览器自动化路线（social-auto-upload），只作为国内平台或测试用，不要作为 TikTok 商用主路径，预算里不宜把它算作已降低成本。(b) 浏览器自动化路线如果要做多账号，还会产生住宅代理、云浏览器、养号设备等费用（Postiz README 赞助位提到 RapidProxy 0.55 美元/GB 起，仅作参考，不是正式报价），这类支出合规性存疑，不建议列入申报。(c) 二次开发人力：接 Postiz Public API/MCP 或 Upload-Post API，把趋势分析 → 复刻 → 发布串成 agent，工作量没评估。",
+  "gaps": "以下没查到或没核实：TikTok Content Posting API 审核的具体流程、周期，以及审核后的日发帖上限和用户数上限（文档摘要未提）；Postiz 自托管的最低服务器配置；Mixpost 续费价，以及它的 TikTok 是否走 Content Posting API；Upload-Post 75 个 profile 那一档的名称，及其底层是否全走官方 API；Ayrshare 各档名称和是否支持 TikTok 直发；Browserbase/Steel 的价格；elizaOS 有没有 TikTok 插件；social-auto-upload 实际封号率（没有公开数据）；国内平台（抖音等）开放平台 API 的发布权限。stars 数是 2026-10-05 通过 GitHub API 实时查询的。"
+ },
+ {
+  "id": "gen-cost",
+  "findings": [
+   {
+    "item": "AutoDL.Art 市场 · H3 六图三音频生视频（minimax_h3_z0903，参考/多图路线）",
+    "fact": "API 返回的 billing_config：480p 高峰40/闲时30；768p 70/50；1088p 70/50；1440p 80/60。单位是 0.001 元/秒（本机 market_estimate.py 按 price/1000×秒 计算，2026-10-01 实跑 9 秒 1088p 闲时扣 ¥0.45，和 50/1000×9 对得上）。即 1088p 高峰 ¥0.07/秒、闲时 ¥0.05/秒。",
+    "price": "CNY 0.04–0.08 元/秒（高峰），0.03–0.06 元/秒（闲时），按生成秒数计费",
+    "grade": "官方",
+    "source": "https://www.autodl.art/api/v1/comfyui/workflows/minimax_h3_z0903（无需鉴权的只读 GET）；实跑记录见 ~/hypit-projects/tools/market_estimate.py 与项目记忆",
+    "date": "查询 2026-10-05；实跑 2026-10-01"
+   },
+   {
+    "item": "AutoDL.Art 市场 · H3 首尾帧生视频（minimax_h3_b99_002）",
+    "fact": "只有 736p 一档：高峰50、闲时30（单位 0.001 元/秒）",
+    "price": "CNY 0.05 元/秒（高峰）/ 0.03 元/秒（闲时）",
+    "grade": "官方",
+    "source": "https://www.autodl.art/api/v1/comfyui/workflows/minimax_h3_b99_002",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "AutoDL.Art 市场 · H3 文生视频（minimax_h3_lightx2v_no_pic）",
+    "fact": "480p 30/20；768p 40/30（单位 0.001 元/秒）",
+    "price": "CNY 0.02–0.04 元/秒",
+    "grade": "官方",
+    "source": "https://www.autodl.art/api/v1/comfyui/workflows/minimax_h3_lightx2v_no_pic",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "AutoDL.Art 高峰/闲时时段定义",
+    "fact": "本机脚本注释写的是高峰为北京时间 8–24 点、闲时 0–8 点。官方文档页 autodl.art/docs/comfyui_api 上没有查到价格和时段说明。",
+    "price": "—",
+    "grade": "推断",
+    "source": "~/hypit-projects/tools/market_estimate.py（本地注释，非官方页面）；https://www.autodl.art/docs/comfyui_api",
+    "date": "2026-10-05"
+   },
+   {
+    "item": "AutoDL.Art 市场的限制",
+    "fact": "本机实测：市场 H3 不接受参考视频（动作参考要换回自有实例 h3.autodl），图像参考可用 base64；排队加生成约 13 分钟/条（9 秒 1088p）",
+    "price": "—",
+    "grade": "推断",
+    "source": "项目记忆 hypit-local-pipeline（内部实测）",
+    "date": "2026-10-01"
+   },
+   {
+    "item": "MiniMax H3 官方 API（国内站）",
+    "fact": "按秒计费。MiniMax-H3：768P 0.50 元/秒，2K 0.80 元/秒；MiniMax-H3-Max：480P 0.33 元/秒，768P 0.50 元/秒。输入：音频免费；图片 5 张以内免费，超出 0.20 元/张；输入视频按时长计费（2K 0.80 元/秒，768P 0.50 元/秒）。768P→2K 再生成 0.30 元/秒。视频资源包（¥7,000–40,000/月）只支持 Hailuo，不支持 H3。",
+    "price": "CNY 0.33–0.80 元/秒（刊例价）",
+    "grade": "官方",
+    "source": "https://platform.minimaxi.com/docs/guides/pricing-paygo ；https://platform.minimaxi.com/docs/guides/pricing-video",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "MiniMax H3 官方 API（国际站）",
+    "fact": "H3：768P $0.08/秒，2K $0.13/秒；H3-Max：480P $0.05/秒，768P $0.08/秒。超出的图片 $0.04/张。",
+    "price": "USD 0.05–0.13 /秒",
+    "grade": "官方",
+    "source": "https://platform.minimax.io/docs/guides/pricing-paygo",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "MiniMax Hailuo 2.3 / 02（历史模型，按条计费）",
+    "fact": "Hailuo-2.3-Fast 768P 6s ¥1.35、10s ¥2.25、1080P 6s ¥2.31；Hailuo-2.3/02 768P 6s ¥2.00、10s ¥4.00、1080P 6s ¥3.50；Hailuo-02 512P 6s ¥0.60、10s ¥1.00",
+    "price": "CNY 0.10–0.58 元/秒（按条价折算）",
+    "grade": "官方",
+    "source": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "火山方舟 Seedance 2.0 系列（按 token 计费）",
+    "fact": "在线推理，单位元/百万token。2.0：480p/720p 输入不含视频 46、含视频 28；1080p 51/31；4k 26/16。2.0-fast：37/22（8/7–10/7 限时 75 折，仅企业用户）。2.0-mini：23/14（同期限时 4 折）。官方示例（16:9，5 秒，输入不含视频）：2.0 的 480p 0.46 元/秒，720p 0.99，1080p 2.48，4k 5.05；fast 的 480p 0.37，720p 0.80；mini 的 480p 0.23，720p 0.50。token 估算公式：(输入视频时长+输出时长)×宽×高×帧率/1024。只对生成成功的视频计费。输入含视频时有最低 token 用量。",
+    "price": "CNY 0.23–5.05 元/秒（刊例价）",
+    "grade": "官方",
+    "source": "https://docs.volcengine.com/docs/82379/1544106（“模型价格”页，通过 volcengine.com/api/doc/getDocDetail 读取）",
+    "date": "页面更新 2026-09-28；查询 2026-10-05"
+   },
+   {
+    "item": "火山方舟 Seedance 2.5",
+    "fact": "480p/720p：输入不含视频 70、含视频 42 元/百万token；1080p：77/46。示例（16:9，5 秒，不含视频）：480p 0.67 元/秒，720p 1.51，1080p 3.74。不支持离线推理。",
+    "price": "CNY 0.67–3.74 元/秒",
+    "grade": "官方",
+    "source": "https://docs.volcengine.com/docs/82379/1544106",
+    "date": "页面更新 2026-09-28"
+   },
+   {
+    "item": "火山方舟 Seedance 1.0",
+    "fact": "1.0-pro：在线 15、离线 7.5 元/百万token；1.0-pro-fast：在线 4.20、离线 2.10。每秒价格没有给示例。",
+    "price": "CNY 元/百万token（见左）；每秒价未查到官方示例",
+    "grade": "官方",
+    "source": "https://docs.volcengine.com/docs/82379/1544106",
+    "date": "页面更新 2026-09-28"
+   },
+   {
+    "item": "可灵 Kling v3（阿里云百炼代售，官方刊例）",
+    "fact": "kling-v3-turbo 有声：720P 0.8 元/秒，1080P 1.0。kling-v3 无声：720P 0.6，1080P 0.8，4K 3.0；有声：720P 0.9，1080P 1.2，4K 3.0。kling-v3-omni：无声无参考 0.6/0.8/3.0；有参考视频或有声 0.9/1.2/3.0。",
+    "price": "CNY 0.6–3.0 元/秒",
+    "grade": "官方",
+    "source": "https://help.aliyun.com/zh/model-studio/model-pricing（百炼“模型调用价格”页，浏览器渲染读取）",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "可灵 Kling 自有开放平台 API",
+    "fact": "官方页 kling.ai/document-api/productBilling 是 JS 渲染，没读到内容。第三方汇总：2026-08-18 按秒价约 $0.06–0.42/秒（6 档）；invideo 称 3.0 Turbo 720p ¥0.8/秒是该系列唯一的官方按秒价。",
+    "price": "USD 0.06–0.42 /秒（第三方）",
+    "grade": "第三方",
+    "source": "https://costbench.com/software/ai-media-apis/kling-api/ ；https://invideo.io/blog/ai-video-model-pricing",
+    "date": "costbench 2026-08-18；invideo 2026-08-07；查询 2026-10-05"
+   },
+   {
+    "item": "Vidu Q3 官方 API",
+    "fact": "1 credit = $0.005。Q3-pro：1080P 24 credits/秒（$0.12），720P 20（$0.10），540P 9（$0.045）；Q3-turbo：1080P 13（$0.065），720P 11（$0.055），540P 7（$0.035）。官方说明闲时价为正常价的一半。",
+    "price": "USD 0.035–0.12 /秒（闲时减半）",
+    "grade": "官方",
+    "source": "https://platform.vidu.com/docs/pricing",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "Vidu Q3（阿里云百炼代售）",
+    "fact": "viduq3-pro 文生/图生：540P 0.3125、720P 0.78125、1080P 0.9375 元/秒；viduq3-turbo 文生：0.25/0.375/0.4375；viduq3-turbo 参考生视频：0.15625/0.3125/0.40625",
+    "price": "CNY 0.16–0.94 元/秒",
+    "grade": "官方",
+    "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "通义万相 wan2.7 / 2.6 视频（百炼）",
+    "fact": "wan2.7-t2v、wan2.7-i2v（有声）：720P 0.6 元/秒，1080P 1 元/秒，北京区免费 50 秒。wan2.6-i2v-flash：有声 720P 0.3、1080P 0.5；无声 0.15/0.25。wan2.2-i2v-flash 无声：480P 0.10、720P 0.20、1080P 0.48。",
+    "price": "CNY 0.10–1.0 元/秒",
+    "grade": "官方",
+    "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "Runway API",
+    "fact": "1 credit = $0.01。gen4.5 12 credits/秒，gen4_turbo 5，act_two 5，aleph2 28，veo3.1（有声）40，veo3.1_fast（有声）15，seedance2（1080p）36，hailuo3（768p）10。Professional/HDR 输出每秒另加 5–40 credits。",
+    "price": "USD 0.05/秒（gen4_turbo）– 0.12/秒（gen4.5）",
+    "grade": "官方",
+    "source": "https://docs.dev.runwayml.com/guides/pricing",
+    "date": "查询 2026-10-05（页面没写日期）"
+   },
+   {
+    "item": "Google Veo 3.1（Gemini API 付费层）",
+    "fact": "带音频默认价：Veo 3.1 Standard 720p/1080p $0.40/秒，4k $0.60；Fast 720p $0.10，1080p $0.12，4k $0.30；Lite 720p $0.05，1080p $0.08（不支持 4k）。免费层不可用。",
+    "price": "USD 0.05–0.60 /秒",
+    "grade": "官方",
+    "source": "https://ai.google.dev/gemini-api/docs/pricing",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "Claude API（Anthropic）",
+    "fact": "单位 $/百万token，依次为输入 / 5 分钟缓存写 / 1 小时缓存写 / 缓存命中 / 输出。Opus 5.5：4 / 5 / 8 / 0.20 / 20。Opus 5 和 4.5–4.8：5 / 6.25 / 10 / 0.50 / 25。Sonnet 5.5 和 Sonnet 5：2 / 2.50 / 4 / 0.20 / 10。Sonnet 4.5/4.6：3 / 3.75 / 6 / 0.30 / 15。Haiku 4.5：1 / 1.25 / 2 / 0.10 / 5。Fable 5.1：10 / 12.50 / 20 / 0.25 / 50。Batch API 输入输出都打 5 折。",
+    "price": "USD 1–10 输入 / 5–50 输出（每百万token）",
+    "grade": "官方",
+    "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "OpenAI API（Standard 层，短上下文）",
+    "fact": "单位 $/百万token，依次为输入 / 缓存输入 / 缓存写 / 输出。gpt-6-astra：10 / 1.00 / 12.50 / 50。gpt-6.1-sol：2 / 0.10 / 2.50 / 10。gpt-6-sol：2 / 0.20 / 2.50 / 10。gpt-6-luna：0.10 / 0.01 / 0.125 / 0.50。gpt-5.6-sol：4 / 0.40 / 5 / 20。Batch 和 Flex 约 5 折，Fast 2 倍；长上下文价格更高。",
+    "price": "USD 0.10–10 输入 / 0.50–50 输出（每百万token）",
+    "grade": "官方",
+    "source": "https://developers.openai.com/api/docs/pricing.md",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "豆包 Seed 文本模型（火山方舟在线推理）",
+    "fact": "单位元/百万token，依次为输入 / 缓存命中 / 输出。doubao-seed-2.1-pro（≤1024k）：6.00 / 1.20 / 30.00。seed-2.1-lite：0.80 / 0.16 / 2.70。seed-2.1-turbo：3.00 / 0.60 / 15.00。seed-2.0-pro（≤32k）：3.2 / 0.64 / 16.0。seed-2.0-mini（≤32k）：0.2 / 0.04 / 2.0。缓存存储 0.017 元/百万token/小时。“在线推理（低优）”档约半价，例如 2.1-pro 为 3.00 / 1.20 / 15.00。",
+    "price": "CNY 0.2–6 输入 / 2–30 输出（每百万token）",
+    "grade": "官方",
+    "source": "https://docs.volcengine.com/docs/82379/1544106",
+    "date": "页面更新 2026-09-28"
+   },
+   {
+    "item": "通义千问（阿里云百炼，华北2北京）",
+    "fact": "单位元/百万token。qwen3.8-max / qwen3.7-max（≤1M）：输入 12，输出 36。qwen3-max：≤32K 2.5/10，32–128K 4/16，128–256K 7/28。qwen3.7-plus（≤256K）：2/8（限时 8 折）。qwen3.5-plus（≤128K）：0.8/4.8。qwen-flash（≤128K）：0.15/1.5。Batch 半价；显式缓存创建按输入价的 125%，命中按 10%。每个模型免费 100 万 token（90 天）。",
+    "price": "CNY 0.15–12 输入 / 1.5–36 输出（每百万token）",
+    "grade": "官方",
+    "source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "MiniMax 文本模型（导演 agent 备选）",
+    "fact": "MiniMax-M3（≤512k，永久五折后）：输入 2.10、输出 8.40、缓存读 0.42 元/百万token。M2.7：2.1 / 8.4 / 0.42，缓存写 2.625。",
+    "price": "CNY 2.1 输入 / 8.4 输出（每百万token）",
+    "grade": "官方",
+    "source": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+    "date": "查询 2026-10-05"
+   },
+   {
+    "item": "导演 agent 成本实测（内部）",
+    "fact": "ref105 第一集复刻：Claude 用量按 API 价折算重做约 $13、整集约 $25，视频生成只花了 ¥1.45。原因是会话上下文约 72 万 token。",
+    "price": "单集约 USD 25（LLM）对比 CNY 1.45（生成）",
+    "grade": "推断",
+    "source": "项目记忆 hypit-local-pipeline（内部实测记录，非公开出处）",
+    "date": "2026-10-01"
+   }
+  ],
+  "risks": [
+   "限时价会过期：Seedance 2.0-fast 的 75 折和 2.0-mini 的 4 折截止北京时间 2026-10-07 14:00，只给企业用户，用量到上限后按刊例价算。立项预算应按刊例价，即 mini 720p 0.50 元/秒、fast 720p 0.80 元/秒。",
+   "AutoDL.Art 市场是第三方用开放权重 H3 自建的 ComfyUI 工作流，价格（0.03–0.08 元/秒）只有 MiniMax 官方 H3 的约 1/10。但没有 SLA，排队时间不定（实测约 13 分钟/条），不收参考视频，价格随时可能调整。规模化投产需要备一个官方 API 兜底。",
+   "本机实测里 LLM（Claude 导演 agent）的成本远高于视频生成本身（$25 对 ¥1.45）。导演/分析 agent 是最大的成本变量，要靠控制上下文、用缓存、用 Batch、换便宜模型来压。",
+   "可灵自有开放平台的价格页是 JS 渲染，没读到。用的是阿里云百炼代售价，加第三方汇总。直接在可灵开放平台买资源包的单价可能不同。",
+   "Vidu 有两组数：第三方搜索摘要写 Q3-pro 1080P 30 credits/秒，官方页实读是 24 credits/秒。以官方页为准，说明价格调整得很频繁。",
+   "多数官方价是按“成功生成的秒数”计费，但抽卡（同一镜头多次重生成）、输入参考视频计费（H3、Seedance 含视频档、Kling omni）、超出的参考图费用都会把实际单秒成本抬高好几倍。",
+   "OpenAI、Claude、Gemini、Veo、Runway 都用美元结算，境内主体申报要考虑汇率和跨境支付渠道。本次没有查汇率。"
+  ],
+  "budget_implications": "【官方价汇总，按每秒生成视频算】最低档：AutoDL.Art 市场 H3 0.02–0.08 元/秒（闲时更低）。Vidu Q3-turbo 和 Veo 3.1 Lite 约 $0.035–0.08/秒。Seedance 2.0-mini 和 wan2.6-flash 0.15–0.50 元/秒。中档：MiniMax H3 官方 0.33–0.80 元/秒（$0.05–0.13）；Kling v3 0.6–1.2 元/秒；Seedance 2.0 标准 720p 0.99 元/秒；Runway gen4.5 $0.12/秒。高档：Veo 3.1 Standard $0.40–0.60/秒；Seedance 2.0 1080p 2.48、4k 5.05 元/秒；Kling 4K 3.0 元/秒。\n\n【推断，口径要在申报书里写明】(1) 主力路线（H3 走 AutoDL 市场）按每条 15 秒成片、抽卡系数 3（每个镜头平均生成 3 次）算：约 45 秒×0.05–0.08 元，即 2.3–3.6 元/条。兜底路线（MiniMax 官方 H3 768P）同口径约 22.5 元/条。高质量路线（Seedance 2.0 1080p）约 112 元/条。(2) 建议的预算科目：①视频生成费（按条数×秒数×抽卡系数×单价，主力+兜底分两档列）；②LLM agent 费（趋势分析、脚本、导演、质检，按 token 测算；实测单集 Claude 约 $25 是上限参考，换豆包/通义/MiniMax 文本模型或用缓存加 Batch 可降一个数量级）；③GPU 算力（自有 AutoDL 实例，本次未查小时价）；④数据接口（FastMoss 等，不在本任务范围）；⑤投放与账号运营（不在本任务范围）。(3) 申报时建议用刊例价，不用限时折扣价，并留 20–30% 的价格波动余量。这个比例是推断，没有出处。",
+  "gaps": "没查到或没核实的：(1) AutoDL.Art 市场高峰/闲时的官方时段说明和价格公示页，现有数字来自只读 API，时段来自本机脚本注释；(2) 可灵自有开放平台（kling.ai）的资源包单价和每秒积分扣减表，页面是 JS 渲染没读到，用的是百炼代售价和第三方数据；(3) Seedance 1.0-pro / pro-fast 的官方每秒示例价，只有 token 单价；Seedance 1.5 本次没在价格页找到；(4) Veo 3.1 无音频档价格（当前页只列了带音频的默认价）、Veo 在 Vertex AI 上的价格；(5) Runway 页面日期；(6) AutoDL 自有 GPU 实例（4090D 等）的小时价；(7) 美元兑人民币汇率；(8) Kling、Seedance、H3 等的企业商务折扣和定制价，都需要联系销售。"
+ },
+ {
+  "id": "funding",
+  "findings": [
+   {
+    "item": "国家科技计划经费科目（国办发〔2021〕32号）",
+    "fact": "直接费用简化为设备费、业务费、劳务费三大类；50万元以下的设备费只需提供基本测算说明。劳务费标准参照当地科学研究和技术服务业从业人员的平均工资，可以包含社保和公积金。设备费的预算调剂权下放给承担单位，其余科目的调剂由项目负责人自主决定。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://www.gov.cn/zhengce/content/2021-08/13/content_5631102.htm",
+    "date": "发文2021-08-05；查询2026-10-05"
+   },
+   {
+    "item": "间接费比例上限（国办发〔2021〕32号）",
+    "fact": "间接费按直接费用扣除设备购置费后的金额分档核定：500万元以下的部分不超过30%，500万至1000万元的部分不超过25%，1000万元以上的部分不超过20%；纯理论研究类项目最高可到60%。间接费可以全部用于绩效支出。",
+    "price": "比例上限，人民币",
+    "grade": "官方",
+    "source": "https://www.gov.cn/zhengce/content/2021-08/13/content_5631102.htm",
+    "date": "发文2021-08-05；查询2026-10-05"
+   },
+   {
+    "item": "研发费用加计扣除（财政部 税务总局公告2023年第7号）",
+    "fact": "研发费用未形成无形资产、计入当期损益的，在据实扣除的基础上再按实际发生额的100%税前加计扣除；形成无形资产的，按成本的200%摊销。自2023-01-01起执行，作为制度性安排长期实施。除烟草制造、住宿餐饮、批发零售、房地产、租赁和商务服务、娱乐业等行业外，其他行业企业都可以享受（排除行业由财税〔2015〕119号规定，该清单来自检索摘要，原文页面未直接展示）。",
+    "price": "加计100%或摊销200%",
+    "grade": "官方",
+    "source": "https://www.gov.cn/zhengce/zhengceku/2023-03/28/content_5748747.htm",
+    "date": "发布2023-03-26；查询2026-10-05"
+   },
+   {
+    "item": "科技型中小企业评价条件",
+    "fact": "按国科发政〔2017〕115号：须为境内注册的居民企业，职工总数不超过500人，年销售收入不超过2亿元，资产总额不超过2亿元（数据来自检索摘要，未逐条核对原文）。",
+    "price": "不适用",
+    "grade": "第三方",
+    "source": "https://teda.gov.cn/bmztc/upload/files/2022/12/附件1.科技型中小企业明白纸.pdf",
+    "date": "2022-12；查询2026-10-05"
+   },
+   {
+    "item": "高新技术企业认定条件（国科发火〔2016〕32号第十一条）",
+    "fact": "须注册成立1年以上；拥有对主营产品起核心支撑作用的知识产权；科技人员占当年职工总数不低于10%；近3年研发费用占销售收入的比例，年收入不超过5000万元的不低于5%，5000万至2亿元的不低于4%。高新收入占比不低于60%、企业所得税按15%征收这两点，本次没有从原文核实。",
+    "price": "不适用",
+    "grade": "第三方",
+    "source": "https://www.sz.gov.cn/szzt2010/zdlyzl/kjcy/yhzc/content/post_1327995.html",
+    "date": "查询2026-10-05"
+   },
+   {
+    "item": "上海2026年度“模塑申城”算力券、模型券（Token券）、语料券申报（沪经信智〔2026〕248号）",
+    "fact": "支持方向包括在线新经济、广告、OPC创业等重点领域。算力券用于租用非关联方的智能算力（不含存储、网络、安全服务）；模型券用于调用非关联方云平台上第三方大模型API产生的费用；语料券用于购买非关联方的语料。申报主体须在上海依法经营，有独立承担民事责任的能力，信用良好，财务制度健全；同一项目不能已获其他市级财政补贴。全年分4批：第一批受理2026-05-08 10:00至05-27 16:00，之后每季度首月受理，推断第四批在2026年10月。申报平台为 https://zxzj.sheitc.sh.gov.cn 。通知原文没有写补贴比例。",
+    "price": "通知未列比例",
+    "grade": "官方",
+    "source": "https://www.sheitc.sh.gov.cn/cmsres/0e/0e38c292e2bb457fa0d2206925e63b0c/efa09c11f8385922bea2bc3b2bc7f8e6.pdf",
+    "date": "发文2026-04-30；查询2026-10-05"
+   },
+   {
+    "item": "上海“模塑申城”实施方案中的补贴比例",
+    "fact": "算力券总额6亿元，市级补贴最高30%的租金，市区协同最多补1年、最高100%；模型券总额3亿元，补贴核定合同额最高50%，单个主体最高500万元；语料券总额1亿元，补贴最高30%，单个主体最高500万元。",
+    "price": "人民币，按核定合同额的比例补贴",
+    "grade": "第三方",
+    "source": "https://www.thepaper.cn/newsDetail_forward_31249856 ；https://www.ithome.com/0/871/261.htm",
+    "date": "查询2026-10-05（方案原文PDF未打开核对）"
+   },
+   {
+    "item": "北京经开区2026年上半年“算力券”",
+    "fact": "政策依据为京技管发〔2024〕29号。补贴2026-01-01至06-30实际使用的智能算力结算费用，最高30%，同一企业每个自然年不超过2000万元。只补GPU租用部分，存储、网络等不在范围内。须在亦庄225平方公里范围内实际经营、有固定场所，算力租自非关联方，并提交合同、增值税专票、结算单、支付凭证和近两年审计报告。申报时间为2026-08-31至09-20，已经截止；下半年批次未查到。",
+    "price": "人民币，补贴30%，年上限2000万元",
+    "grade": "官方",
+    "source": "https://kfqgw.beijing.gov.cn/zwgkkfq/2024zcwj/202608/W020260826569730189158.doc",
+    "date": "2026-08；查询2026-10-05"
+   },
+   {
+    "item": "北京亦庄“模型券”即时补贴平台",
+    "fact": "2026-07-14上线，面向在北京经开区依法经营的企业，“即用即补”，最高补贴65%（例：1000元的模型券套餐实付低至350元）。补贴比例怎么构成、单企业上限多少，均未查到。",
+    "price": "人民币，补贴最高65%",
+    "grade": "第三方",
+    "source": "https://www.stdaily.com/web/gdxw/2026-07/15/content_547656.html",
+    "date": "2026-07-15；查询2026-10-05"
+   },
+   {
+    "item": "北京市级算力券",
+    "fact": "2026年市级算力券实施细则的原文链接（jxj.beijing.gov.cn …W020260214541631874131.docx）已返回404，补贴比例、上限和批次均未查到。检索摘要中有“最高不超过实际智能算力费用的20%”的说法，但出处未核实。",
+    "price": "未查到",
+    "grade": "第三方",
+    "source": "https://jxj.beijing.gov.cn/zwgk/2024zcwj/202602/W020260214541631874131.docx",
+    "date": "查询2026-10-05"
+   },
+   {
+    "item": "深圳2026年度训力券",
+    "fact": "由深圳市科技创新局发布。申请主体须在深圳（含深汕）依法经营并具有独立法人资格。门槛是每年租用非关联方智能算力做大模型训练或推理的费用达到50万元（含）以上；单次抵扣不超过服务合同金额的50%，注册未满一年的企业可提高到60%；同一需求方每年累计最高1000万元。2026年受理时间为05-06至06-05，已经截止。",
+    "price": "人民币，抵扣50%或60%，年上限1000万元",
+    "grade": "第三方",
+    "source": "https://www.sznews.com/news/content/2026-05/08/content_32041156.htm",
+    "date": "2026-05-08；查询2026-10-05"
+   },
+   {
+    "item": "深圳2026年人工智能语料券",
+    "fact": "企业通过数据交易所购买非关联方语料，资助不超过采购总费用的30%，最高200万元；向市政府数据开放平台开放语料，最高奖励100万元。须在深圳实际经营，语料合规。受理时间为2026-09-01 09:00至11-10 18:00，目前仍在申报窗口内。",
+    "price": "人民币，资助30%，上限200万元",
+    "grade": "官方",
+    "source": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/bmdt/content/post_12965392.html",
+    "date": "2026-09-03；查询2026-10-05"
+   },
+   {
+    "item": "杭州算力券",
+    "fact": "出自《支持人工智能全产业链高质量发展若干措施》，每年总额2.5亿元。只支持购买符合杭州规划布局的智算中心，或纳入算力撮合的合作伙伴提供的智能算力。依托已备案的生成式多模态基础大模型做MaaS或智能体应用的企业，补贴不超过合同费用的30%；使用国产算力的不超过30%；使用其他算力的不超过20%。单家企业每年不超过800万元。2026年的实施细则和批次未查到。",
+    "price": "人民币，补贴20%-30%，年上限800万元",
+    "grade": "第三方",
+    "source": "https://www.cls.cn/detail/1741810",
+    "date": "2024-07-23；查询2026-10-05"
+   },
+   {
+    "item": "成都算力券（2.0版）和词元券（征求意见稿）",
+    "fact": "算力券2026年4月修订：年度总额1亿元，单个主体上限500万元，最高抵扣60%，首次纳入OPC主体。早期版本要求使用成都智算中心或国家超算成都中心的算力、上年营收1000万元以上，2.0版是否保留这些条件未核实。词元券征求意见稿于2026-09-11发布：每年总额不超过1亿元，单个主体最高200万元，补贴不超过实际购买金额的30%（小微企业不超过50%），目前还是征求意见稿，未正式施行。",
+    "price": "人民币，算力券60%、上限500万元；词元券30%-50%、上限200万元",
+    "grade": "第三方",
+    "source": "https://finance.sina.cn/tech/2026-09-12/detail-inirqrwy6355666.d.html ；https://cbgc.scol.com.cn/news/7848011",
+    "date": "2026-09-12；查询2026-10-05"
+   },
+   {
+    "item": "深圳跨境电商独立站项目（2026年度中央资金，跨境电子商务企业市场开拓扶持事项）",
+    "fact": "支持深圳跨境电商综合试验区内的跨境电商企业运营独立站、建设自有品牌渠道，每个项目最高奖励100万元，已获过中央资金资助的独立站项目不再重复奖励。网上填报时间为2026-08-14至08-28，纸质材料提交为08-24至08-31，已经截止。具体申报条件在申报指南附件里，本次未读取。",
+    "price": "人民币，每个项目最高100万元",
+    "grade": "官方",
+    "source": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/tzgg/content/post_12925023.html",
+    "date": "2026-08-06；查询2026-10-05"
+   },
+   {
+    "item": "中小企业数字化转型城市试点（财政部、工信部，2025年第三批）",
+    "fact": "约34个城市入选，中央财政按城市给予定额奖补：省会城市和计划单列市不超过1.5亿元，其他城市不超过1亿元；不低于80%的奖补资金用于中小企业数字化改造。试点期两年。",
+    "price": "按城市奖补，不直接补给企业",
+    "grade": "第三方",
+    "source": "https://m.gmw.cn/2025-05/14/content_38024778.htm",
+    "date": "2025-05-14；查询2026-10-05"
+   },
+   {
+    "item": "其他城市算力券（参考）",
+    "fact": "重庆按实际算力服务金额的20%补贴，每个单位每年最高100万元；贵州补贴合同金额的30%，每年累计最高200万元；山东省级单家企业每年不超过500万元，青岛不超过20%、最高100万元；合肥高新区算力券最高1000万元。",
+    "price": "人民币",
+    "grade": "第三方",
+    "source": "https://www.36kr.com/p/3719347815560582",
+    "date": "2026-03-12；查询2026-10-05"
+   },
+   {
+    "item": "国家/地方重点研发计划2026年度AI方向",
+    "fact": "新一代人工智能国家科技重大专项已发布2026年度“以赛代评”项目指南；湖南、黑龙江等省级重点研发计划设有多模态大模型、多智能体等方向。本次未找到明确对应“AIGC视频复刻+跨境营销投放”的指南条目。",
+    "price": "未查到",
+    "grade": "第三方",
+    "source": "https://m.c114.com.cn/w5285-1303592.html ；https://kjj.nanjing.gov.cn/njskxjswyh/202605/P020260520531128118706.pdf",
+    "date": "查询2026-10-05"
+   },
+   {
+    "item": "AI生成内容标识（合规成本相关）",
+    "fact": "国家网信办、工信部、公安部、广电总局联合发布《人工智能生成合成内容标识办法》，配套强制性国家标准同步实施，自2025-09-01起施行，要求加显式标识和隐式标识。",
+    "price": "不适用",
+    "grade": "官方",
+    "source": "https://www.cac.gov.cn/2025-03/14/c_1743654685899683.htm",
+    "date": "发布2025-03-14；查询2026-10-05"
+   }
+  ],
+  "risks": [
+   "行业属性可能让加计扣除落空【推断】：批发和零售业企业不能享受研发费用加计扣除。如果申报主体的主营业务是跨境电商卖货，大概率被归为批发零售业。建议由软件或技术服务类主体承担研发，或者让技术服务收入成为主营。",
+   "补贴普遍要求“非关联方”：上海、北京、深圳的算力券、模型券、语料券都要求从非关联方采购，还要有合同、增值税专票、结算单和支付凭证。AutoDL按秒计费、MiniMax按次调用，如果只有平台账单、没有正式合同和专票，很可能无法申报【推断】。",
+   "算力来源受限：杭州只认本市规划的智算中心和算力撮合合作伙伴；成都早期版本只认成都智算中心和国家超算成都中心；北京经开区只补GPU部分。AutoDL是否在这些认可范围内，未查到【推断：大概率不在】。",
+   "深圳训力券要求每年算力费用不低于50万元，本项目早期的算力用量可能达不到。",
+   "属地要求：每张券都要求申报主体在当地注册或实际经营，跨城市不能申领。上海还要求同一项目未获其他市级财政补贴，同一笔费用不能重复申领。",
+   "时间窗口：北京经开区上半年批次、深圳训力券、深圳独立站项目2026年都已截止。目前还开着的是深圳语料券（到2026-11-10）和上海第四批（推断在2026年10月受理）。",
+   "中小企业数字化转型试点是以城市为单位奖补，重点是工业中小企业的数字化改造。本项目属于内容营销类SaaS，能否以服务商身份进入当地的服务商资源池，未查到【推断：申报路径不直接】。",
+   "合规风险：自动复刻爆款视频可能涉及第三方著作权和肖像权；《人工智能生成合成内容标识办法》要求做AI生成标识；用开源agent自动投放可能违反TikTok平台规则。政府项目评审可能对“复刻”这一表述持负面态度，建议改写成“趋势驱动的AIGC内容生成”【推断】。",
+   "国家科技计划多面向科研攻关、要求单位整体申报，企业单独以“营销自动化”立项的匹配度低【推断】。"
+  ],
+  "budget_implications": "【官方依据】如果按科技计划格式申报，直接费用分三项。设备费：GPU工作站、存储；50万元以下只需简要测算。业务费：云算力（AutoDL）、模型API（MiniMax H3）、数据接口订阅（FastMoss）、测试投放、知识产权、合规与审计。劳务费：参照当地科研和技术服务业平均工资，可含社保公积金。间接费按直接费用扣除设备购置费后的金额分档计算：500万元以下的部分不超过30%，500万至1000万元的部分不超过25%，1000万元以上的部分不超过20%。【推断】企业内部立项可以沿用这三类加管理费的结构，并给研发费用单独建辅助账，以便享受100%加计扣除，相当于研发费的25%（企业所得税率25%时）或15%（高新企业）可以抵减所得税。前提是主体不属于批发零售等排除行业。【推断】补贴应作为抵减项来做预算，不能当作收入来源。对于模型API费用，上海模型券最高补50%、单个主体最高500万元；北京亦庄模型券最高65%；成都词元券30%到50%，目前还是征求意见稿。对于GPU算力费用，上海市级补30%（市区协同最高可到100%）；北京经开区补30%；深圳补50%到60%，但年费用须达50万元；杭州补20%到30%；成都最高60%。预算里要把“可补贴部分”和“不可补贴部分”分开列：可补贴的是有合同和专票的非关联方算力和API；不可补贴的是零散按秒结算、境外数据订阅（FastMoss）、海外广告投放。补贴到账通常在费用发生之后，需要先自己垫付现金流。",
+  "gaps": "以下内容未查到或未核实：上海“模塑申城”实施方案原文PDF（补贴比例来自澎湃、IT之家转述），以及第四批的具体受理日期；北京市级2026算力券细则，原链接已404；北京亦庄模型券65%的构成和单企业上限；杭州2026年实施细则和批次（36氪摘要提到的“国产叠加至45%”未核实）；成都算力券2.0原文的主体条件；深圳训力券2026申请指南原文（数字来自深圳新闻网）；深圳跨境电商独立站的申报条件（附件未读）；其他城市2026年的跨境电商专项资金；广东、浙江等省级数字化转型、中小企业专精特新资金中是否有适用本项目的方向；高新企业认定第十一条中“高新收入不低于60%”和15%税率未从原文核实；国家重点研发计划2026年是否有对应“AIGC视频+营销智能体”的指南方向；FastMoss、AutoDL、MiniMax能否开具符合补贴要求的合同和增值税专票。"
+ }
+]

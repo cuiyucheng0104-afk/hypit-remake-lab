@@ -1,0 +1,237 @@
+<?svml using="@hypit/markup@1"?>
+<!-- 新版蓝V认证教程 · 前 30 秒复刻
+     保留：俯拍手机的操作画面、操作段原配音。
+     重做：开场讲解员（H3 生成）、标题、字幕、红色指引（全部挂在台词上）。 -->
+<svml>
+  <import as="asset" from="@hypit/media@1"/>
+  <import as="text" from="@hypit/text@1"/>
+  <import as="pipeline" from="@hypit/media-pipeline@1"/>
+  <import as="h3" from="@hypit/minimax-h3@1"/>
+  <import as="time" from="@hypit/timeline-author@1"/>
+  <import from="@hypit/script@1"/>
+  <import as="whisperx" from="@hypit/whisperx@1"/>
+  <import as="space" from="@hypit/spatial@1"/>
+  <import as="performance" from="@hypit/performance@1"/>
+  <import as="sound" from="@hypit/sound@1"/>
+  <import as="media-track" from="@hypit/media-track@1"/>
+  <import as="typo" from="@hypit/typography-track@1"/>
+  <import as="caption-fine" from="@hypit/caption-fine@1"/>
+  <import as="fonts" from="@hypit/fonts-open@1"/>
+  <import as="film" from="@hypit/film@1"/>
+  <import as="render" from="@hypit/render-hyperframes@1"/>
+  <import as="recipes" source="./recipes.svs"/>
+
+  <time:Clock id="clock" frame-rate="30"/>
+
+  <!-- 参考片与讲解员形象 -->
+  <asset:Video id="reference" src="../../references/lanv-30s/source.mp4"/>
+  <asset:Video id="presenter-look" src="./assets/tk-presenter.mp4"/>
+
+  <!-- 讲解员形象：取绿幕素材里正对镜头的一帧 -->
+  <pipeline:ExtractFrame id="presenter-still" source={presenter-look}
+    video="primary-moving" at="time:9.5s"/>
+
+  <!-- 原开场的声音，作为新讲解员的音色参考 -->
+  <pipeline:Normalize id="reference-media" source={reference} clock={clock}
+    video="primary-moving" audio="default" span-authority="video"/>
+  <pipeline:Transform id="opening-cut" source={reference-media.media}>
+    <pipeline:Trim end="2.2s"/>
+  </pipeline:Transform>
+  <pipeline:ExtractAudio id="opening-voice" source={opening-cut.video} audio="default"/>
+
+  <!-- 新讲解员：办公室中近景，对镜头说开场白 -->
+  <text:Value id="presenter-prompt">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the young woman from &lt;Picture 1&gt;, with long black hair gathered into a low updo with loose strands framing her face, fair skin, soft natural makeup, a white satin long-sleeve blouse and a black high-waisted pencil skirt.",
+    "&lt;Audio 1&gt; is the voice of &lt;Subject 1&gt;: a bright, clear young female Mandarin voice with a quick, friendly delivery."
+  ],
+  "summary": "[reference generation] A 5-second single-shot medium close-up in a bright modern office, where &lt;Subject 1&gt; looks into the camera and introduces a phone tutorial.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt; (appears in [Shot 1]): fully_preserved - face, hairstyle, white satin blouse and black skirt are retained; the green backdrop of &lt;Picture 1&gt; is replaced by the office."
+  ],
+  "detailed_description": "Photorealistic vertical-video vlog style, natural daylight from office windows, sharp focus on the face.\n\n[Shot 1] Medium close-up, static camera at eye level (00:00.000 - 00:05.000). &lt;Subject 1&gt; sits at a white office desk in a bright open-plan office, with computer monitors, green potted plants and softly blurred colleagues behind her. From the very first frame she is already facing the camera mid-breath and starts talking at 00:00.200 without any pause, at a brisk, energetic pace, lifting one hand in a small open gesture. (S1) in the voice of &lt;Audio 1&gt;, &lt;d&gt;[Chinese] 这边是新版蓝V的认证，我带大家操作一遍。&lt;/d&gt; The whole line is finished by 00:03.200, ending clearly on the word 一遍. From 00:03.200 to 00:05.000 she stays silent, smiling at the camera and lowering her hand. No text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Quiet office room tone and a clear close-miked female voice.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="presenter" prompt={presenter-prompt} duration="5"
+    resolution="768P" aspect-ratio="1:1">
+    <h3:Reference image={presenter-still.image}/>
+    <h3:Reference audio={opening-voice.audio}/>
+  </h3:ReferenceVideo>
+
+  <!-- ===== 台词：两段表演。开场由新讲解员说，操作段保留原配音。
+       @{…!} 是挂指引用的词锚点，|| 是字幕换条。 ===== -->
+  <script id="story">
+    <intro>
+      @{opening}这边是新版<蓝V|蓝微>的认证，|| 我带大家操作一遍。@{/opening}
+    </intro>
+    <demo>
+      我们首先点，我@{menu!}点右上角的三条杠。|| @{service!}同样的，点企业服务中心。|| @{lanv!}点亮<蓝V|蓝微>。|| @{apply-say!}点@{apply!}立即申请。|| @{choose!}点，这有两个，|| 一定不要选错。|| 点@{transfer!}转移已有抖音号。|| 如果你点新的，|| 就@{zero!}从<0|零>开始，|| 连粉丝都没有了。|| 点开始转移。|| 这个确定是你@{origin!}原先的@{account!}抖音号，|| 点下一步。|| @{qual-say!}点@{qual!}企业资质认证。|| @{body-say!}点@{body!}主体资质。|| @{upload-say!}点这里头，直接上传我们的营业执照。|| 点，是长期的，|| 你就选择长期，|| 因为我的执照是长期的。|| 注册地的是中国广西桂林。|| 确认无误，|| @{submit!}提交。@{~done!}
+    </demo>
+  </script>
+
+  <!-- 开场：H3 生成的讲解员，只留说台词的那一段 -->
+  <pipeline:Normalize id="presenter-media" source={presenter.video} clock={clock}
+    video="primary-moving" audio="default" span-authority="video"/>
+  <pipeline:Transform id="presenter-cut" source={presenter-media.media}>
+    <pipeline:Trim start="2.7s"/>
+    <pipeline:Trim end="2.32s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="intro-media" source={presenter-cut.video} clock={clock}
+    video="primary-moving" audio="default" span-authority="video"/>
+  <whisperx:SemanticTake id="intro-take" narrative={story} segment={story.segment.intro}
+    media={intro-media.media} language="zh"/>
+
+  <!-- 操作段：原片 2.13 s 以后（去掉原讲解员） -->
+  <pipeline:Transform id="demo-cut" source={reference-media.media}>
+    <pipeline:Trim start="2.13s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="demo-media" source={demo-cut.video} clock={clock}
+    video="primary-moving" audio="default" span-authority="video"/>
+  <whisperx:SemanticTake id="demo-take" narrative={story} segment={story.segment.demo}
+    media={demo-media.media} language="zh"/>
+
+  <time:Timeline id="program" clock={clock}>
+    <time:Take source={intro-take.take}/>
+    <time:Take source={demo-take.take}/>
+  </time:Timeline>
+
+  <!-- ===== 版式 ===== -->
+  <space:Canvas id="vertical" width="720" height="1280"/>
+  <space:Frame id="stage" within={vertical} left="0px" top="250px" right="720px" bottom="1050px"/>
+  <space:Frame id="title-band" within={vertical} left="0px" top="0px" right="720px" bottom="250px"/>
+  <space:Frame id="title-accent" within={vertical} left="0px" top="244px" right="720px" bottom="250px"/>
+  <space:Frame id="caption-band" within={vertical} left="0px" top="1050px" right="720px" bottom="1280px"/>
+  <space:Frame id="caption-accent" within={vertical} left="0px" top="1050px" right="720px" bottom="1056px"/>
+  <space:Frame id="title-line-1" within={vertical} left="20px" top="36px" right="700px" bottom="136px"/>
+  <space:Frame id="title-line-2" within={vertical} left="20px" top="134px" right="700px" bottom="226px"/>
+  <space:Point id="label-point" x="28" y="1026"/>
+  <space:Frame id="demo-frame" within={vertical} left="-156.4px" top="-222.5px" right="782.5px" bottom="1463.5px"/>
+  <!-- menu: tip (287,468) -->
+  <space:Frame id="arrow-menu-box" within={vertical} left="222.8px" top="222.7px" right="350.8px" bottom="481.6px"/>
+  <space:Path id="arrow-menu-edge"><space:Move x="258.8" y="226.7"/><space:Line x="314.8" y="226.7"/><space:Line x="314.8" y="402.0"/><space:Line x="346.8" y="402.0"/><space:Line x="286.8" y="477.6"/><space:Line x="226.8" y="402.0"/><space:Line x="258.8" y="402.0"/><space:Close/></space:Path>
+  <space:Path id="arrow-menu-fill"><space:Move x="264.8" y="232.7"/><space:Line x="308.8" y="232.7"/><space:Line x="308.8" y="402.0"/><space:Line x="340.8" y="402.0"/><space:Line x="286.8" y="468.0"/><space:Line x="232.8" y="402.0"/><space:Line x="264.8" y="402.0"/><space:Close/></space:Path>
+  <!-- service: tip (392,638) -->
+  <space:Frame id="arrow-service-box" within={vertical} left="327.9px" top="389.6px" right="455.9px" bottom="651.9px"/>
+  <space:Path id="arrow-service-edge"><space:Move x="363.9" y="393.6"/><space:Line x="419.9" y="393.6"/><space:Line x="419.9" y="572.3"/><space:Line x="451.9" y="572.3"/><space:Line x="391.9" y="647.9"/><space:Line x="331.9" y="572.3"/><space:Line x="363.9" y="572.3"/><space:Close/></space:Path>
+  <space:Path id="arrow-service-fill"><space:Move x="369.9" y="399.6"/><space:Line x="413.9" y="399.6"/><space:Line x="413.9" y="572.3"/><space:Line x="445.9" y="572.3"/><space:Line x="391.9" y="638.3"/><space:Line x="337.9" y="572.3"/><space:Line x="369.9" y="572.3"/><space:Close/></space:Path>
+  <!-- lanv: tip (140,691) -->
+  <space:Frame id="arrow-lanv-box" within={vertical} left="76.3px" top="443.6px" right="204.3px" bottom="704.2px"/>
+  <space:Path id="arrow-lanv-edge"><space:Move x="112.3" y="447.6"/><space:Line x="168.3" y="447.6"/><space:Line x="168.3" y="624.6"/><space:Line x="200.3" y="624.6"/><space:Line x="140.3" y="700.2"/><space:Line x="80.3" y="624.6"/><space:Line x="112.3" y="624.6"/><space:Close/></space:Path>
+  <space:Path id="arrow-lanv-fill"><space:Move x="118.3" y="453.6"/><space:Line x="162.3" y="453.6"/><space:Line x="162.3" y="624.6"/><space:Line x="194.3" y="624.6"/><space:Line x="140.3" y="690.6"/><space:Line x="86.3" y="624.6"/><space:Line x="118.3" y="624.6"/><space:Close/></space:Path>
+  <!-- apply: tip (477,893) -->
+  <space:Frame id="arrow-apply-box" within={vertical} left="413.4px" top="639.2px" right="541.4px" bottom="906.5px"/>
+  <space:Path id="arrow-apply-edge"><space:Move x="449.4" y="643.2"/><space:Line x="505.4" y="643.2"/><space:Line x="505.4" y="826.9"/><space:Line x="537.4" y="826.9"/><space:Line x="477.4" y="902.5"/><space:Line x="417.4" y="826.9"/><space:Line x="449.4" y="826.9"/><space:Close/></space:Path>
+  <space:Path id="arrow-apply-fill"><space:Move x="455.4" y="649.2"/><space:Line x="499.4" y="649.2"/><space:Line x="499.4" y="826.9"/><space:Line x="531.4" y="826.9"/><space:Line x="477.4" y="892.9"/><space:Line x="423.4" y="826.9"/><space:Line x="455.4" y="826.9"/><space:Close/></space:Path>
+  <!-- transfer: tip (424,839) -->
+  <space:Frame id="arrow-transfer-box" within={vertical} left="359.8px" top="591.9px" right="487.8px" bottom="852.5px"/>
+  <space:Path id="arrow-transfer-edge"><space:Move x="395.8" y="595.9"/><space:Line x="451.8" y="595.9"/><space:Line x="451.8" y="772.9"/><space:Line x="483.8" y="772.9"/><space:Line x="423.8" y="848.5"/><space:Line x="363.8" y="772.9"/><space:Line x="395.8" y="772.9"/><space:Close/></space:Path>
+  <space:Path id="arrow-transfer-fill"><space:Move x="401.8" y="601.9"/><space:Line x="445.8" y="601.9"/><space:Line x="445.8" y="772.9"/><space:Line x="477.8" y="772.9"/><space:Line x="423.8" y="838.9"/><space:Line x="369.8" y="772.9"/><space:Line x="401.8" y="772.9"/><space:Close/></space:Path>
+  <!-- next: tip (605,825) -->
+  <space:Frame id="arrow-next-box" within={vertical} left="541.0px" top="657.7px" right="669.0px" bottom="839.1px"/>
+  <space:Path id="arrow-next-edge"><space:Move x="577.0" y="661.7"/><space:Line x="633.0" y="661.7"/><space:Line x="633.0" y="759.5"/><space:Line x="665.0" y="759.5"/><space:Line x="605.0" y="835.1"/><space:Line x="545.0" y="759.5"/><space:Line x="577.0" y="759.5"/><space:Close/></space:Path>
+  <space:Path id="arrow-next-fill"><space:Move x="583.0" y="667.7"/><space:Line x="627.0" y="667.7"/><space:Line x="627.0" y="759.5"/><space:Line x="659.0" y="759.5"/><space:Line x="605.0" y="825.5"/><space:Line x="551.0" y="759.5"/><space:Line x="583.0" y="759.5"/><space:Close/></space:Path>
+  <!-- qual: tip (233,596) -->
+  <space:Frame id="arrow-qual-box" within={vertical} left="169.3px" top="347.5px" right="297.3px" bottom="609.7px"/>
+  <space:Path id="arrow-qual-edge"><space:Move x="205.3" y="351.5"/><space:Line x="261.3" y="351.5"/><space:Line x="261.3" y="530.1"/><space:Line x="293.3" y="530.1"/><space:Line x="233.3" y="605.7"/><space:Line x="173.3" y="530.1"/><space:Line x="205.3" y="530.1"/><space:Close/></space:Path>
+  <space:Path id="arrow-qual-fill"><space:Move x="211.3" y="357.5"/><space:Line x="255.3" y="357.5"/><space:Line x="255.3" y="530.1"/><space:Line x="287.3" y="530.1"/><space:Line x="233.3" y="596.1"/><space:Line x="179.3" y="530.1"/><space:Line x="211.3" y="530.1"/><space:Close/></space:Path>
+  <!-- body: tip (283,557) -->
+  <space:Frame id="arrow-body-box" within={vertical} left="219.0px" top="308.7px" right="347.0px" bottom="571.0px"/>
+  <space:Path id="arrow-body-edge"><space:Move x="255.0" y="312.7"/><space:Line x="311.0" y="312.7"/><space:Line x="311.0" y="491.4"/><space:Line x="343.0" y="491.4"/><space:Line x="283.0" y="567.0"/><space:Line x="223.0" y="491.4"/><space:Line x="255.0" y="491.4"/><space:Close/></space:Path>
+  <space:Path id="arrow-body-fill"><space:Move x="261.0" y="318.7"/><space:Line x="305.0" y="318.7"/><space:Line x="305.0" y="491.4"/><space:Line x="337.0" y="491.4"/><space:Line x="283.0" y="557.4"/><space:Line x="229.0" y="491.4"/><space:Line x="261.0" y="491.4"/><space:Close/></space:Path>
+  <!-- submit: tip (217,534) -->
+  <space:Frame id="arrow-submit-box" within={vertical} left="153.3px" top="285.1px" right="281.3px" bottom="547.4px"/>
+  <space:Path id="arrow-submit-edge"><space:Move x="189.3" y="289.1"/><space:Line x="245.3" y="289.1"/><space:Line x="245.3" y="467.8"/><space:Line x="277.3" y="467.8"/><space:Line x="217.3" y="543.4"/><space:Line x="157.3" y="467.8"/><space:Line x="189.3" y="467.8"/><space:Close/></space:Path>
+  <space:Path id="arrow-submit-fill"><space:Move x="195.3" y="295.1"/><space:Line x="239.3" y="295.1"/><space:Line x="239.3" y="467.8"/><space:Line x="271.3" y="467.8"/><space:Line x="217.3" y="533.8"/><space:Line x="163.3" y="467.8"/><space:Line x="195.3" y="467.8"/><space:Close/></space:Path>
+  <!-- origin circle: centre (314,487) radii (193,140) -->
+  <space:Frame id="circle-origin-box" within={vertical} left="101.5px" top="327.3px" right="527.4px" bottom="647.2px"/>
+  <space:Path id="circle-origin-edge"><space:Move x="518.4" y="487.3"/><space:Cubic control1-x="518.4" control1-y="570.7" control2-x="427.1" control2-y="638.2" x="314.5" y="638.2"/><space:Cubic control1-x="201.8" control1-y="638.2" control2-x="110.5" control2-y="570.7" x="110.5" y="487.3"/><space:Cubic control1-x="110.5" control1-y="403.9" control2-x="201.8" control2-y="336.3" x="314.5" y="336.3"/><space:Cubic control1-x="427.1" control1-y="336.3" control2-x="518.4" control2-y="403.9" x="518.4" y="487.3"/><space:Close/><space:Move x="496.4" y="487.3"/><space:Cubic control1-x="496.4" control1-y="416.1" control2-x="414.9" control2-y="358.3" x="314.5" y="358.3"/><space:Cubic control1-x="214.0" control1-y="358.3" control2-x="132.5" control2-y="416.1" x="132.5" y="487.3"/><space:Cubic control1-x="132.5" control1-y="558.5" control2-x="214.0" control2-y="616.2" x="314.5" y="616.2"/><space:Cubic control1-x="414.9" control1-y="616.2" control2-x="496.4" control2-y="558.5" x="496.4" y="487.3"/><space:Close/></space:Path>
+  <space:Path id="circle-origin-fill"><space:Move x="513.4" y="487.3"/><space:Cubic control1-x="513.4" control1-y="567.9" control2-x="424.3" control2-y="633.2" x="314.5" y="633.2"/><space:Cubic control1-x="204.6" control1-y="633.2" control2-x="115.5" control2-y="567.9" x="115.5" y="487.3"/><space:Cubic control1-x="115.5" control1-y="406.7" control2-x="204.6" control2-y="341.3" x="314.5" y="341.3"/><space:Cubic control1-x="424.3" control1-y="341.3" control2-x="513.4" control2-y="406.7" x="513.4" y="487.3"/><space:Close/><space:Move x="501.4" y="487.3"/><space:Cubic control1-x="501.4" control1-y="413.3" control2-x="417.7" control2-y="353.3" x="314.5" y="353.3"/><space:Cubic control1-x="211.2" control1-y="353.3" control2-x="127.5" control2-y="413.3" x="127.5" y="487.3"/><space:Cubic control1-x="127.5" control1-y="561.3" control2-x="211.2" control2-y="621.2" x="314.5" y="621.2"/><space:Cubic control1-x="417.7" control1-y="621.2" control2-x="501.4" control2-y="561.3" x="501.4" y="487.3"/><space:Close/></space:Path>
+
+  <!-- 画面：全程是操作画面，开场这一段换成讲解员 -->
+  <performance:Style id="demo-view" frame={demo-frame} appearance={recipes.media.demo}/>
+  <performance:Style id="presenter-view" frame={stage} appearance={recipes.media.presenter}/>
+  <performance:Track id="picture" timeline={program.timeline} canvas={vertical}>
+    <performance:Use style={demo-view}/>
+    <performance:Use during={story.segment.intro} style={presenter-view}/>
+  </performance:Track>
+
+  <!-- 声音：两段同期声；「提交」之后静音（原片后面是下一段的半句话） -->
+  <sound:Style id="normal"/>
+  <sound:Style id="silent" gain="0"/>
+  <sound:Track id="voice" timeline={program.timeline}>
+    <sound:Use style={normal}/>
+    <sound:Use start="moment.cue" start-source={story.moment.done} end="program.end" style={silent}/>
+  </sound:Track>
+
+  <!-- 色带 -->
+  <media-track:Track id="bands" timeline={program.timeline} canvas={vertical}>
+    <media-track:Item id="title-band" frame={title-band} appearance={recipes.media.band} during="program"><media-track:Paint appearance={recipes.paint.title-band}/></media-track:Item>
+    <media-track:Item id="title-accent" frame={title-accent} appearance={recipes.media.accent} during="program"><media-track:Paint appearance={recipes.paint.accent}/></media-track:Item>
+    <media-track:Item id="caption-band" frame={caption-band} appearance={recipes.media.band} during="program"><media-track:Paint appearance={recipes.paint.caption-band}/></media-track:Item>
+    <media-track:Item id="caption-accent" frame={caption-accent} appearance={recipes.media.accent} during="program"><media-track:Paint appearance={recipes.paint.accent}/></media-track:Item>
+  </media-track:Track>
+
+  <!-- 红色指引：每个都挂在台词的词上，起止都跟着话走 -->
+  <media-track:Track id="pointers" timeline={program.timeline} canvas={vertical}>
+    <media-track:Item id="arrow-menu-edge" frame={arrow-menu-box} clip={arrow-menu-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.menu} end="moment.cue" end-source={story.moment.service}><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="arrow-menu-fill" frame={arrow-menu-box} clip={arrow-menu-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.menu} end="moment.cue" end-source={story.moment.service}><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="arrow-service-edge" frame={arrow-service-box} clip={arrow-service-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.service} end="moment.cue" end-source={story.moment.lanv}><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="arrow-service-fill" frame={arrow-service-box} clip={arrow-service-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.service} end="moment.cue" end-source={story.moment.lanv}><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="arrow-lanv-edge" frame={arrow-lanv-box} clip={arrow-lanv-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.pointer-1} start="moment.cue" start-source={story.moment.lanv} end="moment.cue" end-source={story.moment.apply-say}><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="arrow-lanv-fill" frame={arrow-lanv-box} clip={arrow-lanv-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-1} start="moment.cue" start-source={story.moment.lanv} end="moment.cue" end-source={story.moment.apply-say}><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="arrow-apply-edge" frame={arrow-apply-box} clip={arrow-apply-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.apply} end="moment.cue" end-source={story.moment.choose}><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="arrow-apply-fill" frame={arrow-apply-box} clip={arrow-apply-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.apply} end="moment.cue" end-source={story.moment.choose}><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="arrow-transfer-edge" frame={arrow-transfer-box} clip={arrow-transfer-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.pointer-4} start="moment.cue" start-source={story.moment.transfer} end="moment.cue" end-source={story.moment.zero}><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="arrow-transfer-fill" frame={arrow-transfer-box} clip={arrow-transfer-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-4} start="moment.cue" start-source={story.moment.transfer} end="moment.cue" end-source={story.moment.zero}><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="arrow-next-edge" frame={arrow-next-box} clip={arrow-next-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.account} end="moment.cue" end-source={story.moment.qual-say}><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="arrow-next-fill" frame={arrow-next-box} clip={arrow-next-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.account} end="moment.cue" end-source={story.moment.qual-say}><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="arrow-qual-edge" frame={arrow-qual-box} clip={arrow-qual-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.qual} end="moment.cue" end-source={story.moment.body-say}><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="arrow-qual-fill" frame={arrow-qual-box} clip={arrow-qual-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.qual} end="moment.cue" end-source={story.moment.body-say}><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="arrow-body-edge" frame={arrow-body-box} clip={arrow-body-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.pointer-1} start="moment.cue" start-source={story.moment.body} end="moment.cue" end-source={story.moment.upload-say}><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="arrow-body-fill" frame={arrow-body-box} clip={arrow-body-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-1} start="moment.cue" start-source={story.moment.body} end="moment.cue" end-source={story.moment.upload-say}><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="arrow-submit-edge" frame={arrow-submit-box} clip={arrow-submit-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.submit} end="program.end"><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="arrow-submit-fill" frame={arrow-submit-box} clip={arrow-submit-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.pointer-2} start="moment.cue" start-source={story.moment.submit} end="program.end"><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+    <media-track:Item id="circle-origin-edge" frame={circle-origin-box} clip={circle-origin-edge} appearance={recipes.media.pointer-edge} motion={recipes.motion.circle} start="moment.cue" start-source={story.moment.origin} end="moment.cue" end-source={story.moment.qual-say}><media-track:Paint appearance={recipes.paint.white}/></media-track:Item>
+    <media-track:Item id="circle-origin-fill" frame={circle-origin-box} clip={circle-origin-fill} appearance={recipes.media.pointer-fill} motion={recipes.motion.circle} start="moment.cue" start-source={story.moment.origin} end="moment.cue" end-source={story.moment.qual-say}><media-track:Paint appearance={recipes.paint.red}/></media-track:Item>
+  </media-track:Track>
+
+  <!-- 标题与讲解员标签 -->
+  <fonts:Face id="sc-black" family="noto-sans-sc" weight="900" style="normal"/>
+  <fonts:Face id="sc-bold" family="noto-sans-sc" weight="700" style="normal"/>
+  <typo:Style id="title-style" recipe={recipes.text.title} font={sc-black}>
+    <typo:Fill color="#FFE14D"/>
+    <typo:Stroke color="#08183F" width="7" placement="outside"/>
+    <typo:Shadow color="#000000" x="0" y="4" blur="10"/>
+  </typo:Style>
+  <typo:Style id="subtitle-style" recipe={recipes.text.subtitle} font={sc-black}>
+    <typo:Fill color="#FFFFFF"/>
+    <typo:Stroke color="#08183F" width="6" placement="outside"/>
+  </typo:Style>
+  <typo:Style id="label-style" recipe={recipes.text.label} font={sc-bold}>
+    <typo:Fill color="#FFFFFF"/>
+    <typo:Box target="content" color="#16B364" padding="8 18" radius="22"/>
+  </typo:Style>
+  <typo:Track id="titles" timeline={program.timeline}>
+    <typo:Area id="title" placement={title-line-1} style={title-style} during="program">#新的企业蓝V认证</typo:Area>
+    <typo:Area id="subtitle" placement={title-line-2} style={subtitle-style} during="program">如何认证？</typo:Area>
+    <typo:Point id="presenter-label" placement={label-point} style={label-style}
+      during={story.selection.opening}>企业号运营 · 实操讲解</typo:Point>
+  </typo:Track>
+
+  <!-- 字幕 -->
+  <caption-fine:Style id="caption-style" recipe={recipes.caption.main} font={sc-bold}/>
+  <caption-fine:Track id="captions" document={story.caption} timeline={program.timeline}>
+    <caption-fine:Use style={caption-style}/>
+  </caption-fine:Track>
+
+  <film:Film id="main" canvas={vertical} timeline={program.timeline} appearance={recipes.film.vertical}>
+    <film:Track source={picture.visual}/>
+    <film:Track source={voice.audio}/>
+    <film:Track source={bands.visual}/>
+    <film:Track source={pointers.visual}/>
+    <film:Track source={titles.track}/>
+    <film:Track source={captions.track}/>
+  </film:Film>
+  <render:Video id="final" composition={main.composition} timeline={program.timeline}/>
+</svml>

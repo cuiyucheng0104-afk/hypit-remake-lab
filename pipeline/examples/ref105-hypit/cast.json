@@ -1,0 +1,27 @@
+{
+ "hero": {
+  "image": "cast/hero_face.png",
+  "kind": "character",
+  "desc": "the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery"
+ },
+ "hero_full": {
+  "image": "cast/hero_full.png",
+  "kind": "other",
+  "desc": "the same man's full-length costume: near-black robe, leather belt and a long sword in a dark scabbard at his waist"
+ },
+ "boss": {
+  "image": "cast/boss_face.png",
+  "kind": "character",
+  "desc": "the grim middle-aged leader in a wide black bamboo hat with a metal crest and a black embroidered robe"
+ },
+ "henchmen": {
+  "image": "cast/henchmen.jpg",
+  "kind": "group",
+  "desc": "the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre"
+ },
+ "scene": {
+  "image": "cast/scene.jpg",
+  "kind": "scene",
+  "desc": "an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night"
+ }
+}

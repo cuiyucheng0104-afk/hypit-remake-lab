@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.hypit/
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.png
+*.jpg
+*.jpeg
+*.webp
+drafts/gen/
+**/out/*.mp4
+.env*
+*token*

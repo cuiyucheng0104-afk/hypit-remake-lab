@@ -1,0 +1,6 @@
+<?svml using="@hypit/run-markup@1"?>
+<!-- 阶段一：原片画面占位的完整结构预览（不发生成请求） -->
+<svrun version="1">
+  <author source="../authors/s01.svml"/>
+  <target output="final.video"/>
+</svrun>

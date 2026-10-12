@@ -1,0 +1,14 @@
+<?svml using="@hypit/run-markup@1"?>
+<!-- 阶段三：固定 4 组生成素材，按原片切点拼装成片（不再发生成请求） -->
+<svrun version="1">
+  <author source="../authors/s01.svml"/>
+  <target output="final.video"/>
+  <build-record id="gen-r1" build="bld_20260930T164228307Z_3FC8269E4F" output="g-r1.video"/>
+  <satisfy output="g-r1.video" candidate="gen-r1"/>
+  <build-record id="gen-r2" build="bld_20260930T164228307Z_3FC8269E4F" output="g-r2.video"/>
+  <satisfy output="g-r2.video" candidate="gen-r2"/>
+  <build-record id="gen-r3" build="bld_20260930T164228307Z_3FC8269E4F" output="g-r3.video"/>
+  <satisfy output="g-r3.video" candidate="gen-r3"/>
+  <build-record id="gen-r4" build="bld_20260930T164228307Z_3FC8269E4F" output="g-r4.video"/>
+  <satisfy output="g-r4.video" candidate="gen-r4"/>
+</svrun>

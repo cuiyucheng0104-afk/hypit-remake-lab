@@ -1,0 +1,64 @@
+{
+  "format": "hypit.runtime-local@1",
+  "dataRoot": ".hypit/runtimes/local",
+  "credentials": {
+    "platform": {
+      "use": "@hypit/credential-store-platform"
+    }
+  },
+  "endpoints": {
+    "hypihub.default": {
+      "use": "@hypit/provider-hypihub",
+      "config": {
+        "baseUrl": "https://hypit.ai",
+        "apiKey": {
+          "store": "platform",
+          "key": "hypihub.oauth"
+        }
+      }
+    },
+    "media.local": {
+      "use": "@hypit/provider-media-local"
+    },
+    "hyperframes.local": {
+      "use": "@hypit/provider-hyperframes-local"
+    },
+    "h3.autodl": {
+      "use": "@local/provider-comfy-h3",
+      "config": {
+        "baseUrl": "http://127.0.0.1:16006",
+        "pollIntervalMs": 5000
+      }
+    },
+    "whisperx.local": {
+      "use": "@hypit/provider-whisperx-local",
+      "config": {
+        "expectedModel": "medium",
+        "expectedDevice": "cpu",
+        "expectedCompute": "int8",
+        "expectedBatchSize": 8,
+        "alignmentLanguages": [
+          "zh"
+        ]
+      }
+    },
+    "h3.market": {
+      "use": "@local/provider-autodl-market",
+      "config": {
+        "tokenFile": "~/.config/autodl/comfy_token",
+        "referenceWorkflow": "minimax_h3_z0903",
+        "frameWorkflow": "minimax_h3_b99_002",
+        "textWorkflow": "minimax_h3_lightx2v_no_pic",
+        "referenceTier": "1088p",
+        "spendCapYuan": 30,
+        "ledgerFile": "~/.config/autodl/market-ledger.json",
+        "pollIntervalMs": 8000,
+        "concurrency": 4
+      }
+    }
+  },
+  "bindings": {
+    "@hypit/minimax-h3@1#minimax-h3": "h3.market",
+    "@hypit/whisperx@1#whisperx-alignment": "whisperx.local"
+  }
+}

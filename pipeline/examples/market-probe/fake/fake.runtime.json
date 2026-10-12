@@ -1,0 +1,62 @@
+{
+  "format": "hypit.runtime-local@1",
+  "dataRoot": ".hypit/runtimes/fake-market-test",
+  "credentials": {
+    "platform": {
+      "use": "@hypit/credential-store-platform"
+    }
+  },
+  "endpoints": {
+    "hypihub.default": {
+      "use": "@hypit/provider-hypihub",
+      "config": {
+        "baseUrl": "https://hypit.ai",
+        "apiKey": {
+          "store": "platform",
+          "key": "hypihub.oauth"
+        }
+      }
+    },
+    "media.local": {
+      "use": "@hypit/provider-media-local"
+    },
+    "hyperframes.local": {
+      "use": "@hypit/provider-hyperframes-local"
+    },
+    "h3.autodl": {
+      "use": "@local/provider-comfy-h3",
+      "config": {
+        "baseUrl": "http://127.0.0.1:16006",
+        "pollIntervalMs": 5000
+      }
+    },
+    "whisperx.local": {
+      "use": "@hypit/provider-whisperx-local",
+      "config": {
+        "expectedModel": "medium",
+        "expectedDevice": "cpu",
+        "expectedCompute": "int8",
+        "expectedBatchSize": 8,
+        "alignmentLanguages": [
+          "zh"
+        ]
+      }
+    },
+    "h3.fake": {
+      "use": "@local/provider-autodl-market",
+      "config": {
+        "baseUrl": "http://127.0.0.1:18777",
+        "tokenFile": "~/hypit-projects/productions/market-probe/fake/token",
+        "referenceTier": "1088p",
+        "spendCapYuan": 1,
+        "ledgerFile": "~/hypit-projects/productions/market-probe/fake/ledger.json",
+        "pollIntervalMs": 1000,
+        "concurrency": 2
+      }
+    }
+  },
+  "bindings": {
+    "@hypit/minimax-h3@1#minimax-h3": "h3.fake",
+    "@hypit/whisperx@1#whisperx-alignment": "whisperx.local"
+  }
+}

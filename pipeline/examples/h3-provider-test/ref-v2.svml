@@ -1,0 +1,17 @@
+<?svml using="@hypit/markup@1"?>
+<svml>
+  <import as="asset" from="@hypit/media@1"/>
+  <import as="text" from="@hypit/text@1"/>
+  <import as="h3" from="@hypit/minimax-h3@1"/>
+
+  <asset:Image id="hero" src="../ref105-remake/assets/hero-face.jpg"/>
+  <asset:Video id="s07" src="../ref105-remake/export/refclips/S07.mp4"/>
+
+  <text:Value id="prompt">
+保留视频1的镜头运动、构图、景别、剪辑切点、人物动作与时序、场景、雨水和光照完全不变，逐镜头一一对应，时长不变。只是将视频1中穿蓝色长袍、戴斗笠的主角替换为图片1的男子：头顶束发髻，额前垂几缕湿发，眉骨有一道旧伤疤，深靛蓝色长袍，不戴斗笠；他在每个镜头里的面容、发型和服装保持一致。视频1中的其他人物保持不变。画面中不出现任何文字、字幕或水印。
+  </text:Value>
+  <h3:ReferenceVideo id="s07-remake" prompt={prompt} duration="5" aspect-ratio="16:9">
+    <h3:Reference image={hero}/>
+    <h3:Reference video={s07}/>
+  </h3:ReferenceVideo>
+</svml>

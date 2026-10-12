@@ -1,0 +1,8 @@
+<?svml using="@hypit/run-markup@1"?>
+<svrun version="1">
+  <author source="./lanv.svml"/>
+  <target output="final.video"/>
+  <!-- 选定的讲解员：第三次生成（6 s，台词 0.39–2.75 s，完整清楚）。不再重新生成。 -->
+  <build-record id="presenter-v3" build="bld_20260929T112458931Z_0A0A8DD2A5" output="presenter.video"/>
+  <satisfy output="presenter.video" candidate="presenter-v3"/>
+</svrun>

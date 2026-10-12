@@ -1,0 +1,111 @@
+{
+  "format": "hypit.transcript@1",
+  "source": "~/hypit-projects/productions/lanv-remake/out/v2-head.mp4",
+  "language": "zh",
+  "audio_seconds": 2.624,
+  "passages": [
+    {
+      "text": "大 家 合 作 给 这 个 超 甜 最 突 如 回 料 妈 了",
+      "start_seconds": 0.378,
+      "end_seconds": 2.273,
+      "words": [
+        {
+          "text": "大",
+          "start_seconds": 0.378,
+          "end_seconds": 0.419,
+          "score": 0.5
+        },
+        {
+          "text": "家",
+          "start_seconds": 0.419,
+          "end_seconds": 0.58,
+          "score": 0.875
+        },
+        {
+          "text": "合",
+          "start_seconds": 0.58,
+          "end_seconds": 0.681,
+          "score": 0.809
+        },
+        {
+          "text": "作",
+          "start_seconds": 0.681,
+          "end_seconds": 0.802,
+          "score": 0.924
+        },
+        {
+          "text": "给",
+          "start_seconds": 0.802,
+          "end_seconds": 0.923,
+          "score": 0.833
+        },
+        {
+          "text": "这",
+          "start_seconds": 0.923,
+          "end_seconds": 1.024,
+          "score": 0.8
+        },
+        {
+          "text": "个",
+          "start_seconds": 1.024,
+          "end_seconds": 1.084,
+          "score": 0.667
+        },
+        {
+          "text": "超",
+          "start_seconds": 1.084,
+          "end_seconds": 1.245,
+          "score": 0.982
+        },
+        {
+          "text": "甜",
+          "start_seconds": 1.245,
+          "end_seconds": 1.447,
+          "score": 0.9
+        },
+        {
+          "text": "最",
+          "start_seconds": 1.447,
+          "end_seconds": 1.588,
+          "score": 0.999
+        },
+        {
+          "text": "突",
+          "start_seconds": 1.588,
+          "end_seconds": 1.729,
+          "score": 0.859
+        },
+        {
+          "text": "如",
+          "start_seconds": 1.729,
+          "end_seconds": 1.87,
+          "score": 0.861
+        },
+        {
+          "text": "回",
+          "start_seconds": 1.87,
+          "end_seconds": 1.991,
+          "score": 0.834
+        },
+        {
+          "text": "料",
+          "start_seconds": 1.991,
+          "end_seconds": 2.132,
+          "score": 0.867
+        },
+        {
+          "text": "妈",
+          "start_seconds": 2.132,
+          "end_seconds": 2.253,
+          "score": 0.834
+        },
+        {
+          "text": "了",
+          "start_seconds": 2.253,
+          "end_seconds": 2.273,
+          "score": 0.114
+        }
+      ]
+    }
+  ]
+}

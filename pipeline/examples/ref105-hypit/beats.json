@@ -1,0 +1,761 @@
+{
+ "_说明": "按原片 9 个叙事段分段；每段一次 H3 请求。note/kind 是分析备注，不进提示词。",
+ "beats": [
+  {
+   "id": "s01",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "hero_full",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "",
+   "note": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "shots": [
+    {
+     "start": 0,
+     "end": 27,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 27,
+     "end": 42,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 42,
+     "end": 66,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 66,
+     "end": 88,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 88,
+     "end": 104,
+     "kind": "hand",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 104,
+     "end": 114,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 114,
+     "end": 128,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 128,
+     "end": 135,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 135,
+     "end": 147,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 147,
+     "end": 161,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 161,
+     "end": 171,
+     "kind": "hand",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 171,
+     "end": 191,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 191,
+     "end": 249,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "boss",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "",
+   "note": "交锋：雨中近身快打；14s 敌人嘶吼特写；16s 俯拍'圈'构图（被围）；擒拿",
+   "shots": [
+    {
+     "start": 249,
+     "end": 361,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 361,
+     "end": 409,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 409,
+     "end": 424,
+     "kind": "boss",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 424,
+     "end": 489,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 489,
+     "end": 513,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 513,
+     "end": 540,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 540,
+     "end": 596,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "",
+   "note": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "shots": [
+    {
+     "start": 596,
+     "end": 655,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 655,
+     "end": 711,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 711,
+     "end": 720,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 720,
+     "end": 756,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 756,
+     "end": 776,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 776,
+     "end": 866,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 866,
+     "end": 896,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 896,
+     "end": 915,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 915,
+     "end": 938,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "hero_full",
+    "boss",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "",
+   "note": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "shots": [
+    {
+     "start": 938,
+     "end": 955,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 955,
+     "end": 963,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 963,
+     "end": 1005,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1005,
+     "end": 1041,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1041,
+     "end": 1115,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1115,
+     "end": 1140,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1140,
+     "end": 1217,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1217,
+     "end": 1221,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1221,
+     "end": 1225,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1225,
+     "end": 1237,
+     "kind": "boss",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1237,
+     "end": 1251,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1251,
+     "end": 1271,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1271,
+     "end": 1283,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1283,
+     "end": 1288,
+     "kind": "hand",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1288,
+     "end": 1300,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1300,
+     "end": 1321,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1321,
+     "end": 1333,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "",
+   "note": "连续快切：47s 口中见血，踢飞，倒地",
+   "shots": [
+    {
+     "start": 1333,
+     "end": 1348,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1348,
+     "end": 1391,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1391,
+     "end": 1406,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1406,
+     "end": 1595,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1595,
+     "end": 1608,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1608,
+     "end": 1611,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1611,
+     "end": 1626,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1626,
+     "end": 1654,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1654,
+     "end": 1730,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "",
+   "note": "红水缸，倒地，收尾几击",
+   "shots": [
+    {
+     "start": 1730,
+     "end": 1760,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1760,
+     "end": 1855,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1855,
+     "end": 1882,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1882,
+     "end": 1890,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1890,
+     "end": 1927,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "",
+   "note": "风暴眼：雨中正面静态特写 → 低机位踩水 → 水花白闪",
+   "shots": [
+    {
+     "start": 1927,
+     "end": 1975,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1975,
+     "end": 1988,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 1988,
+     "end": 2006,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2006,
+     "end": 2034,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2034,
+     "end": 2074,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2074,
+     "end": 2087,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "hero_full",
+    "boss",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "",
+   "note": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "shots": [
+    {
+     "start": 2087,
+     "end": 2102,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2102,
+     "end": 2139,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2139,
+     "end": 2165,
+     "kind": "hand",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2165,
+     "end": 2174,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2174,
+     "end": 2177,
+     "kind": "hero",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2177,
+     "end": 2186,
+     "kind": "hand",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2186,
+     "end": 2237,
+     "kind": "hand",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2237,
+     "end": 2242,
+     "kind": "boss",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2242,
+     "end": 2266,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2266,
+     "end": 2271,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2271,
+     "end": 2317,
+     "kind": "hench",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "mode": "h3-reference",
+   "refs": [
+    "hero",
+    "hero_full",
+    "henchmen",
+    "scene"
+   ],
+   "summary": "",
+   "note": "收束：剑尖拖过血迹地砖 → 俯拍'圈'构图（全倒）缓慢升起旋转 → 渐隐黑场",
+   "shots": [
+    {
+     "start": 2317,
+     "end": 2343,
+     "kind": "hand",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    },
+    {
+     "start": 2343,
+     "end": 2573,
+     "kind": "both",
+     "camera": "",
+     "action": "",
+     "dialogue": ""
+    }
+   ]
+  }
+ ]
+}

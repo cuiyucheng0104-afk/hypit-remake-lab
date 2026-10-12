@@ -1,0 +1,12 @@
+<?svml using="@hypit/svs@1"?>
+
+<sheet version="1">
+  /* 版式：上方画面区 1280×640，下方 80 px 黑条是画布本身的黑底。 */
+  film.main { background: #000000; }
+
+  /* 镜头铺满画面区，比例不同时裁边不留黑。 */
+  media.shot { stack-order: 0; fit: cover; }
+
+  /* 字幕：白偏灰粗笔刷楷体，宽字距，单行居中于黑条。 */
+  text.sub { stack-order: 30; size: 31; tracking: 7; align: center; block-align: center; wrap: none; }
+</sheet>

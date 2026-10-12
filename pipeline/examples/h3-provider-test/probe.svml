@@ -1,0 +1,10 @@
+<?svml using="@hypit/markup@1"?>
+<svml>
+  <import as="text" from="@hypit/text@1"/>
+  <import as="h3" from="@hypit/minimax-h3@1"/>
+
+  <text:Value id="prompt">
+    A rainy night courtyard of an ancient Chinese mansion. Heavy rain falls on wet stone tiles, water drips from the tiled eaves, warm lanterns glow under the dark wooden corridor. Slow push-in camera. Cinematic, realistic.
+  </text:Value>
+  <h3:TextVideo id="probe" prompt={prompt} duration="4" aspect-ratio="16:9"/>
+</svml>

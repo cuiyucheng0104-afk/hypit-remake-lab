@@ -1,0 +1,340 @@
+<?svml using="@hypit/markup@1"?>
+<!-- 由 remake-kit/remake.py compose 从 remake.json / cast.json / beats.json 生成，别手改；改那三份再 compose。 -->
+<svml>
+  <import as="asset" from="@hypit/media@1"/>
+  <import as="text" from="@hypit/text@1"/>
+  <import as="pipeline" from="@hypit/media-pipeline@1"/>
+  <import as="h3" from="@hypit/minimax-h3@1"/>
+  <import as="time" from="@hypit/timeline-author@1"/>
+  <import from="@hypit/script@1"/>
+  <import as="whisperx" from="@hypit/whisperx@1"/>
+  <import as="space" from="@hypit/spatial@1"/>
+  <import as="performance" from="@hypit/performance@1"/>
+  <import as="sound" from="@hypit/sound@1"/>
+  <import as="audio" from="@hypit/audio-track@1"/>
+  <import as="film" from="@hypit/film@1"/>
+  <import as="render" from="@hypit/render-hyperframes@1"/>
+  <import as="recipes" source="../recipes/remake.svs"/>
+
+  <time:Clock id="clock" frame-rate="30"/>
+  <asset:Video id="source" src="../../../references/ref-105/source.mp4"/>
+  <asset:Image id="cast-boss" src="../cast/boss_face.png"/>
+  <asset:Image id="cast-henchmen" src="../cast/henchmen.jpg"/>
+  <asset:Image id="cast-hero" src="../cast/hero_face.png"/>
+  <asset:Image id="cast-hero_full" src="../cast/hero_full.png"/>
+  <asset:Image id="cast-scene" src="../cast/scene.jpg"/>
+
+  <!-- 每个段落一个空 Segment：没有台词，时长由这一段的画面决定。 -->
+  <script id="story">
+    <s01/>
+    <s02/>
+    <s03/>
+    <s04/>
+    <s05/>
+    <s06/>
+    <s07/>
+    <s08/>
+    <s09/>
+  </script>
+
+  <!-- ===== s01 · 原片 0–249 帧（8.30 秒，13 镜）· h3-reference ===== -->
+  <text:Value id="p-s01">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Picture 2&gt; shows the same man's full-length costume: near-black robe, leather belt and a long sword in a dark scabbard at his waist.",
+    "&lt;Subject 2&gt; are the group in &lt;Picture 3&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 4&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] A 9-second sequence of 13 shots.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, heavy rain and splashing water, fast practical sword fighting with clear contact.\n\n[Shot 1] Shot (00:00.000 - 00:00.900).\n\n[Shot 2] Shot (00:00.900 - 00:01.400).\n\n[Shot 3] Shot (00:01.400 - 00:02.200).\n\n[Shot 4] Shot (00:02.200 - 00:02.933).\n\n[Shot 5] Shot (00:02.933 - 00:03.467).\n\n[Shot 6] Shot (00:03.467 - 00:03.800).\n\n[Shot 7] Shot (00:03.800 - 00:04.267).\n\n[Shot 8] Shot (00:04.267 - 00:04.500).\n\n[Shot 9] Shot (00:04.500 - 00:04.900).\n\n[Shot 10] Shot (00:04.900 - 00:05.367).\n\n[Shot 11] Shot (00:05.367 - 00:05.700).\n\n[Shot 12] Shot (00:05.700 - 00:06.367).\n\n[Shot 13] Shot (00:06.367 - 00:09.000).\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Heavy rain, splashing footsteps, clashing blades and grunts.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s01" prompt={p-s01} duration="9" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-hero_full}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s01" source={g-s01.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s01" source={gm-s01.media}>
+    <pipeline:Trim end="8.3s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s01" source={cut-s01.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s01" narrative={story} segment={story.segment.s01} media={m-s01.media}/>
+
+  <!-- ===== s02 · 原片 249–596 帧（11.57 秒，7 镜）· h3-reference ===== -->
+  <text:Value id="p-s02">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Subject 2&gt; is the person in &lt;Picture 2&gt;: the grim middle-aged leader in a wide black bamboo hat with a metal crest and a black embroidered robe.",
+    "&lt;Subject 3&gt; are the group in &lt;Picture 3&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 4&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] A 12-second sequence of 7 shots.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 3&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, heavy rain and splashing water, fast practical sword fighting with clear contact.\n\n[Shot 1] Shot (00:00.000 - 00:03.733).\n\n[Shot 2] Shot (00:03.733 - 00:05.333).\n\n[Shot 3] Shot (00:05.333 - 00:05.833).\n\n[Shot 4] Shot (00:05.833 - 00:08.000).\n\n[Shot 5] Shot (00:08.000 - 00:08.800).\n\n[Shot 6] Shot (00:08.800 - 00:09.700).\n\n[Shot 7] Shot (00:09.700 - 00:12.000).\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Heavy rain, splashing footsteps, clashing blades and grunts.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s02" prompt={p-s02} duration="12" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-boss}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s02" source={g-s02.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s02" source={gm-s02.media}>
+    <pipeline:Trim end="11.5667s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s02" source={cut-s02.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s02" narrative={story} segment={story.segment.s02} media={m-s02.media}/>
+
+  <!-- ===== s03 · 原片 596–938 帧（11.40 秒，9 镜）· h3-reference ===== -->
+  <text:Value id="p-s03">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Subject 2&gt; are the group in &lt;Picture 2&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 3&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] A 12-second sequence of 9 shots.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, heavy rain and splashing water, fast practical sword fighting with clear contact.\n\n[Shot 1] Shot (00:00.000 - 00:01.967).\n\n[Shot 2] Shot (00:01.967 - 00:03.833).\n\n[Shot 3] Shot (00:03.833 - 00:04.133).\n\n[Shot 4] Shot (00:04.133 - 00:05.333).\n\n[Shot 5] Shot (00:05.333 - 00:06.000).\n\n[Shot 6] Shot (00:06.000 - 00:09.000).\n\n[Shot 7] Shot (00:09.000 - 00:10.000).\n\n[Shot 8] Shot (00:10.000 - 00:10.633).\n\n[Shot 9] Shot (00:10.633 - 00:12.000).\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Heavy rain, splashing footsteps, clashing blades and grunts.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s03" prompt={p-s03} duration="12" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s03" source={g-s03.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s03" source={gm-s03.media}>
+    <pipeline:Trim end="11.4s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s03" source={cut-s03.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s03" narrative={story} segment={story.segment.s03} media={m-s03.media}/>
+
+  <!-- ===== s04 · 原片 938–1333 帧（13.17 秒，17 镜）· h3-reference ===== -->
+  <text:Value id="p-s04">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Picture 2&gt; shows the same man's full-length costume: near-black robe, leather belt and a long sword in a dark scabbard at his waist.",
+    "&lt;Subject 2&gt; is the person in &lt;Picture 3&gt;: the grim middle-aged leader in a wide black bamboo hat with a metal crest and a black embroidered robe.",
+    "&lt;Subject 3&gt; are the group in &lt;Picture 4&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 5&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] A 14-second sequence of 17 shots.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 3&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, heavy rain and splashing water, fast practical sword fighting with clear contact.\n\n[Shot 1] Shot (00:00.000 - 00:00.567).\n\n[Shot 2] Shot (00:00.567 - 00:00.833).\n\n[Shot 3] Shot (00:00.833 - 00:02.233).\n\n[Shot 4] Shot (00:02.233 - 00:03.433).\n\n[Shot 5] Shot (00:03.433 - 00:05.900).\n\n[Shot 6] Shot (00:05.900 - 00:06.733).\n\n[Shot 7] Shot (00:06.733 - 00:09.300).\n\n[Shot 8] Shot (00:09.300 - 00:09.433).\n\n[Shot 9] Shot (00:09.433 - 00:09.567).\n\n[Shot 10] Shot (00:09.567 - 00:09.967).\n\n[Shot 11] Shot (00:09.967 - 00:10.433).\n\n[Shot 12] Shot (00:10.433 - 00:11.100).\n\n[Shot 13] Shot (00:11.100 - 00:11.500).\n\n[Shot 14] Shot (00:11.500 - 00:11.667).\n\n[Shot 15] Shot (00:11.667 - 00:12.067).\n\n[Shot 16] Shot (00:12.067 - 00:12.767).\n\n[Shot 17] Shot (00:12.767 - 00:14.000).\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Heavy rain, splashing footsteps, clashing blades and grunts.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s04" prompt={p-s04} duration="14" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-hero_full}/>
+    <h3:Reference image={cast-boss}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s04" source={g-s04.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s04" source={gm-s04.media}>
+    <pipeline:Trim end="13.1667s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s04" source={cut-s04.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s04" narrative={story} segment={story.segment.s04} media={m-s04.media}/>
+
+  <!-- ===== s05 · 原片 1333–1730 帧（13.23 秒，9 镜）· h3-reference ===== -->
+  <text:Value id="p-s05">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Subject 2&gt; are the group in &lt;Picture 2&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 3&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] A 14-second sequence of 9 shots.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, heavy rain and splashing water, fast practical sword fighting with clear contact.\n\n[Shot 1] Shot (00:00.000 - 00:00.500).\n\n[Shot 2] Shot (00:00.500 - 00:01.933).\n\n[Shot 3] Shot (00:01.933 - 00:02.433).\n\n[Shot 4] Shot (00:02.433 - 00:08.733).\n\n[Shot 5] Shot (00:08.733 - 00:09.167).\n\n[Shot 6] Shot (00:09.167 - 00:09.267).\n\n[Shot 7] Shot (00:09.267 - 00:09.767).\n\n[Shot 8] Shot (00:09.767 - 00:10.700).\n\n[Shot 9] Shot (00:10.700 - 00:14.000).\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Heavy rain, splashing footsteps, clashing blades and grunts.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s05" prompt={p-s05} duration="14" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s05" source={g-s05.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s05" source={gm-s05.media}>
+    <pipeline:Trim end="13.2333s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s05" source={cut-s05.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s05" narrative={story} segment={story.segment.s05} media={m-s05.media}/>
+
+  <!-- ===== s06 · 原片 1730–1927 帧（6.57 秒，5 镜）· h3-reference ===== -->
+  <text:Value id="p-s06">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Subject 2&gt; are the group in &lt;Picture 2&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 3&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] A 7-second sequence of 5 shots.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, heavy rain and splashing water, fast practical sword fighting with clear contact.\n\n[Shot 1] Shot (00:00.000 - 00:01.000).\n\n[Shot 2] Shot (00:01.000 - 00:04.167).\n\n[Shot 3] Shot (00:04.167 - 00:05.067).\n\n[Shot 4] Shot (00:05.067 - 00:05.333).\n\n[Shot 5] Shot (00:05.333 - 00:07.000).\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Heavy rain, splashing footsteps, clashing blades and grunts.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s06" prompt={p-s06} duration="7" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s06" source={g-s06.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s06" source={gm-s06.media}>
+    <pipeline:Trim end="6.5667s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s06" source={cut-s06.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s06" narrative={story} segment={story.segment.s06} media={m-s06.media}/>
+
+  <!-- ===== s07 · 原片 1927–2087 帧（5.33 秒，6 镜）· h3-reference ===== -->
+  <text:Value id="p-s07">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Subject 2&gt; are the group in &lt;Picture 2&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 3&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] A 6-second sequence of 6 shots.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, heavy rain and splashing water, fast practical sword fighting with clear contact.\n\n[Shot 1] Shot (00:00.000 - 00:01.600).\n\n[Shot 2] Shot (00:01.600 - 00:02.033).\n\n[Shot 3] Shot (00:02.033 - 00:02.633).\n\n[Shot 4] Shot (00:02.633 - 00:03.567).\n\n[Shot 5] Shot (00:03.567 - 00:04.900).\n\n[Shot 6] Shot (00:04.900 - 00:06.000).\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Heavy rain, splashing footsteps, clashing blades and grunts.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s07" prompt={p-s07} duration="6" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s07" source={g-s07.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s07" source={gm-s07.media}>
+    <pipeline:Trim end="5.3333s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s07" source={cut-s07.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s07" narrative={story} segment={story.segment.s07} media={m-s07.media}/>
+
+  <!-- ===== s08 · 原片 2087–2317 帧（7.67 秒，11 镜）· h3-reference ===== -->
+  <text:Value id="p-s08">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Picture 2&gt; shows the same man's full-length costume: near-black robe, leather belt and a long sword in a dark scabbard at his waist.",
+    "&lt;Subject 2&gt; is the person in &lt;Picture 3&gt;: the grim middle-aged leader in a wide black bamboo hat with a metal crest and a black embroidered robe.",
+    "&lt;Subject 3&gt; are the group in &lt;Picture 4&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 5&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] A 8-second sequence of 11 shots.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 3&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, heavy rain and splashing water, fast practical sword fighting with clear contact.\n\n[Shot 1] Shot (00:00.000 - 00:00.500).\n\n[Shot 2] Shot (00:00.500 - 00:01.733).\n\n[Shot 3] Shot (00:01.733 - 00:02.600).\n\n[Shot 4] Shot (00:02.600 - 00:02.900).\n\n[Shot 5] Shot (00:02.900 - 00:03.000).\n\n[Shot 6] Shot (00:03.000 - 00:03.300).\n\n[Shot 7] Shot (00:03.300 - 00:05.000).\n\n[Shot 8] Shot (00:05.000 - 00:05.167).\n\n[Shot 9] Shot (00:05.167 - 00:05.967).\n\n[Shot 10] Shot (00:05.967 - 00:06.133).\n\n[Shot 11] Shot (00:06.133 - 00:08.000).\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Heavy rain, splashing footsteps, clashing blades and grunts.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s08" prompt={p-s08} duration="8" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-hero_full}/>
+    <h3:Reference image={cast-boss}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s08" source={g-s08.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s08" source={gm-s08.media}>
+    <pipeline:Trim end="7.6667s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s08" source={cut-s08.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s08" narrative={story} segment={story.segment.s08} media={m-s08.media}/>
+
+  <!-- ===== s09 · 原片 2317–2573 帧（8.53 秒，2 镜）· h3-reference ===== -->
+  <text:Value id="p-s09">{
+  "subject_definitions": [
+    "&lt;Subject 1&gt; is the person in &lt;Picture 1&gt;: the man with a tight topknot, a few wet strands over his forehead, an old scar across his brow bone and a dark indigo, near-black robe with subtle tone-on-tone embroidery.",
+    "&lt;Picture 2&gt; shows the same man's full-length costume: near-black robe, leather belt and a long sword in a dark scabbard at his waist.",
+    "&lt;Subject 2&gt; are the group in &lt;Picture 3&gt;: the swordsmen in low black woven bamboo hats hiding their eyes, soaked black robes and leather belts, each holding a long sabre.",
+    "&lt;Picture 4&gt; shows the location: an ancient courtyard on a rainy night, dark timber corridors and pillars, grey-tiled eaves pouring water, wet reflective stone paving and dim warm lanterns in a cold blue night."
+  ],
+  "summary": "[reference generation] A 9-second sequence of 2 shots.",
+  "retention_analysis": [
+    "&lt;Subject 1&gt;: fully_preserved - face, hairstyle and costume are retained.",
+    "&lt;Subject 2&gt;: fully_preserved - look, costume and weapons are retained."
+  ],
+  "detailed_description": "Photorealistic wuxia action film shot on a cinema camera: rainy night, cold blue grade with warm lantern accents, heavy rain and splashing water, fast practical sword fighting with clear contact.\n\n[Shot 1] Shot (00:00.000 - 00:00.867).\n\n[Shot 2] Shot (00:00.867 - 00:09.000).\n\nNo text, captions, logos or watermarks appear in the picture.",
+  "overall_soundscape": "Heavy rain, splashing footsteps, clashing blades and grunts.",
+  "non_diegetic_music": "N/A"
+}</text:Value>
+  <h3:ReferenceVideo id="g-s09" prompt={p-s09} duration="9" aspect-ratio="16:9">
+    <h3:Reference image={cast-hero}/>
+    <h3:Reference image={cast-hero_full}/>
+    <h3:Reference image={cast-henchmen}/>
+    <h3:Reference image={cast-scene}/>
+  </h3:ReferenceVideo>
+  <pipeline:Normalize id="gm-s09" source={g-s09.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <pipeline:Transform id="cut-s09" source={gm-s09.media}>
+    <pipeline:Trim end="8.5333s"/>
+  </pipeline:Transform>
+  <pipeline:Normalize id="m-s09" source={cut-s09.video} clock={clock} video="primary-moving" audio="none" span-authority="video"/>
+  <whisperx:SemanticTake id="t-s09" narrative={story} segment={story.segment.s09} media={m-s09.media}/>
+
+  <!-- 每段放回它在原片里的位置（帧），整片长度与原片复刻区间一致。 -->
+  <time:Timeline id="program" clock={clock} end="2573f">
+    <time:Take source={t-s01.take} at="0f"/>
+    <time:Take source={t-s02.take} at="249f"/>
+    <time:Take source={t-s03.take} at="596f"/>
+    <time:Take source={t-s04.take} at="938f"/>
+    <time:Take source={t-s05.take} at="1333f"/>
+    <time:Take source={t-s06.take} at="1730f"/>
+    <time:Take source={t-s07.take} at="1927f"/>
+    <time:Take source={t-s08.take} at="2087f"/>
+    <time:Take source={t-s09.take} at="2317f"/>
+  </time:Timeline>
+
+  <space:Canvas id="canvas" width="1280" height="720"/>
+  <space:Frame id="full" within={canvas} left="0px" top="0px" right="1280px" bottom="720px"/>
+  <performance:Style id="shot-view" frame={full} appearance={recipes.media.shot}/>
+  <performance:Track id="picture" timeline={program.timeline} canvas={canvas}>
+    <performance:Use style={shot-view}/>
+  </performance:Track>
+
+  <!-- 声音：整段用参考片原声（音乐、音效、节奏都跟原切点对齐），生成画面静音。 -->
+  <pipeline:Normalize id="source-audio" source={source} clock={clock} video="none" audio="default" span-authority="audio"/>
+  <audio:Track id="soundtrack" timeline={program.timeline}>
+    <audio:Item id="source-soundtrack" source={source-audio.media} during="program" playback="once-start"/>
+  </audio:Track>
+
+  <film:Film id="main" canvas={canvas} timeline={program.timeline} appearance={recipes.film.main}>
+    <film:Track source={picture.visual}/>
+    <film:Track source={soundtrack.audio}/>
+  </film:Film>
+  <render:Video id="final" composition={main.composition} timeline={program.timeline}/>
+</svml>

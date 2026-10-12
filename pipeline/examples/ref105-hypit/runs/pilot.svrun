@@ -1,0 +1,6 @@
+<?svml using="@hypit/run-markup@1"?>
+<!-- 由 remake.py 生成；固定镜头用 remake.py pin / use-file，别手改。 -->
+<svrun version="1">
+  <author source="../authors/remake.svml"/>
+  <target output="g-s07.video"/>
+</svrun>

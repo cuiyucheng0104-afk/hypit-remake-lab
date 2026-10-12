@@ -1,0 +1,9 @@
+<?svml using="@hypit/run-markup@1"?>
+<!-- 由 remake.py 生成；固定镜头用 remake.py pin / use-file，别手改。 -->
+<svrun version="1">
+  <author source="../authors/remake.svml"/>
+  <target output="final.video"/>
+  <!-- s01：固定 bld_20260930T160208226Z_D0EA970CE4 的生成结果 -->
+  <build-record id="pin-s01" build="bld_20260930T160208226Z_D0EA970CE4" output="g-s01.video"/>
+  <satisfy output="g-s01.video" candidate="pin-s01"/>
+</svrun>

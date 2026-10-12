@@ -1,0 +1,44 @@
+<?svml using="@hypit/svs@1"?>
+
+<sheet version="1">
+  /* 版式：顶部标题带 0–250，中间舞台 250–1050，底部字幕带 1050–1280（720×1280）。 */
+  film.vertical { background: #0B1530; }
+
+  /* 画面：讲解员填满舞台；操作画面用放大的 Frame 取景，只露出手机区域，
+     原片烧进去的标题和字幕落在上下两条色带下面。 */
+  media.presenter { stack-order: 0; fit: cover; }
+  media.demo { stack-order: 0; fit: cover; }
+
+  /* 色带 */
+  media.band { stack-order: 20; }
+  media.accent { stack-order: 21; }
+  paint.title-band { paint: "linear(180;#0A1F52@0,#123A9C@1)"; }
+  paint.caption-band { paint: #0B1530; }
+  paint.accent { paint: #FFD23F; }
+
+  /* 指引：白边 + 红芯，压在色带下面 */
+  media.pointer-edge { stack-order: 10; }
+  media.pointer-fill { stack-order: 11; }
+  paint.white { paint: #FFFFFF; }
+  paint.red { paint: #FF2A2A; }
+
+  motion.pointer-1 { enter: pop; enter-frames: 6; enter-easing: ease-out; sustain: "float 10 1"; }
+  motion.pointer-2 { enter: pop; enter-frames: 6; enter-easing: ease-out; sustain: "float 10 2"; }
+  motion.pointer-4 { enter: pop; enter-frames: 6; enter-easing: ease-out; sustain: "float 10 4"; }
+  motion.circle { enter: wipe; enter-frames: 9; enter-direction: right; enter-easing: ease-out; }
+
+  /* 文字 */
+  text.title { stack-order: 30; size: 62; weight: 900; line-height: 1.3; align: center; block-align: center; wrap: none; }
+  text.subtitle { stack-order: 30; size: 50; weight: 900; line-height: 1.3; align: center; wrap: none; }
+  text.label { stack-order: 35; size: 28; weight: 700; point-anchor-inline: start; point-anchor-block: end; wrap: none; }
+
+  /* 字幕：逐字点亮 */
+  caption.main {
+    stack-order: 40;
+    x: 0.5; y: 0.905; width: 0.9; anchor-x: center; anchor-y: center; align: center;
+    size: 42; line-height: 1.3; fill: #FFFFFF;
+    background: #00000000; padding: "0"; radius: 0;
+    karaoke: current; active-fill: #FFD23F;
+    cue-enter: fade; cue-enter-frames: 3;
+  }
+</sheet>

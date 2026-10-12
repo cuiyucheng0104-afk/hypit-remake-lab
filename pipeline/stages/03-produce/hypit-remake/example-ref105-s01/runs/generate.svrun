@@ -1,0 +1,9 @@
+<?svml using="@hypit/run-markup@1"?>
+<!-- 阶段二：只生成 4 组 H3 素材（拼装另跑） -->
+<svrun version="1">
+  <author source="../authors/s01.svml"/>
+  <target output="g-r1.video"/>
+  <target output="g-r2.video"/>
+  <target output="g-r3.video"/>
+  <target output="g-r4.video"/>
+</svrun>

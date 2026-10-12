@@ -1,3 +1,5 @@
+> **本仓库 fork 自 [hypit-ai/hypit](https://github.com/hypit-ai/hypit)，用于开发基于 Hypit 的 AI 短视频生产管线**（趋势 → Hypit 复刻 / 动作迁移 → 审查 → 发布 → 回测）。我们的代码和文档都在 [`pipeline/`](pipeline/) 目录，上游源码未作改动。许可证见 [LICENSE](LICENSE)。
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./docs/public/hypit-logo-light.svg">

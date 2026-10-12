@@ -1,0 +1,12 @@
+{
+  "name": "@local/provider-comfy-h3",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Hypit Provider：把 @hypit/minimax-h3 请求交给自有 ComfyUI（Zealman 镜像的 U 系列 MiniMax-H3 工作流）执行",
+  "hypit": { "activation": "./dist/activation.js" },
+  "exports": { ".": "./dist/provider.js" },
+  "files": ["dist", "templates"],
+  "scripts": { "build": "tsc -p tsconfig.json" },
+  "devDependencies": { "@hypit/hypit": "0.2.16", "@types/node": "^22.0.0", "typescript": "5.9.3" }
+}

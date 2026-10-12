@@ -1,0 +1,9 @@
+<?svml using="@hypit/markup@1"?>
+<svml>
+  <import as="asset" from="@hypit/media@1"/>
+  <import as="text" from="@hypit/text@1"/>
+  <import as="h3" from="@hypit/minimax-h3@1"/>
+  <asset:Image id="first" src="../ref105-remake/s01/chosen/A.png"/>
+  <text:Value id="p">男子缓缓抬头。</text:Value>
+  <h3:FrameVideo id="shot" prompt={p} duration="4" first-frame={first}/>
+</svml>

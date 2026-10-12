@@ -1,0 +1,1428 @@
+{
+ "fps": 30,
+ "total_frames": 2573,
+ "shots": [
+  {
+   "id": "S01-A",
+   "segment": "S01",
+   "seg_frames": [
+    0,
+    27
+   ],
+   "film_frames": [
+    0,
+    27
+   ],
+   "source_seconds": 0.9,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-B",
+   "segment": "S01",
+   "seg_frames": [
+    27,
+    42
+   ],
+   "film_frames": [
+    27,
+    42
+   ],
+   "source_seconds": 0.5,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-C",
+   "segment": "S01",
+   "seg_frames": [
+    42,
+    66
+   ],
+   "film_frames": [
+    42,
+    66
+   ],
+   "source_seconds": 0.8,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-D",
+   "segment": "S01",
+   "seg_frames": [
+    66,
+    88
+   ],
+   "film_frames": [
+    66,
+    88
+   ],
+   "source_seconds": 0.733,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-E",
+   "segment": "S01",
+   "seg_frames": [
+    88,
+    104
+   ],
+   "film_frames": [
+    88,
+    104
+   ],
+   "source_seconds": 0.533,
+   "generate_seconds": 4,
+   "kind": "hand",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-F",
+   "segment": "S01",
+   "seg_frames": [
+    104,
+    114
+   ],
+   "film_frames": [
+    104,
+    114
+   ],
+   "source_seconds": 0.333,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-G",
+   "segment": "S01",
+   "seg_frames": [
+    114,
+    128
+   ],
+   "film_frames": [
+    114,
+    128
+   ],
+   "source_seconds": 0.467,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-H",
+   "segment": "S01",
+   "seg_frames": [
+    128,
+    135
+   ],
+   "film_frames": [
+    128,
+    135
+   ],
+   "source_seconds": 0.233,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-I",
+   "segment": "S01",
+   "seg_frames": [
+    135,
+    147
+   ],
+   "film_frames": [
+    135,
+    147
+   ],
+   "source_seconds": 0.4,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-J",
+   "segment": "S01",
+   "seg_frames": [
+    147,
+    161
+   ],
+   "film_frames": [
+    147,
+    161
+   ],
+   "source_seconds": 0.467,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-K",
+   "segment": "S01",
+   "seg_frames": [
+    161,
+    171
+   ],
+   "film_frames": [
+    161,
+    171
+   ],
+   "source_seconds": 0.333,
+   "generate_seconds": 4,
+   "kind": "hand",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-L",
+   "segment": "S01",
+   "seg_frames": [
+    171,
+    191
+   ],
+   "film_frames": [
+    171,
+    191
+   ],
+   "source_seconds": 0.667,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S01-M",
+   "segment": "S01",
+   "seg_frames": [
+    191,
+    249
+   ],
+   "film_frames": [
+    191,
+    249
+   ],
+   "source_seconds": 1.933,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "立局：斗笠特写↔人群正反打，反握剑手部，俯拍独立，台阶对峙，冲锋，开打",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S02-1",
+   "segment": "S02",
+   "seg_frames": [
+    0,
+    112
+   ],
+   "film_frames": [
+    249,
+    361
+   ],
+   "source_seconds": 3.733,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "交锋：雨中近身快打；14s 敌人嘶吼特写；16s 俯拍'圈'构图（被围）；擒拿",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S02-2",
+   "segment": "S02",
+   "seg_frames": [
+    112,
+    160
+   ],
+   "film_frames": [
+    361,
+    409
+   ],
+   "source_seconds": 1.6,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "交锋：雨中近身快打；14s 敌人嘶吼特写；16s 俯拍'圈'构图（被围）；擒拿",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S02-3",
+   "segment": "S02",
+   "seg_frames": [
+    160,
+    175
+   ],
+   "film_frames": [
+    409,
+    424
+   ],
+   "source_seconds": 0.5,
+   "generate_seconds": 4,
+   "kind": "boss",
+   "segment_content": "交锋：雨中近身快打；14s 敌人嘶吼特写；16s 俯拍'圈'构图（被围）；擒拿",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S02-4",
+   "segment": "S02",
+   "seg_frames": [
+    175,
+    240
+   ],
+   "film_frames": [
+    424,
+    489
+   ],
+   "source_seconds": 2.167,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "交锋：雨中近身快打；14s 敌人嘶吼特写；16s 俯拍'圈'构图（被围）；擒拿",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S02-5",
+   "segment": "S02",
+   "seg_frames": [
+    240,
+    264
+   ],
+   "film_frames": [
+    489,
+    513
+   ],
+   "source_seconds": 0.8,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "交锋：雨中近身快打；14s 敌人嘶吼特写；16s 俯拍'圈'构图（被围）；擒拿",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S02-6",
+   "segment": "S02",
+   "seg_frames": [
+    264,
+    291
+   ],
+   "film_frames": [
+    513,
+    540
+   ],
+   "source_seconds": 0.9,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "交锋：雨中近身快打；14s 敌人嘶吼特写；16s 俯拍'圈'构图（被围）；擒拿",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S02-7",
+   "segment": "S02",
+   "seg_frames": [
+    291,
+    347
+   ],
+   "film_frames": [
+    540,
+    596
+   ],
+   "source_seconds": 1.867,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "交锋：雨中近身快打；14s 敌人嘶吼特写；16s 俯拍'圈'构图（被围）；擒拿",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S03-1",
+   "segment": "S03",
+   "seg_frames": [
+    0,
+    59
+   ],
+   "film_frames": [
+    596,
+    655
+   ],
+   "source_seconds": 1.967,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S03-2",
+   "segment": "S03",
+   "seg_frames": [
+    59,
+    115
+   ],
+   "film_frames": [
+    655,
+    711
+   ],
+   "source_seconds": 1.867,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S03-3",
+   "segment": "S03",
+   "seg_frames": [
+    115,
+    124
+   ],
+   "film_frames": [
+    711,
+    720
+   ],
+   "source_seconds": 0.3,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S03-4",
+   "segment": "S03",
+   "seg_frames": [
+    124,
+    160
+   ],
+   "film_frames": [
+    720,
+    756
+   ],
+   "source_seconds": 1.2,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S03-5",
+   "segment": "S03",
+   "seg_frames": [
+    160,
+    180
+   ],
+   "film_frames": [
+    756,
+    776
+   ],
+   "source_seconds": 0.667,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S03-6",
+   "segment": "S03",
+   "seg_frames": [
+    180,
+    270
+   ],
+   "film_frames": [
+    776,
+    866
+   ],
+   "source_seconds": 3.0,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S03-7",
+   "segment": "S03",
+   "seg_frames": [
+    270,
+    300
+   ],
+   "film_frames": [
+    866,
+    896
+   ],
+   "source_seconds": 1.0,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S03-8",
+   "segment": "S03",
+   "seg_frames": [
+    300,
+    319
+   ],
+   "film_frames": [
+    896,
+    915
+   ],
+   "source_seconds": 0.633,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S03-9",
+   "segment": "S03",
+   "seg_frames": [
+    319,
+    342
+   ],
+   "film_frames": [
+    915,
+    938
+   ],
+   "source_seconds": 0.767,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "主战铺开：大全景群战，踩水飞溅，翻滚脚踢",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-1",
+   "segment": "S04",
+   "seg_frames": [
+    0,
+    17
+   ],
+   "film_frames": [
+    938,
+    955
+   ],
+   "source_seconds": 0.567,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-2",
+   "segment": "S04",
+   "seg_frames": [
+    17,
+    25
+   ],
+   "film_frames": [
+    955,
+    963
+   ],
+   "source_seconds": 0.267,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-3",
+   "segment": "S04",
+   "seg_frames": [
+    25,
+    67
+   ],
+   "film_frames": [
+    963,
+    1005
+   ],
+   "source_seconds": 1.4,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-4",
+   "segment": "S04",
+   "seg_frames": [
+    67,
+    103
+   ],
+   "film_frames": [
+    1005,
+    1041
+   ],
+   "source_seconds": 1.2,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-5",
+   "segment": "S04",
+   "seg_frames": [
+    103,
+    177
+   ],
+   "film_frames": [
+    1041,
+    1115
+   ],
+   "source_seconds": 2.467,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-6",
+   "segment": "S04",
+   "seg_frames": [
+    177,
+    202
+   ],
+   "film_frames": [
+    1115,
+    1140
+   ],
+   "source_seconds": 0.833,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-7",
+   "segment": "S04",
+   "seg_frames": [
+    202,
+    279
+   ],
+   "film_frames": [
+    1140,
+    1217
+   ],
+   "source_seconds": 2.567,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-8",
+   "segment": "S04",
+   "seg_frames": [
+    279,
+    283
+   ],
+   "film_frames": [
+    1217,
+    1221
+   ],
+   "source_seconds": 0.133,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-9",
+   "segment": "S04",
+   "seg_frames": [
+    283,
+    287
+   ],
+   "film_frames": [
+    1221,
+    1225
+   ],
+   "source_seconds": 0.133,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-10",
+   "segment": "S04",
+   "seg_frames": [
+    287,
+    299
+   ],
+   "film_frames": [
+    1225,
+    1237
+   ],
+   "source_seconds": 0.4,
+   "generate_seconds": 4,
+   "kind": "boss",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-11",
+   "segment": "S04",
+   "seg_frames": [
+    299,
+    313
+   ],
+   "film_frames": [
+    1237,
+    1251
+   ],
+   "source_seconds": 0.467,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-12",
+   "segment": "S04",
+   "seg_frames": [
+    313,
+    333
+   ],
+   "film_frames": [
+    1251,
+    1271
+   ],
+   "source_seconds": 0.667,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-13",
+   "segment": "S04",
+   "seg_frames": [
+    333,
+    345
+   ],
+   "film_frames": [
+    1271,
+    1283
+   ],
+   "source_seconds": 0.4,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-14",
+   "segment": "S04",
+   "seg_frames": [
+    345,
+    350
+   ],
+   "film_frames": [
+    1283,
+    1288
+   ],
+   "source_seconds": 0.167,
+   "generate_seconds": 4,
+   "kind": "hand",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-15",
+   "segment": "S04",
+   "seg_frames": [
+    350,
+    362
+   ],
+   "film_frames": [
+    1288,
+    1300
+   ],
+   "source_seconds": 0.4,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-16",
+   "segment": "S04",
+   "seg_frames": [
+    362,
+    383
+   ],
+   "film_frames": [
+    1300,
+    1321
+   ],
+   "source_seconds": 0.7,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S04-17",
+   "segment": "S04",
+   "seg_frames": [
+    383,
+    395
+   ],
+   "film_frames": [
+    1321,
+    1333
+   ],
+   "source_seconds": 0.4,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "32s 俯拍'圈'构图（冲杀），水花特写，39.8s 刀锋贴脸，41s 敌人嘶喊",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S05-1",
+   "segment": "S05",
+   "seg_frames": [
+    0,
+    15
+   ],
+   "film_frames": [
+    1333,
+    1348
+   ],
+   "source_seconds": 0.5,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "连续快切：47s 口中见血，踢飞，倒地",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S05-2",
+   "segment": "S05",
+   "seg_frames": [
+    15,
+    58
+   ],
+   "film_frames": [
+    1348,
+    1391
+   ],
+   "source_seconds": 1.433,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "连续快切：47s 口中见血，踢飞，倒地",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S05-3",
+   "segment": "S05",
+   "seg_frames": [
+    58,
+    73
+   ],
+   "film_frames": [
+    1391,
+    1406
+   ],
+   "source_seconds": 0.5,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "连续快切：47s 口中见血，踢飞，倒地",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S05-4",
+   "segment": "S05",
+   "seg_frames": [
+    73,
+    262
+   ],
+   "film_frames": [
+    1406,
+    1595
+   ],
+   "source_seconds": 6.3,
+   "generate_seconds": 7,
+   "kind": "both",
+   "segment_content": "连续快切：47s 口中见血，踢飞，倒地",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S05-5",
+   "segment": "S05",
+   "seg_frames": [
+    262,
+    275
+   ],
+   "film_frames": [
+    1595,
+    1608
+   ],
+   "source_seconds": 0.433,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "连续快切：47s 口中见血，踢飞，倒地",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S05-6",
+   "segment": "S05",
+   "seg_frames": [
+    275,
+    278
+   ],
+   "film_frames": [
+    1608,
+    1611
+   ],
+   "source_seconds": 0.1,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "连续快切：47s 口中见血，踢飞，倒地",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S05-7",
+   "segment": "S05",
+   "seg_frames": [
+    278,
+    293
+   ],
+   "film_frames": [
+    1611,
+    1626
+   ],
+   "source_seconds": 0.5,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "连续快切：47s 口中见血，踢飞，倒地",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S05-8",
+   "segment": "S05",
+   "seg_frames": [
+    293,
+    321
+   ],
+   "film_frames": [
+    1626,
+    1654
+   ],
+   "source_seconds": 0.933,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "连续快切：47s 口中见血，踢飞，倒地",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S05-9",
+   "segment": "S05",
+   "seg_frames": [
+    321,
+    397
+   ],
+   "film_frames": [
+    1654,
+    1730
+   ],
+   "source_seconds": 2.533,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "连续快切：47s 口中见血，踢飞，倒地",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S06-1",
+   "segment": "S06",
+   "seg_frames": [
+    0,
+    30
+   ],
+   "film_frames": [
+    1730,
+    1760
+   ],
+   "source_seconds": 1.0,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "红水缸，倒地，收尾几击",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S06-2",
+   "segment": "S06",
+   "seg_frames": [
+    30,
+    125
+   ],
+   "film_frames": [
+    1760,
+    1855
+   ],
+   "source_seconds": 3.167,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "红水缸，倒地，收尾几击",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S06-3",
+   "segment": "S06",
+   "seg_frames": [
+    125,
+    152
+   ],
+   "film_frames": [
+    1855,
+    1882
+   ],
+   "source_seconds": 0.9,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "红水缸，倒地，收尾几击",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S06-4",
+   "segment": "S06",
+   "seg_frames": [
+    152,
+    160
+   ],
+   "film_frames": [
+    1882,
+    1890
+   ],
+   "source_seconds": 0.267,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "红水缸，倒地，收尾几击",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S06-5",
+   "segment": "S06",
+   "seg_frames": [
+    160,
+    197
+   ],
+   "film_frames": [
+    1890,
+    1927
+   ],
+   "source_seconds": 1.233,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "红水缸，倒地，收尾几击",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S07-1",
+   "segment": "S07",
+   "seg_frames": [
+    0,
+    48
+   ],
+   "film_frames": [
+    1927,
+    1975
+   ],
+   "source_seconds": 1.6,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "风暴眼：雨中正面静态特写 → 低机位踩水 → 水花白闪",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S07-2",
+   "segment": "S07",
+   "seg_frames": [
+    48,
+    61
+   ],
+   "film_frames": [
+    1975,
+    1988
+   ],
+   "source_seconds": 0.433,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "风暴眼：雨中正面静态特写 → 低机位踩水 → 水花白闪",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S07-3",
+   "segment": "S07",
+   "seg_frames": [
+    61,
+    79
+   ],
+   "film_frames": [
+    1988,
+    2006
+   ],
+   "source_seconds": 0.6,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "风暴眼：雨中正面静态特写 → 低机位踩水 → 水花白闪",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S07-4",
+   "segment": "S07",
+   "seg_frames": [
+    79,
+    107
+   ],
+   "film_frames": [
+    2006,
+    2034
+   ],
+   "source_seconds": 0.933,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "风暴眼：雨中正面静态特写 → 低机位踩水 → 水花白闪",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S07-5",
+   "segment": "S07",
+   "seg_frames": [
+    107,
+    147
+   ],
+   "film_frames": [
+    2034,
+    2074
+   ],
+   "source_seconds": 1.333,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "风暴眼：雨中正面静态特写 → 低机位踩水 → 水花白闪",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S07-6",
+   "segment": "S07",
+   "seg_frames": [
+    147,
+    160
+   ],
+   "film_frames": [
+    2074,
+    2087
+   ],
+   "source_seconds": 0.433,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "风暴眼：雨中正面静态特写 → 低机位踩水 → 水花白闪",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-1",
+   "segment": "S08",
+   "seg_frames": [
+    0,
+    15
+   ],
+   "film_frames": [
+    2087,
+    2102
+   ],
+   "source_seconds": 0.5,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-2",
+   "segment": "S08",
+   "seg_frames": [
+    15,
+    52
+   ],
+   "film_frames": [
+    2102,
+    2139
+   ],
+   "source_seconds": 1.233,
+   "generate_seconds": 4,
+   "kind": "both",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-3",
+   "segment": "S08",
+   "seg_frames": [
+    52,
+    78
+   ],
+   "film_frames": [
+    2139,
+    2165
+   ],
+   "source_seconds": 0.867,
+   "generate_seconds": 4,
+   "kind": "hand",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-4",
+   "segment": "S08",
+   "seg_frames": [
+    78,
+    87
+   ],
+   "film_frames": [
+    2165,
+    2174
+   ],
+   "source_seconds": 0.3,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-5",
+   "segment": "S08",
+   "seg_frames": [
+    87,
+    90
+   ],
+   "film_frames": [
+    2174,
+    2177
+   ],
+   "source_seconds": 0.1,
+   "generate_seconds": 4,
+   "kind": "hero",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-6",
+   "segment": "S08",
+   "seg_frames": [
+    90,
+    99
+   ],
+   "film_frames": [
+    2177,
+    2186
+   ],
+   "source_seconds": 0.3,
+   "generate_seconds": 4,
+   "kind": "hand",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-7",
+   "segment": "S08",
+   "seg_frames": [
+    99,
+    150
+   ],
+   "film_frames": [
+    2186,
+    2237
+   ],
+   "source_seconds": 1.7,
+   "generate_seconds": 4,
+   "kind": "hand",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-8",
+   "segment": "S08",
+   "seg_frames": [
+    150,
+    155
+   ],
+   "film_frames": [
+    2237,
+    2242
+   ],
+   "source_seconds": 0.167,
+   "generate_seconds": 4,
+   "kind": "boss",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-9",
+   "segment": "S08",
+   "seg_frames": [
+    155,
+    179
+   ],
+   "film_frames": [
+    2242,
+    2266
+   ],
+   "source_seconds": 0.8,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-10",
+   "segment": "S08",
+   "seg_frames": [
+    179,
+    184
+   ],
+   "film_frames": [
+    2266,
+    2271
+   ],
+   "source_seconds": 0.167,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S08-11",
+   "segment": "S08",
+   "seg_frames": [
+    184,
+    230
+   ],
+   "film_frames": [
+    2271,
+    2317
+   ],
+   "source_seconds": 1.533,
+   "generate_seconds": 4,
+   "kind": "hench",
+   "segment_content": "余波：满地倒敌大全景，主角收拾最后几人，侧脸特写，持剑而立",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S09-1",
+   "segment": "S09",
+   "seg_frames": [
+    0,
+    26
+   ],
+   "film_frames": [
+    2317,
+    2343
+   ],
+   "source_seconds": 0.867,
+   "generate_seconds": 4,
+   "kind": "hand",
+   "segment_content": "收束：剑尖拖过血迹地砖 → 俯拍'圈'构图（全倒）缓慢升起旋转 → 渐隐黑场",
+   "desc": "",
+   "take_offset": 0
+  },
+  {
+   "id": "S09-2",
+   "segment": "S09",
+   "seg_frames": [
+    26,
+    256
+   ],
+   "film_frames": [
+    2343,
+    2573
+   ],
+   "source_seconds": 7.667,
+   "generate_seconds": 8,
+   "kind": "both",
+   "segment_content": "收束：剑尖拖过血迹地砖 → 俯拍'圈'构图（全倒）缓慢升起旋转 → 渐隐黑场",
+   "desc": "",
+   "take_offset": 0
+  }
+ ]
+}
