@@ -13,8 +13,8 @@
 | 阶段 | 做什么 | 现状 | 位置 |
 | --- | --- | --- | --- |
 | 01 趋势 | 拉取趋势视频与指标，产出候选清单 | 待开发 | [stages/01-trend](stages/01-trend/) |
-| 02 读片 | 切点、节奏、景别、字幕系统，产出 ANALYSIS / TIMELINE | 有方法和样例，靠 agent 手动执行 | [stages/02-analyze](stages/02-analyze/) |
-| 03a Hypit 复刻 | BRIEF → TREATMENT → SVML → 预览 → 估价 → 生成 → 拼装 | **已跑通**（S01 样例） | [stages/03-produce/hypit-remake](stages/03-produce/hypit-remake/) |
+| 02 读片 | 切点、节奏、景别、字幕系统，产出 ANALYSIS / TIMELINE | **agent 已跑通**（ref-105、lanv-30s）；待补无人值守触发和机器可读的 `shots.json` | [stages/02-analyze](stages/02-analyze/) |
+| 03a Hypit 复刻 | BRIEF → TREATMENT → SVML → 预览 → 估价 → 生成 → 拼装 | **agent 已跑通**（S01 样例）；待补无人值守触发 | [stages/03-produce/hypit-remake](stages/03-produce/hypit-remake/) |
 | 03b 动作迁移 | 原片动作 + 新角色（Bernini / SCAIL-2 / Wan Animate） | 实验脚本，未接入 Hypit | [stages/03-produce/motion-transfer](stages/03-produce/motion-transfer/) |
 | 03c 灰模导演台 | 参考片反推相机 + 多人 3D 动作 → Blender 白膜 → Seedance 参考视频 | 调研完成，待实验 | [stages/03-produce/greybox-director](stages/03-produce/greybox-director/) |
 | 04 审查 | 11 道证据关卡；切点、运动量、色调自动对比 | 关卡文档 + 量化脚本 | [stages/04-review](stages/04-review/) |

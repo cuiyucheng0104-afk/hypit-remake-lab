@@ -19,6 +19,11 @@ hypit transcribe ref.mp4 --language zh               # 有人声时
 
 样例见 [references/](references/)：ref-105 武侠戏、lanv-30s 教程片，原片与转写稿不含在内。
 
-## 待自动化
+## 现状与待补
 
-由 agent 按趋势清单批量执行，并在切点候选上自动出逐帧核对图。运动量量化可以复用 `04-review/scripts/review_metrics.py` 的算法。
+**agent 已跑通**：由 agent 调用上面的 `hypit media` 命令完成读片，ref-105 与 lanv-30s 是实际产物。
+
+待补：
+- **无人值守触发**：用非交互模式启动 agent（如 `claude -p` 加 Hypit Skill），由趋势清单驱动；
+- **机器可读产物**：`shots.json`，写明每镜的帧区间、景别、运动强度和作用，供 03 直接读取；
+- **自动核对图**：在切点候选上自动出逐帧核对图。运动量量化可以复用 `04-review/scripts/review_metrics.py` 的算法。
