@@ -44,3 +44,10 @@ SMPL / SMPL-X 只许非商业科研，明文禁止"用于商业产品或商业�
 5. 白模视频交给 Seedance 生成，用 `04-review/scripts/review_metrics.py` 和原片、Bernini 结果做三方对比。
 
 这一步同时回答灰模管线里一直没验证的核心假设：灰模到底能把机位和动作钉多紧。
+
+## 第三方：PromptHMR（git submodule）
+
+`pipeline/third_party/PromptHMR` 只是对官方仓库的引用（固定在提交 `3b566b7`），**源码不在本仓库内**。
+- **许可证**：Meshcapade 的 PromptHMR License。只许非商业科研，未经书面许可不得复制、修改后提供给第三方。拉取子模块（`git submodule update --init`）即表示接受这些条款。
+- **商用授权**：sales@meshcapade.com。
+- **衔接脚本**：我们自己写，放在本目录，不改动它的源码。

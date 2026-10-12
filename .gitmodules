@@ -1,0 +1,3 @@
+[submodule "pipeline/third_party/PromptHMR"]
+	path = pipeline/third_party/PromptHMR
+	url = https://github.com/yufu-wang/PromptHMR
