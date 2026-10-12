@@ -13,3 +13,4 @@ drafts/gen/
 **/out/*.mp4
 .env*
 *token*
+_draft-*
