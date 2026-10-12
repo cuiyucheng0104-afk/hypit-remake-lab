@@ -1,0 +1,65 @@
+---
+title: Post actions and statistics
+sidebarTitle: Actions and stats
+description: 'Duplicate, preview, delete, and read per-post performance'
+icon: 'chart-simple'
+---
+
+**Where:** the Calendar, hover any post card
+
+## The card actions
+
+| Action | What it does |
+|---|---|
+| **Duplicate** | Opens a copy in the composer, ready to place elsewhere |
+| **Preview** | Opens the post's public page, see [Sharing for approval](/general/approvals) |
+| **Statistics** | Per-post performance and short link clicks |
+| **Delete** | Removes the post |
+
+## Deleting
+
+**Delete** on a calendar card removes that channel's post, with its thread
+items or comments. A post scheduled to five channels shows as five cards, and
+the other four stay.
+
+To remove it everywhere, click the card and use **Delete Post** in the
+composer. When the post was created for more than one channel, Postiz asks:
+
+| Choice | What it does |
+|---|---|
+| **Delete from all channels** | Removes the post from every channel in the composer |
+| **Only from** *channel* | Removes it only from the channel you are viewing |
+
+## Statistics
+
+The Statistics modal shows how a published post performed, over 7, 30 or 90
+days depending on what the platform supports.
+
+Below the metrics is the **short link** table: each shortened URL in the post,
+the destination, and how many clicks it got. This only has rows if the post was
+saved with short links enabled, see
+[Links and validation](/general/composer/links-and-validation).
+
+<Note>
+Not every platform reports per-post metrics. See
+[Analytics](/general/analytics#per-post-metrics) for which do.
+</Note>
+
+## Connecting a post Postiz lost track of
+
+Occasionally Postiz publishes a post but never receives the platform's ID for
+it, usually because the platform timed out after accepting the content. The
+post shows as published but has no statistics and no link to the live version.
+
+The Statistics modal then offers a **connect** step: you paste the live post's
+URL or pick it from the recent posts the platform reports, and Postiz
+reattaches the two. Statistics start working from that point.
+
+The same operation exists in the API, see
+[Update release ID](/public-api/posts/update-release-id).
+
+## Debugging a failed post
+
+A post with a red ring has the platform's own error message in its tooltip.
+That message is the thing to search for or to quote when asking for help, since
+it comes from the platform rather than from Postiz.
