@@ -1,7 +1,7 @@
 name: postiz
 services:
   postiz:
-    image: ghcr.io/gitroomhq/postiz-app:latest
+    image: ghcr.io/gitroomhq/postiz-app@sha256:d2b37802e96757729fdea2d3d71287f841c2b619faa1cb4c21dac07df657fde1 # 2026-10-11 构建的 latest，钉 digest（SW-02）
     container_name: postiz
     restart: always
     environment:
@@ -124,7 +124,7 @@ services:
       - postiz-config:/config/
       - postiz-uploads:/uploads/
     ports:
-      - '4007:5000'
+      - '127.0.0.1:4007:5000'
     networks:
       - postiz-network
       - temporal-network
@@ -202,7 +202,7 @@ services:
   temporal:
     container_name: temporal
     ports:
-      - '7233:7233'
+      - '127.0.0.1:7233:7233'
     image: temporalio/auto-setup:1.28.1
     depends_on:
       - temporal-postgresql
@@ -247,7 +247,7 @@ services:
     networks:
       - temporal-network
     ports:
-      - '8080:8080'
+      - '127.0.0.1:8080:8080'
 
 volumes:
   postgres-volume:

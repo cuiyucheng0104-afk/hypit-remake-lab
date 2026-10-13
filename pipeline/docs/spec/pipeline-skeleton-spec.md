@@ -127,7 +127,7 @@
 | 03b 动作迁移 | M1 | Q0 | C0 | ref105 全片 v1，85.76s，960×480〔R1-34〕 | 不经过 Hypit、没有账本和 build_id，工作流 JSON 不在仓库〔R1-16〕 |
 | 03c 灰模 | M0 | Q0 | C0 | README 和 PromptHMR 子模块〔R1-17〕 | 没有代码；只许非商业使用 |
 | 04 审查 | M1 | Q0 | C0 | review_metrics.py〔R1-18〕 | 9:16 画面被压扁、默认 30fps、没有阈值和退出码；11 道关卡都只是文字〔R1-19〕 |
-| 05 发布 | M0 | Q0 | C0 | Postiz 源码和 compose〔R1-20〕 | 未部署；主镜像用 :latest；端口未绑回环；开放注册〔R1-20〕 |
+| 05 发布 | M0 | Q0 | C0 | Postiz 源码和 compose〔R1-20〕 | 生产未部署；Mac 本机试用已部署，主镜像已钉 digest、端口已绑回环，注册待用户注册后关闭（见 [postiz-local-deploy-spec.md](postiz-local-deploy-spec.md)）〔R1-20〕 |
 | 06 回测 | M0 | Q0 | C0 | 只有 README〔R1-02〕 | 没有任何代码和 schema〔R1-23〕 |
 
 ### 1.3 基线条目
@@ -139,7 +139,7 @@
 - **BL-05** 03a 只拿仓库无法复现：source.mp4 和 cast/*.png 被 .gitignore 排除，Build 只在原工作区；provider-comfy-h3 的 templates/ 有意没有入库。 —— 〔R1-06、R1-12〕｜等级【实测】｜验收：SW-03 私有资产注入，加上 ART 素材清单（相对路径、sha256、大小、存放位置）以后，新机器上能跑通 check 和 plan｜负责：开发B｜状态：待做
 - **BL-06** 03b 脚本经 SSH 隧道直接调 ComfyUI，产物落在本地 out/，不经过 Hypit，没有账本和 build_id。 —— 〔R1-16〕｜等级【实测】｜验收：SW-12 完成后，03b 产物能进入 manifest｜负责：开发B｜状态：待做
 - **BL-07** 04 的 review_metrics.py 不管原片比例，一律缩到 320×160；默认 30fps，而 H3 是 24fps；没有阈值配置、非零退出码，也没有 build/artifact id；`--cuts` 要手填。 —— 〔R1-18、R1-19〕｜等级【文档】｜验收：见 SW-11｜负责：开发B｜状态：待做
-- **BL-08** 05 Postiz 的 compose 有 8 个服务，其中 postiz 主镜像用 :latest，其余 7 个已钉版本（`docker-compose.yaml:4、138、155、173、191、206、230、243`）；端口 4007、7233、8080 没有绑定回环；`DISABLE_REGISTRATION='false'`；`STORAGE_PROVIDER='local'`。本机部署由另一个会话处理，不在本 spec 范围内。 —— 〔R1-20、R2·HW-12〕｜等级【实测】｜验收：见 SW-02｜负责：开发B｜状态：待做
+- **BL-08** 05 Postiz 的 compose 有 8 个服务，其中 postiz 主镜像用 :latest，其余 7 个已钉版本（`docker-compose.yaml:4、138、155、173、191、206、230、243`）；端口 4007、7233、8080 没有绑定回环；`DISABLE_REGISTRATION='false'`；`STORAGE_PROVIDER='local'`。本机部署由另一个会话处理，不在本 spec 范围内；2026-10-13 起 Mac 本机试用部署已把主镜像钉到 digest、三个端口绑回 127.0.0.1，记录见 [postiz-local-deploy-spec.md](postiz-local-deploy-spec.md)。 —— 〔R1-20、R2·HW-12〕｜等级【实测】｜验收：见 SW-02｜负责：开发B｜状态：待做
 - **BL-09** 05 到 06 之间没有任何代码或 schema 把 Hypit 成片和元数据交给 Postiz，也没有拉取发布数据回写的代码。 —— 〔R1-23〕｜等级【实测】｜验收：见 DC-02、DC-10｜负责：开发A｜状态：待做
 - **BL-10** 现在只有三种 ID：Build id（写在 PROGRESS.md 的自由文本里）、operation id 和市场任务号（在 result.json 里）、方舟 asset_id/group_id。signal、brief、artifact、publication 都没有 ID。 —— 〔R1-45〕｜等级【实测】｜验收：见 DC-01｜负责：开发A｜状态：待做
 - **BL-11** 市场账本已经在用：上限 ¥30，已记 5 笔，共 ¥1.45；提交前预扣，没拿到 task_id 就退回。账本条目里没有工程、Build 和账号字段；费用只能经 operation id 手工关联；跨进程写账本不加锁，会不会丢账没有验证【推断】。 —— 〔R1-09、R1-10〕｜等级【实测】｜验收：见 OPS-05｜负责：开发A｜状态：待做
