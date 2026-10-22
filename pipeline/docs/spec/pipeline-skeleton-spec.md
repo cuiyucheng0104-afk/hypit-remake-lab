@@ -153,7 +153,7 @@
 | 03b 动作迁移 | M1 | Q0 | C0 | ref105 全片 v1，85.76s，960×480〔R1-34〕 | 不经过 Hypit、没有账本和 build_id，工作流 JSON 不在仓库〔R1-16〕 |
 | 03c 灰模 | M0 | Q0 | C0 | README 和 PromptHMR 子模块〔R1-17〕 | 没有代码；只许非商业使用 |
 | 04 审查 | M1 | Q0 | C0 | review_metrics.py〔R1-18〕 | 9:16 画面被压扁、默认 30fps、没有阈值和退出码；11 道关卡都只是文字〔R1-19〕 |
-| 05 发布 | M0 | Q0 | C0 | Postiz 源码和 compose〔R1-20〕 | 生产未部署；Mac 本机试用已部署，主镜像已钉 digest、端口已绑回环，注册待用户注册后关闭（见 [postiz-local-deploy-spec.md](postiz-local-deploy-spec.md)）〔R1-20〕 |
+| 05 发布 | M0 | Q0 | C0 | Postiz 源码和 compose〔R1-20〕 | 生产未部署；Mac 本机自部署试用 2026-10-13 部署、2026-10-22 已卸载（自部署需自有 TikTok 应用，放弃），转为调研云版，未拍板（见 [postiz-local-deploy-spec.md](postiz-local-deploy-spec.md) §6）〔R1-20〕 |
 | 06 回测 | M0 | Q0 | C0 | 只有 README〔R1-02〕 | 没有任何代码和 schema〔R1-23〕 |
 
 ### 1.3 基线条目
@@ -1335,7 +1335,7 @@ flowchart LR
 | DEC-07 | 日产量、单条时长、路线配比 | — | 由用户和运营给出 | 决定是一张卡还是两张卡 | W0 | HW-13、HW-14 |
 | DEC-08 | 成片交付规格 | 1080×1920、30fps、4–6Mbps；或 720×1280、约 1Mbps | 由运营按平台规格定 | 1080p 每条约 15–23MB，720p 约 3.8MB；1080×1920 的 GPU 时间约为 960×480 基数的 4.5 倍（推断），单卡可能不够（HW-13），本地 H3 镜头还要超分（ARCH-12） | W1 | ART-07、ARCH-12 |
 | DEC-09 | 各级产物的保留期 | L1 参考片 90 天、L2 中间件 30 天（建议） | 采用建议值 | 删得太早会无法复现，保留太久会增加存储费 | W2 | 表 6-2 |
-| DEC-10 | 发布模式和 Postiz | 手机原生发布；Postiz UPLOAD 到收件箱（草稿）；Postiz 是否部署、部署在哪、用不用域名和 Access。（DIRECT_POST 与 NG-02、表 11-2 #1 冲突，只有获得平台审计批准后才另行立项，不作为本试点选项） | 试点期用手机原生发布，W3 末再决定是否部署 Postiz；不管走哪种，都显式传 privacy_level 和 is_aigc | 部署 Postiz 需要域名、能直连平台的主机、钉版本、收紧端口；TikTok 审核时间不可控。走 Postiz 时 5 个账号都从同一台主机的同一出口上传，与 NET-12「一号一机一出口」原则冲突，要做关联风险评估并请法务确认；Postiz 上传卷要有清理规则（发布完成并由人确认后清理） | W3 | STO-02、NET-09~NET-11、PLAN-10、NG-02 |
+| DEC-10 | 发布模式和 Postiz | 手机原生发布；Postiz UPLOAD 到收件箱（草稿）；Postiz 是否部署、部署在哪、用不用域名和 Access。（DIRECT_POST 与 NG-02、表 11-2 #1 冲突，只有获得平台审计批准后才另行立项，不作为本试点选项） | 试点期用手机原生发布，W3 末再决定是否部署 Postiz；不管走哪种，都显式传 privacy_level 和 is_aigc | 部署 Postiz 需要域名、能直连平台的主机、钉版本、收紧端口；TikTok 审核时间不可控。走 Postiz 时 5 个账号都从同一台主机的同一出口上传，与 NET-12「一号一机一出口」原则冲突，要做关联风险评估并请法务确认；Postiz 上传卷要有清理规则（发布完成并由人确认后清理） | W3 | STO-02、NET-09~NET-11、PLAN-10、NG-02；2026-10-22 调研进展（自部署因需自有 TikTok 应用而放弃，转查云版；UPLOAD 草稿模式与本条一致；仍未拍板）见 [postiz-local-deploy-spec.md §6](postiz-local-deploy-spec.md) |
 | DEC-11 | 生产侧存储；Seedance 小额实测 | TOS 北京；OSS（要备案域名）；COS；（AutoDL 文件存储默认上限 200GB，只适合小量） | 主库按 L2/L3 归档和 3-2-1 备份的需求选：放大陆用 TOS 北京，放海外先补查（U-34）；Seedance 临时桶作为研发附属单独决定 | TOS 的流出单价未知；Seedance 实测要先报价 | W2 | STO-01 |
 | DEC-12 | NAS 或冷备 | 先不买，全部上云；群晖、绿联、威联通；B2；外置盘 | 先不买 NAS；冷备用 B2 或外置盘，W2 后再定 | NAS 一次性约 ¥1 万，按估算回本约 14 年 | W2 | STO-03、STO-10 |
 | DEC-13 | 安装 rclone、croc、cloudflared | — | 需要用到时逐个批准 | 多了维护面 | W1 | XFER-03 |
