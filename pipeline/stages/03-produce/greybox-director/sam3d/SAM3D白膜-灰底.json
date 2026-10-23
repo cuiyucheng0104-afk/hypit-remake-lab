@@ -1,1 +1,2926 @@
-{"id":"76915793-04af-4b60-a2a2-9fd3ebbdc944","revision":0,"last_node_id":158,"last_link_id":320,"nodes":[{"id":15,"type":"CLIPTextEncode","pos":[-1740,5640],"size":[400,200],"flags":{},"order":16,"mode":0,"inputs":[{"localized_name":"clip","name":"clip","type":"CLIP","link":15},{"localized_name":"文本","name":"text","type":"STRING","widget":{"name":"text"},"link":null}],"outputs":[{"localized_name":"条件","name":"CONDITIONING","type":"CONDITIONING","links":[34]}],"title":"要追踪的东西（英文）","properties":{"Node name for S&R":"CLIPTextEncode","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":["person"],"widgets_values_named":{"text":"person"}},{"id":18,"type":"SAM3_VideoTrack","pos":[-1290,5640],"size":[280,240],"flags":{},"order":19,"mode":0,"inputs":[{"label":"images","localized_name":"图像","name":"images","type":"IMAGE","link":304},{"label":"model","localized_name":"model","name":"model","type":"MODEL","link":33},{"label":"initial_mask","localized_name":"初始 mask","name":"initial_mask","shape":7,"type":"MASK","link":null},{"label":"conditioning","localized_name":"条件","name":"conditioning","shape":7,"type":"CONDITIONING","link":34},{"localized_name":"检测阈值","name":"detection_threshold","type":"FLOAT","widget":{"name":"detection_threshold"},"link":null},{"localized_name":"最大对象数","name":"max_objects","type":"INT","widget":{"name":"max_objects"},"link":null},{"localized_name":"检测间隔","name":"detect_interval","type":"INT","widget":{"name":"detect_interval"},"link":null}],"outputs":[{"localized_name":"跟踪数据","name":"track_data","type":"SAM3_TRACK_DATA","links":[303]}],"title":"⑤ SAM3 视频追踪（给每个人编号）","properties":{"Node name for S&R":"SAM3_VideoTrack","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[0.5,0,1],"widgets_values_named":{"detection_threshold":0.5,"max_objects":0,"detect_interval":1}},{"id":14,"type":"CheckpointLoaderSimple","pos":[-2180,5640],"size":[410,150],"flags":{},"order":0,"mode":0,"inputs":[{"localized_name":"Checkpoint名称","name":"ckpt_name","type":"COMBO","widget":{"name":"ckpt_name"},"link":null}],"outputs":[{"localized_name":"模型","name":"MODEL","type":"MODEL","links":[33]},{"localized_name":"CLIP","name":"CLIP","type":"CLIP","links":[15]},{"localized_name":"VAE","name":"VAE","type":"VAE","links":null}],"title":"加载 SAM 3.1 追踪模型","properties":{"Node name for S&R":"CheckpointLoaderSimple","cnr_id":"comfy-core","ver":"0.33.0","models":[{"name":"sam3.1_multiplex_fp16.safetensors","url":"https://huggingface.co/Comfy-Org/sam3.1/resolve/main/checkpoints/sam3.1_multiplex_fp16.safetensors","directory":"checkpoints"}]},"widgets_values":["sam3.1_multiplex_fp16.safetensors"],"widgets_values_named":{"ckpt_name":"sam3.1_multiplex_fp16.safetensors"},"color":"#223","bgcolor":"#335"},{"id":109,"type":"RTDETR_detect","pos":[-1580,5200],"size":[280,162],"flags":{},"order":20,"mode":0,"inputs":[{"label":"model","localized_name":"模型","name":"model","type":"MODEL","link":232},{"label":"image","localized_name":"图像","name":"image","type":"IMAGE","link":305},{"localized_name":"阈值","name":"threshold","type":"FLOAT","widget":{"name":"threshold"},"link":null},{"localized_name":"类别名称","name":"class_name","type":"COMBO","widget":{"name":"class_name"},"link":null},{"localized_name":"最大检测数","name":"max_detections","type":"INT","widget":{"name":"max_detections"},"link":null}],"outputs":[{"localized_name":"边界框","name":"bboxes","type":"BOUNDING_BOX","links":[285,318]}],"title":"④ RT-DETR 逐帧找人（画框）","properties":{"Node name for S&R":"RTDETR_detect","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[0.5,"person",100],"widgets_values_named":{"threshold":0.5,"class_name":"person","max_detections":100}},{"id":128,"type":"SAM3DBody_FaceExpression","pos":[-370,5810],"size":[310,220],"flags":{},"order":24,"mode":4,"showAdvanced":false,"inputs":[{"localized_name":"sam3d_body_model","name":"sam3d_body_model","type":"SAM3D_BODY_MODEL","link":279},{"localized_name":"mhr_pose_data","name":"mhr_pose_data","type":"MHR_POSE_DATA","link":287},{"localized_name":"image","name":"image","type":"IMAGE","link":307},{"localized_name":"strength","name":"strength","type":"FLOAT","widget":{"name":"strength"},"link":null},{"localized_name":"mouth_strength","name":"mouth_strength","type":"FLOAT","widget":{"name":"mouth_strength"},"link":null},{"localized_name":"eye_strength","name":"eye_strength","type":"FLOAT","widget":{"name":"eye_strength"},"link":null},{"localized_name":"brow_strength","name":"brow_strength","type":"FLOAT","widget":{"name":"brow_strength"},"link":null},{"localized_name":"input_threshold","name":"input_threshold","type":"FLOAT","widget":{"name":"input_threshold"},"link":null},{"localized_name":"blendshape_smooth_window","name":"blendshape_smooth_window","type":"INT","widget":{"name":"blendshape_smooth_window"},"link":null}],"outputs":[{"localized_name":"mhr_pose_data","name":"mhr_pose_data","type":"MHR_POSE_DATA","links":[288]}],"title":"（已跳过）面部表情","properties":{"Node name for S&R":"SAM3DBody_FaceExpression","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[1,1,2,2,0.02,7],"widgets_values_named":{"strength":1,"mouth_strength":1,"eye_strength":2,"brow_strength":2,"input_threshold":0.02,"blendshape_smooth_window":7}},{"id":129,"type":"SAM3DBody_Predict","pos":[-730,5830],"size":[292.378515625,198],"flags":{},"order":23,"mode":0,"inputs":[{"localized_name":"sam3d_body_model","name":"sam3d_body_model","type":"SAM3D_BODY_MODEL","link":283},{"localized_name":"image","name":"image","type":"IMAGE","link":308},{"localized_name":"track_data","name":"track_data","shape":7,"type":"SAM3_TRACK_DATA","link":303},{"localized_name":"bboxes","name":"bboxes","shape":7,"type":"BOUNDING_BOX","link":285},{"localized_name":"run_hand_refinement","name":"run_hand_refinement","type":"BOOLEAN","widget":{"name":"run_hand_refinement"},"link":null},{"localized_name":"fov","name":"fov","type":"FLOAT","widget":{"name":"fov"},"link":286},{"localized_name":"batch_size","name":"batch_size","type":"INT","widget":{"name":"batch_size"},"link":null}],"outputs":[{"localized_name":"mhr_pose_data","name":"mhr_pose_data","type":"MHR_POSE_DATA","links":[287]}],"title":"⑦ SAM 3D Body 重建每个人的 3D 人体","properties":{"Node name for S&R":"SAM3DBody_Predict","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[true,0,64],"widgets_values_named":{"run_hand_refinement":true,"fov":0,"batch_size":64}},{"id":130,"type":"SAM3DBody_Smooth","pos":[330,5790],"size":[330,150],"flags":{},"order":25,"mode":0,"inputs":[{"localized_name":"mhr_pose_data","name":"mhr_pose_data","type":"MHR_POSE_DATA","link":288},{"localized_name":"强度","name":"strength","type":"FLOAT","widget":{"name":"strength"},"link":null},{"localized_name":"方法","name":"method","type":"COMBO","widget":{"name":"method"},"link":null},{"localized_name":"窗口","name":"window","type":"INT","widget":{"name":"window"},"link":null},{"localized_name":"旋转阈值（度）","name":"rotation_threshold_degrees","type":"FLOAT","widget":{"name":"rotation_threshold_degrees"},"link":null}],"outputs":[{"localized_name":"mhr_pose_data","name":"mhr_pose_data","type":"MHR_POSE_DATA","links":[290,317]}],"title":"⑧ 时间平滑（去抖动）","properties":{"Node name for S&R":"SAM3DBody_Smooth","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[1,"gaussian",7,15],"widgets_values_named":{"strength":1,"method":"gaussian","window":7,"rotation_threshold_degrees":15}},{"id":119,"type":"SAM3DBody_Loader","pos":[-740,5510],"size":[510,110],"flags":{},"order":1,"mode":0,"inputs":[{"localized_name":"model_file","name":"model_file","type":"COMBO","widget":{"name":"model_file"},"link":null}],"outputs":[{"localized_name":"sam3d_body_model","name":"sam3d_body_model","type":"SAM3D_BODY_MODEL","links":[274,279,283]}],"title":"加载 SAM 3D Body 模型","properties":{"Node name for S&R":"SAM3DBody_Loader","cnr_id":"comfy-core","ver":"0.33.0","models":[{"name":"sam_3d_body_dinov3_bf16.safetensors","url":"https://huggingface.co/Comfy-Org/sam-3d-body/resolve/main/detection/sam_3d_body_dinov3_bf16.safetensors","directory":"detection"}]},"widgets_values":["sam_3d_body_dinov3_bf16.safetensors"],"widgets_values_named":{"model_file":"sam_3d_body_dinov3_bf16.safetensors"},"color":"#223","bgcolor":"#335"},{"id":126,"type":"MoGeGeometryToFOV","pos":[-1380,6110],"size":[300,134],"flags":{},"order":22,"mode":0,"inputs":[{"localized_name":"moge_geometry","name":"moge_geometry","type":"MOGE_GEOMETRY","link":271},{"localized_name":"轴","name":"axis","type":"COMBO","widget":{"name":"axis"},"link":null},{"localized_name":"单位","name":"unit","type":"COMBO","widget":{"name":"unit"},"link":null}],"outputs":[{"localized_name":"视场","name":"fov","type":"FLOAT","links":[286]},{"localized_name":"焦距（像素）","name":"focal_pixels","type":"FLOAT","links":null}],"title":"⑥ 换算成镜头视场角","properties":{"Node name for S&R":"MoGeGeometryToFOV","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":["vertical","degrees"],"widgets_values_named":{"axis":"vertical","unit":"degrees"}},{"id":114,"type":"MoGeInference","pos":[-1700,6110],"size":[270,198],"flags":{},"order":21,"mode":0,"inputs":[{"localized_name":"moge_model","name":"moge_model","type":"MOGE_MODEL","link":242},{"localized_name":"image","name":"image","type":"IMAGE","link":306},{"localized_name":"resolution_level","name":"resolution_level","type":"INT","widget":{"name":"resolution_level"},"link":null},{"localized_name":"fov_x_degrees","name":"fov_x_degrees","type":"FLOAT","widget":{"name":"fov_x_degrees"},"link":null},{"localized_name":"batch_size","name":"batch_size","type":"INT","widget":{"name":"batch_size"},"link":null},{"localized_name":"force_projection","name":"force_projection","type":"BOOLEAN","widget":{"name":"force_projection"},"link":null},{"localized_name":"apply_mask","name":"apply_mask","type":"BOOLEAN","widget":{"name":"apply_mask"},"link":null},{"localized_name":"refine_steps","name":"refine_steps","type":"INT","widget":{"name":"refine_steps"},"link":null}],"outputs":[{"localized_name":"moge_geometry","name":"moge_geometry","type":"MOGE_GEOMETRY","links":[271]}],"title":"⑥ MoGe 估算画面几何","properties":{"Node name for S&R":"MoGeInference","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[9,0,4,true,true,3],"widgets_values_named":{"resolution_level":9,"fov_x_degrees":0,"batch_size":4,"force_projection":true,"apply_mask":true,"refine_steps":3}},{"id":115,"type":"LoadMoGeModel","pos":[-2160,6110],"size":[410,110],"flags":{},"order":2,"mode":0,"inputs":[{"localized_name":"model_name","name":"model_name","type":"COMBO","widget":{"name":"model_name"},"link":null}],"outputs":[{"localized_name":"MOGE模型","name":"MOGE_MODEL","type":"MOGE_MODEL","links":[242]}],"properties":{"Node name for S&R":"LoadMoGeModel","cnr_id":"comfy-core","ver":"0.33.0","models":[{"name":"moge_2_vitl_normal_fp16.safetensors","url":"https://huggingface.co/Comfy-Org/MoGe/resolve/main/geometry_estimation/moge_2_vitl_normal_fp16.safetensors","directory":"geometry_estimation"}]},"widgets_values":["moge_2_vitl_normal_fp16.safetensors"],"widgets_values_named":{"model_name":"moge_2_vitl_normal_fp16.safetensors"},"color":"#223","bgcolor":"#335"},{"id":127,"type":"BuildPoseFile","pos":[820,6140],"size":[350,246],"flags":{},"order":26,"mode":0,"inputs":[{"localized_name":"pose_data","name":"pose_data","type":"MHR_POSE_DATA,KIMODO_POSE_DATA","link":290},{"localized_name":"sam3d_body_model","name":"sam3d_body_model","shape":7,"type":"SAM3D_BODY_MODEL","link":274},{"localized_name":"格式","name":"format","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"format"},"link":null},{"localized_name":"mesh_style","name":"format.mesh_style","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"format.mesh_style"},"link":null},{"localized_name":"bone_vis","name":"format.mesh_style.bone_vis","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"format.mesh_style.bone_vis"},"link":null},{"localized_name":"shader","name":"format.mesh_style.shader","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"format.mesh_style.shader"},"link":null},{"localized_name":"bone_smooth_window","name":"format.bone_smooth_window","type":"INT","widget":{"name":"format.bone_smooth_window"},"link":null},{"localized_name":"fps","name":"fps","type":"FLOAT","widget":{"name":"fps"},"link":null},{"localized_name":"camera_translation","name":"camera_translation","type":"COMBO","widget":{"name":"camera_translation"},"link":null},{"localized_name":"track_index","name":"track_index","type":"INT","widget":{"name":"track_index"},"link":null}],"outputs":[{"localized_name":"model_3d","name":"model_3d","type":"FILE_3D","links":[310]}],"title":"⑬ 生成 3D 动画文件（GLB）","properties":{"Node name for S&R":"BuildPoseFile","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":["glb","body_mesh","off","default",0,24,"absolute",-1],"widgets_values_named":{"format":"glb","format.mesh_style":"body_mesh","format.mesh_style.bone_vis":"off","format.mesh_style.shader":"default","format.bone_smooth_window":0,"fps":24,"camera_translation":"absolute","track_index":-1},"color":"#322","bgcolor":"#533"},{"id":134,"type":"CreateVideo","pos":[1230,5320],"size":[270,162],"flags":{},"order":31,"mode":0,"inputs":[{"localized_name":"图像","name":"images","type":"IMAGE","link":298},{"localized_name":"音频","name":"audio","shape":7,"type":"AUDIO","link":null},{"localized_name":"帧率","name":"fps","type":"FLOAT","widget":{"name":"fps"},"link":300},{"localized_name":"bit_depth","name":"bit_depth","shape":7,"type":"COMBO","widget":{"name":"bit_depth"},"link":null},{"localized_name":"color_space","name":"color_space","shape":7,"type":"COMBO","widget":{"name":"color_space"},"link":null},{"localized_name":"codec","name":"codec","shape":7,"type":"COMBO","widget":{"name":"codec"},"link":null}],"outputs":[{"localized_name":"视频","name":"VIDEO","type":"VIDEO","links":[299]}],"title":"合成视频（白模）","properties":{"Node name for S&R":"CreateVideo","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[30,8,"sRGB","none"],"widgets_values_named":{"fps":30,"bit_depth":8,"color_space":"sRGB","codec":"none"}},{"id":135,"type":"SaveVideo","pos":[1600,5320],"size":[570,150],"flags":{},"order":33,"mode":0,"inputs":[{"localized_name":"视频","name":"video","type":"VIDEO","link":299},{"localized_name":"文件名前缀","name":"filename_prefix","type":"STRING","widget":{"name":"filename_prefix"},"link":null},{"localized_name":"格式","name":"format","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"format"},"link":null},{"localized_name":"编解码器","name":"format.codec","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"format.codec"},"link":null},{"localized_name":"编码器","name":"codec","shape":7,"type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"codec"},"link":null}],"outputs":[{"localized_name":"video","name":"video","type":"VIDEO","links":null}],"title":"⑫ 保存白模视频","properties":{"cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":["video/SAM3D_gray","auto","auto","auto"],"widgets_values_named":{"filename_prefix":"video/SAM3D_gray","format":"auto","format.codec":"auto","codec":"auto"}},{"id":85,"type":"LoadVideo","pos":[-3530,5600],"size":[590,860],"flags":{},"order":3,"mode":0,"inputs":[{"localized_name":"文件","name":"file","type":"COMBO","widget":{"name":"file"},"link":null},{"localized_name":"选择要上传的文件","name":"upload","type":"IMAGEUPLOAD","widget":{"name":"upload"},"link":null}],"outputs":[{"localized_name":"视频","name":"VIDEO","type":"VIDEO","links":[267]}],"title":"① 加载视频","properties":{"Node name for S&R":"LoadVideo","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":["T2_S03_group.mp4","image"],"widgets_values_named":{"file":"T2_S03_group.mp4","upload":"image"}},{"id":125,"type":"Video Slice","pos":[-2840,5640],"size":[270,142],"flags":{},"order":17,"mode":0,"inputs":[{"localized_name":"视频","name":"video","type":"VIDEO","link":267},{"localized_name":"起始时间","name":"start_time","type":"FLOAT","widget":{"name":"start_time"},"link":null},{"localized_name":"时长","name":"duration","type":"FLOAT","widget":{"name":"duration"},"link":null},{"localized_name":"严格时长","name":"strict_duration","type":"BOOLEAN","widget":{"name":"strict_duration"},"link":null}],"outputs":[{"localized_name":"视频","name":"VIDEO","type":"VIDEO","links":[268]}],"title":"② 截取片段","properties":{"Node name for S&R":"Video Slice","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[0,5,false],"widgets_values_named":{"start_time":0,"duration":5,"strict_duration":false},"color":"#322","bgcolor":"#533"},{"id":86,"type":"GetVideoComponents","pos":[-2520,5640],"size":[230,138],"flags":{},"order":18,"mode":0,"inputs":[{"localized_name":"视频","name":"video","type":"VIDEO","link":268}],"outputs":[{"localized_name":"图像","name":"images","type":"IMAGE","links":[304,305,306,307,308,313]},{"localized_name":"音频","name":"audio","type":"AUDIO","links":null},{"localized_name":"帧率","name":"fps","type":"FLOAT","links":[300,315]},{"localized_name":"bit_depth","name":"bit_depth","type":"COMBO","links":null},{"localized_name":"color_space","name":"color_space","type":"COMBO","links":null}],"title":"③ 拆成逐帧","properties":{"Node name for S&R":"GetVideoComponents","cnr_id":"comfy-core","ver":"0.33.0"}},{"id":111,"type":"UNETLoader","pos":[-2180,5200],"size":[510,110],"flags":{},"order":4,"mode":0,"inputs":[{"localized_name":"UNet名称","name":"unet_name","type":"COMBO","widget":{"name":"unet_name"},"link":null},{"localized_name":"数据类型","name":"weight_dtype","type":"COMBO","widget":{"name":"weight_dtype"},"link":null}],"outputs":[{"localized_name":"模型","name":"MODEL","type":"MODEL","links":[232]}],"title":"加载 RT-DETR 人体检测模型","properties":{"Node name for S&R":"UNETLoader","cnr_id":"comfy-core","ver":"0.33.0","models":[{"name":"rt_detr_v4-x-hgnet_fp32.safetensors","url":"https://huggingface.co/Comfy-Org/SDPose/resolve/main/diffusion_models/rt_detr_v4-x-hgnet_fp32.safetensors","directory":"diffusion_models"}]},"widgets_values":["rt_detr_v4-x-hgnet_fp32.safetensors","default"],"widgets_values_named":{"unet_name":"rt_detr_v4-x-hgnet_fp32.safetensors","weight_dtype":"default"},"color":"#223","bgcolor":"#335"},{"id":131,"type":"SAM3DBody_Render","pos":[810,5310],"size":[370,294],"flags":{},"order":29,"mode":0,"inputs":[{"localized_name":"pose_data","name":"pose_data","type":"MHR_POSE_DATA,KIMODO_POSE_DATA","link":319},{"localized_name":"背景","name":"background","shape":7,"type":"IMAGE","link":311},{"localized_name":"相机信息","name":"camera_info","shape":7,"type":"LOAD3D_CAMERA","link":null},{"localized_name":"宽度","name":"width","type":"INT","widget":{"name":"width"},"link":null},{"localized_name":"高度","name":"height","type":"INT","widget":{"name":"height"},"link":null},{"localized_name":"渲染风格","name":"render_style","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"render_style"},"link":null},{"localized_name":"着色器","name":"render_style.shader","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"render_style.shader"},"link":null},{"localized_name":"不透明度","name":"render_style.opacity","type":"FLOAT","widget":{"name":"render_style.opacity"},"link":null},{"localized_name":"人物调色板衰减","name":"render_style.person_palette_falloff","type":"FLOAT","widget":{"name":"render_style.person_palette_falloff"},"link":null},{"localized_name":"区域","name":"render_style.region","type":"COMBO","widget":{"name":"render_style.region"},"link":null}],"outputs":[{"localized_name":"图像","name":"image","type":"IMAGE","links":[298]}],"title":"⑪ 白模渲染（灰底）","properties":{"Node name for S&R":"SAM3DBody_Render","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[0,0,"mesh","default",1,1,"full_body"],"widgets_values_named":{"width":0,"height":0,"render_style":"mesh","render_style.shader":"default","render_style.opacity":1,"render_style.person_palette_falloff":1,"render_style.region":"full_body"},"color":"#322","bgcolor":"#533"},{"id":143,"type":"Save3DAdvanced","pos":[1600,6150],"size":[400,550],"flags":{},"order":28,"mode":0,"inputs":[{"localized_name":"model_3d","name":"model_3d","type":"FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D","link":310},{"localized_name":"model_3d_info","name":"model_3d_info","shape":7,"type":"LOAD3D_MODEL_INFO","link":null},{"localized_name":"camera_info","name":"camera_info","shape":7,"type":"LOAD3D_CAMERA","link":null},{"localized_name":"filename_prefix","name":"filename_prefix","type":"STRING","widget":{"name":"filename_prefix"},"link":null},{"localized_name":"viewport_state","name":"viewport_state","type":"LOAD_3D","widget":{"name":"viewport_state"},"link":null},{"localized_name":"width","name":"width","type":"INT","widget":{"name":"width"},"link":null},{"localized_name":"height","name":"height","type":"INT","widget":{"name":"height"},"link":null}],"outputs":[{"localized_name":"model_3d","name":"model_3d","type":"FILE_3D","links":null},{"localized_name":"model_3d_info","name":"model_3d_info","type":"LOAD3D_MODEL_INFO","links":null},{"localized_name":"camera_info","name":"camera_info","type":"LOAD3D_CAMERA","links":null},{"localized_name":"width","name":"width","type":"INT","links":null},{"localized_name":"height","name":"height","type":"INT","links":null}],"title":"⑬ 保存 GLB","properties":{},"widgets_values":["3d/ComfyUI","",1024,1024],"widgets_values_named":{"filename_prefix":"3d/ComfyUI","viewport_state":"","width":1024,"height":1024}},{"id":144,"type":"EmptyImage","pos":[430,5570],"size":[300,130],"flags":{},"order":5,"mode":0,"inputs":[{"localized_name":"宽度","name":"width","type":"INT","widget":{"name":"width"},"link":null},{"localized_name":"高度","name":"height","type":"INT","widget":{"name":"height"},"link":null},{"localized_name":"批量大小","name":"batch_size","type":"INT","widget":{"name":"batch_size"},"link":null},{"localized_name":"颜色","name":"color","type":"INT","widget":{"name":"color"},"link":null}],"outputs":[{"localized_name":"图像","name":"IMAGE","type":"IMAGE","links":[311]}],"title":"⑩ 灰底 0.78（白模背景）","properties":{"Node name for S&R":"EmptyImage"},"widgets_values":[64,64,1,13092807],"widgets_values_named":{"width":64,"height":64,"batch_size":1,"color":13092807}},{"id":145,"type":"SAM3DBody_Render","pos":[810,5730],"size":[370,294],"flags":{},"order":30,"mode":0,"inputs":[{"localized_name":"pose_data","name":"pose_data","type":"MHR_POSE_DATA,KIMODO_POSE_DATA","link":320},{"localized_name":"背景","name":"background","shape":7,"type":"IMAGE","link":313},{"localized_name":"相机信息","name":"camera_info","shape":7,"type":"LOAD3D_CAMERA","link":null},{"localized_name":"宽度","name":"width","type":"INT","widget":{"name":"width"},"link":null},{"localized_name":"高度","name":"height","type":"INT","widget":{"name":"height"},"link":null},{"localized_name":"渲染风格","name":"render_style","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"render_style"},"link":null},{"localized_name":"着色器","name":"render_style.shader","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"render_style.shader"},"link":null},{"localized_name":"不透明度","name":"render_style.opacity","type":"FLOAT","widget":{"name":"render_style.opacity"},"link":null},{"localized_name":"人物调色板衰减","name":"render_style.person_palette_falloff","type":"FLOAT","widget":{"name":"render_style.person_palette_falloff"},"link":null},{"localized_name":"区域","name":"render_style.region","type":"COMBO","widget":{"name":"render_style.region"},"link":null}],"outputs":[{"localized_name":"图像","name":"image","type":"IMAGE","links":[314]}],"title":"⑪ 核对渲染（半透明叠原片）","properties":{"Node name for S&R":"SAM3DBody_Render","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[0,0,"mesh","default",0.7,1,"full_body"],"widgets_values_named":{"width":0,"height":0,"render_style":"mesh","render_style.shader":"default","render_style.opacity":0.7,"render_style.person_palette_falloff":1,"render_style.region":"full_body"},"color":"#322","bgcolor":"#533"},{"id":146,"type":"CreateVideo","pos":[1230,5740],"size":[270,162],"flags":{},"order":32,"mode":0,"inputs":[{"localized_name":"图像","name":"images","type":"IMAGE","link":314},{"localized_name":"音频","name":"audio","shape":7,"type":"AUDIO","link":null},{"localized_name":"帧率","name":"fps","type":"FLOAT","widget":{"name":"fps"},"link":315},{"localized_name":"bit_depth","name":"bit_depth","shape":7,"type":"COMBO","widget":{"name":"bit_depth"},"link":null},{"localized_name":"color_space","name":"color_space","shape":7,"type":"COMBO","widget":{"name":"color_space"},"link":null},{"localized_name":"codec","name":"codec","shape":7,"type":"COMBO","widget":{"name":"codec"},"link":null}],"outputs":[{"localized_name":"视频","name":"VIDEO","type":"VIDEO","links":[316]}],"title":"合成视频（核对）","properties":{"Node name for S&R":"CreateVideo","cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":[30,8,"sRGB","none"],"widgets_values_named":{"fps":30,"bit_depth":8,"color_space":"sRGB","codec":"none"}},{"id":147,"type":"SaveVideo","pos":[1600,5740],"size":[570,150],"flags":{},"order":34,"mode":0,"inputs":[{"localized_name":"视频","name":"video","type":"VIDEO","link":316},{"localized_name":"文件名前缀","name":"filename_prefix","type":"STRING","widget":{"name":"filename_prefix"},"link":null},{"localized_name":"格式","name":"format","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"format"},"link":null},{"localized_name":"编解码器","name":"format.codec","type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"format.codec"},"link":null},{"localized_name":"编码器","name":"codec","shape":7,"type":"COMFY_DYNAMICCOMBO_V3","widget":{"name":"codec"},"link":null}],"outputs":[{"localized_name":"video","name":"video","type":"VIDEO","links":null}],"title":"⑫ 保存核对视频","properties":{"cnr_id":"comfy-core","ver":"0.33.0"},"widgets_values":["video/SAM3D_overlay","auto","auto","auto"],"widgets_values_named":{"filename_prefix":"video/SAM3D_overlay","format":"auto","format.codec":"auto","codec":"auto"}},{"id":148,"type":"HypitSAM3DBodyDedupe","pos":[330,6000],"size":[330,160],"flags":{},"order":27,"mode":0,"inputs":[{"localized_name":"mhr_pose_data","name":"mhr_pose_data","type":"MHR_POSE_DATA","link":317},{"localized_name":"overlap_iou","name":"overlap_iou","type":"FLOAT","widget":{"name":"overlap_iou"},"link":null},{"localized_name":"min_detection_iou","name":"min_detection_iou","type":"FLOAT","widget":{"name":"min_detection_iou"},"link":null},{"localized_name":"hold_frames","name":"hold_frames","type":"INT","widget":{"name":"hold_frames"},"link":null},{"localized_name":"bboxes","name":"bboxes","shape":7,"type":"BOUNDING_BOX","widget":{"name":"bboxes"},"link":318}],"outputs":[{"localized_name":"mhr_pose_data","name":"mhr_pose_data","type":"MHR_POSE_DATA","links":[319,320]}],"title":"⑨ 去重影（同一人多个人偶只留一个）","properties":{"Node name for S&R":"HypitSAM3DBodyDedupe"},"widgets_values":[0.45,0.3,4,4,0,512,512,512],"widgets_values_named":{"overlap_iou":0.45,"min_detection_iou":0.3,"hold_frames":4,"bboxes":4,"x":0,"y":512,"width":512,"height":512}},{"id":149,"type":"MarkdownNote","pos":[-4150,4300],"size":[560,1600],"flags":{},"order":6,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["# SAM3D 白膜 · 使用说明\n\n**用途**：把一段真人视频变成灰色白模人偶视频，保留站位、动作和运镜；同时导出能在 Blender 里编辑的 3D 动画文件（GLB）。\n\n## 怎么用（4 步）\n1. 把视频放进 `ComfyUI/input` 文件夹。\n2. 在 **① 加载视频** 里选这个视频；视频超过 5 秒，要改 **② 截取片段** 的 duration。\n3. 点右上角 **运行**。\n4. 去 `ComfyUI/output` 取结果：\n   - `video/SAM3D_gray_*.mp4`：**白模视频**（交给 Seedance 等模型做参考）\n   - `video/SAM3D_overlay_*.mp4`：**核对视频**（白模半透明叠在原片上，用来检查人偶对不对位）\n   - `3d/*.glb`：**3D 动画**，可以导入 Blender 修改\n\n## 耗时（RTX 5090）\n2 秒的群戏约 5 分钟；单人特写约半分钟。一次最好不超过 10 秒。\n\n## 看到问题怎么调\n| 现象 | 去哪改 |\n|---|---|\n| 一个人身上叠了好几个人偶（重影） | ⑨ 去重影：min_detection_iou 调高，比如 0.4 |\n| 人偶留在原地不动（残影） | ⑨ 去重影：min_detection_iou 调高；hold_frames 调小 |\n| 动作模糊时人偶消失或闪烁 | ⑨ 去重影：hold_frames 调大；或 ④ threshold 调低 |\n| 有人没被做成人偶（漏人） | ⑤ SAM3 追踪：detection_threshold 调低，比如 0.4 |\n| 人偶抖 | ⑧ 时间平滑：window 调大，比如 11 |\n| 人偶大小或位置和原片对不上 | 看核对视频；⑥ MoGe 是否接上 |\n\n## 本工作流和官方模板的区别\n- 加了 ⑩ 灰底，输出纯白模（模板默认是叠在原片上）\n- ⑤ 追踪人数不设上限（模板默认最多 4 人）\n- 加了 ⑨ 去重影（自定义节点 `hypit_sam3d_dedupe.py`）\n- 跳过了面部表情（白模不需要脸）\n- GLB 改成真骨骼格式，并保留每个人在画面里的位置\n\n## 用到的模型（都在 ComfyUI/models 下）\n- checkpoints/sam3.1_multiplex_fp16\n- detection/sam_3d_body_dinov3_bf16\n- geometry_estimation/moge_2_vitl_normal_fp16\n- diffusion_models/rt_detr_v4-x-hgnet_fp32"],"widgets_values_named":{"text":"# SAM3D 白膜 · 使用说明\n\n**用途**：把一段真人视频变成灰色白模人偶视频，保留站位、动作和运镜；同时导出能在 Blender 里编辑的 3D 动画文件（GLB）。\n\n## 怎么用（4 步）\n1. 把视频放进 `ComfyUI/input` 文件夹。\n2. 在 **① 加载视频** 里选这个视频；视频超过 5 秒，要改 **② 截取片段** 的 duration。\n3. 点右上角 **运行**。\n4. 去 `ComfyUI/output` 取结果：\n   - `video/SAM3D_gray_*.mp4`：**白模视频**（交给 Seedance 等模型做参考）\n   - `video/SAM3D_overlay_*.mp4`：**核对视频**（白模半透明叠在原片上，用来检查人偶对不对位）\n   - `3d/*.glb`：**3D 动画**，可以导入 Blender 修改\n\n## 耗时（RTX 5090）\n2 秒的群戏约 5 分钟；单人特写约半分钟。一次最好不超过 10 秒。\n\n## 看到问题怎么调\n| 现象 | 去哪改 |\n|---|---|\n| 一个人身上叠了好几个人偶（重影） | ⑨ 去重影：min_detection_iou 调高，比如 0.4 |\n| 人偶留在原地不动（残影） | ⑨ 去重影：min_detection_iou 调高；hold_frames 调小 |\n| 动作模糊时人偶消失或闪烁 | ⑨ 去重影：hold_frames 调大；或 ④ threshold 调低 |\n| 有人没被做成人偶（漏人） | ⑤ SAM3 追踪：detection_threshold 调低，比如 0.4 |\n| 人偶抖 | ⑧ 时间平滑：window 调大，比如 11 |\n| 人偶大小或位置和原片对不上 | 看核对视频；⑥ MoGe 是否接上 |\n\n## 本工作流和官方模板的区别\n- 加了 ⑩ 灰底，输出纯白模（模板默认是叠在原片上）\n- ⑤ 追踪人数不设上限（模板默认最多 4 人）\n- 加了 ⑨ 去重影（自定义节点 `hypit_sam3d_dedupe.py`）\n- 跳过了面部表情（白模不需要脸）\n- GLB 改成真骨骼格式，并保留每个人在画面里的位置\n\n## 用到的模型（都在 ComfyUI/models 下）\n- checkpoints/sam3.1_multiplex_fp16\n- detection/sam_3d_body_dinov3_bf16\n- geometry_estimation/moge_2_vitl_normal_fp16\n- diffusion_models/rt_detr_v4-x-hgnet_fp32"},"color":"#432","bgcolor":"#653"},{"id":150,"type":"MarkdownNote","pos":[-3530,4300],"size":[1270,780],"flags":{},"order":7,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["## ①②③ 视频输入\n**① 加载视频**\n- **file**：选 input 文件夹里的视频。点下面的「上传」也能直接传。\n\n**② 截取片段**（只处理视频的一段）\n- **start_time**：从第几秒开始，0 = 从头。\n- **duration**：截多长，单位秒。**默认 5 秒，视频更长时要改**；填 0 = 一直到结尾。\n- **strict_duration**：视频不够长时是否报错，一般关着。\n\n**③ 拆成逐帧**：把视频拆成一帧一帧的图片，再取出帧率。后面所有节点都用它，**不用改**。\n\n> 建议一次只处理一个镜头（不跨剪辑切点）、不超过 10 秒；太长会很慢，显存也可能不够。"],"widgets_values_named":{"text":"## ①②③ 视频输入\n**① 加载视频**\n- **file**：选 input 文件夹里的视频。点下面的「上传」也能直接传。\n\n**② 截取片段**（只处理视频的一段）\n- **start_time**：从第几秒开始，0 = 从头。\n- **duration**：截多长，单位秒。**默认 5 秒，视频更长时要改**；填 0 = 一直到结尾。\n- **strict_duration**：视频不够长时是否报错，一般关着。\n\n**③ 拆成逐帧**：把视频拆成一帧一帧的图片，再取出帧率。后面所有节点都用它，**不用改**。\n\n> 建议一次只处理一个镜头（不跨剪辑切点）、不超过 10 秒；太长会很慢，显存也可能不够。"},"color":"#432","bgcolor":"#653"},{"id":151,"type":"MarkdownNote","pos":[-2190,4300],"size":[400,780],"flags":{},"order":8,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["## ④ RT-DETR 人体框\n逐帧找出画面里每个真人，画一个框。**用途**：给 ⑨ 去重影判断哪个人偶对应真人。\n\n- **threshold**：置信度门槛，默认 0.5。调低能找到更多人（包括模糊的人），但也更容易框错。\n- **class_name**：要找的类别，保持 **person**。\n- **max_detections**：每帧最多找多少个，100 足够。\n\n上面的「加载 RT-DETR 模型」**不用改**。"],"widgets_values_named":{"text":"## ④ RT-DETR 人体框\n逐帧找出画面里每个真人，画一个框。**用途**：给 ⑨ 去重影判断哪个人偶对应真人。\n\n- **threshold**：置信度门槛，默认 0.5。调低能找到更多人（包括模糊的人），但也更容易框错。\n- **class_name**：要找的类别，保持 **person**。\n- **max_detections**：每帧最多找多少个，100 足够。\n\n上面的「加载 RT-DETR 模型」**不用改**。"},"color":"#432","bgcolor":"#653"},{"id":152,"type":"MarkdownNote","pos":[-1780,4300],"size":[410,780],"flags":{},"order":9,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["## ⑤ SAM3 视频追踪\n给画面里的每个人分配编号，并一帧一帧跟住他们。\n\n- **要追踪的东西**（文本框）：英文写 **person**，表示所有人。\n- **detection_threshold**：认定是人的门槛，默认 0.5。**漏人就调低**（0.4），**把背景误认成人就调高**（0.6）。\n- **max_objects**：最多追踪几个人。**0 = 不限（上限 64）**。单人镜头可以填 1，速度更快，也不会出现多余的人偶。\n- **detect_interval**：隔几帧重新找一次新出现的人。1 = 每帧都找；调大（比如 4）重影会少一些，但中途入画的人要晚几帧才出现。"],"widgets_values_named":{"text":"## ⑤ SAM3 视频追踪\n给画面里的每个人分配编号，并一帧一帧跟住他们。\n\n- **要追踪的东西**（文本框）：英文写 **person**，表示所有人。\n- **detection_threshold**：认定是人的门槛，默认 0.5。**漏人就调低**（0.4），**把背景误认成人就调高**（0.6）。\n- **max_objects**：最多追踪几个人。**0 = 不限（上限 64）**。单人镜头可以填 1，速度更快，也不会出现多余的人偶。\n- **detect_interval**：隔几帧重新找一次新出现的人。1 = 每帧都找；调大（比如 4）重影会少一些，但中途入画的人要晚几帧才出现。"},"color":"#432","bgcolor":"#653"},{"id":153,"type":"MarkdownNote","pos":[-1360,4300],"size":[400,780],"flags":{},"order":10,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["## ⑥ MoGe 镜头视场角\n估算原片镜头「拍得多广」（视场角），让人偶的大小和透视与原片对上。\n\n**⑥ MoGe 估算画面几何**\n- **resolution_level**：0–9，越大越精细越慢，默认 9。\n- **fov_x_degrees**：已知镜头水平视场角就填上；0 = 自动估。\n- **batch_size**：一次算几帧；显存不够就调小。\n- 其余保持默认。\n\n**⑥ 换算成镜头视场角**：axis 选 vertical、unit 选 degrees，**不用改**。\n\n> 不接 MoGe 也能跑，只是会按约 53° 的默认视场角算，人偶可能偏大或偏小。"],"widgets_values_named":{"text":"## ⑥ MoGe 镜头视场角\n估算原片镜头「拍得多广」（视场角），让人偶的大小和透视与原片对上。\n\n**⑥ MoGe 估算画面几何**\n- **resolution_level**：0–9，越大越精细越慢，默认 9。\n- **fov_x_degrees**：已知镜头水平视场角就填上；0 = 自动估。\n- **batch_size**：一次算几帧；显存不够就调小。\n- 其余保持默认。\n\n**⑥ 换算成镜头视场角**：axis 选 vertical、unit 选 degrees，**不用改**。\n\n> 不接 MoGe 也能跑，只是会按约 53° 的默认视场角算，人偶可能偏大或偏小。"},"color":"#432","bgcolor":"#653"},{"id":154,"type":"MarkdownNote","pos":[-770,4300],"size":[470,780],"flags":{},"order":11,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["## ⑦ SAM 3D Body：重建 3D 人体\n对每一帧里的每个人，估出一个 3D 人体（身形 + 姿势 + 在镜头里的位置）。这是整条流程的核心。\n\n- **run_hand_refinement**：手部细化。开 = 手指更准，速度更慢；白模一般可以关掉提速。\n- **fov**：镜头视场角，已经由 ⑥ 接入，**不用改**。\n- **batch_size**：一次处理多少个人体，默认 64；显存不够（报 out of memory）就调小，比如 16。\n\n「加载 SAM 3D Body 模型」**不用改**。\n\n> 它的输入优先用 ⑤ 的追踪结果；⑤ 没接时用 ④ 的框；都没有就把整张画面当成一个人。"],"widgets_values_named":{"text":"## ⑦ SAM 3D Body：重建 3D 人体\n对每一帧里的每个人，估出一个 3D 人体（身形 + 姿势 + 在镜头里的位置）。这是整条流程的核心。\n\n- **run_hand_refinement**：手部细化。开 = 手指更准，速度更慢；白模一般可以关掉提速。\n- **fov**：镜头视场角，已经由 ⑥ 接入，**不用改**。\n- **batch_size**：一次处理多少个人体，默认 64；显存不够（报 out of memory）就调小，比如 16。\n\n「加载 SAM 3D Body 模型」**不用改**。\n\n> 它的输入优先用 ⑤ 的追踪结果；⑤ 没接时用 ④ 的框；都没有就把整张画面当成一个人。"},"color":"#432","bgcolor":"#653"},{"id":155,"type":"MarkdownNote","pos":[-290,4300],"size":[470,780],"flags":{},"order":12,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["## ⑧ 时间平滑（去抖动）\n逐帧估出来的人偶会抖，这一步把前后几帧平均一下。\n\n- **strength**：平滑强度，0 = 不平滑，1 = 最平滑。\n- **method**：gaussian = 普通平均，最稳；savgol = 能保留出拳、甩头这类尖锐动作。**打戏建议 savgol**。\n- **window**：参考前后多少帧，奇数，默认 7。调大更稳，但动作会发软、滞后。\n- **rotation_threshold_degrees**：人转身快于每帧这么多度时就不平滑，避免把快速旋转抹掉。默认 15。\n\n（灰色的「面部表情」节点已跳过：白模不需要脸。要表情时右键这个节点，取消「绕过」。）"],"widgets_values_named":{"text":"## ⑧ 时间平滑（去抖动）\n逐帧估出来的人偶会抖，这一步把前后几帧平均一下。\n\n- **strength**：平滑强度，0 = 不平滑，1 = 最平滑。\n- **method**：gaussian = 普通平均，最稳；savgol = 能保留出拳、甩头这类尖锐动作。**打戏建议 savgol**。\n- **window**：参考前后多少帧，奇数，默认 7。调大更稳，但动作会发软、滞后。\n- **rotation_threshold_degrees**：人转身快于每帧这么多度时就不平滑，避免把快速旋转抹掉。默认 15。\n\n（灰色的「面部表情」节点已跳过：白模不需要脸。要表情时右键这个节点，取消「绕过」。）"},"color":"#432","bgcolor":"#653"},{"id":156,"type":"MarkdownNote","pos":[190,4300],"size":[470,780],"flags":{},"order":13,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["## ⑨ 去重影（自定义节点）\n**问题**：动作快的时候，SAM3 会把同一个人追成好几条轨迹（实测 2 秒群戏平均每帧 61 个人偶，实际只有约 7 人），渲染出来就是重影；跟丢后留在原地的旧轨迹会变成残影。\n\n**做法**：\n1. 每一帧里，④ 找到的每个真人框只认领**一个**最贴合的人偶，叠在同一个人身上的其余人偶不要。\n2. 动作模糊时 ④ 偶尔会漏人：如果这条轨迹前后几帧都被认领过，就把这一帧补回来，人偶不会闪。\n3. 跟丢后留下的残影，往后不会再被认领，所以会被去掉。\n\n- **min_detection_iou**：人偶的框和真人框至少重叠这么多，才算被认领。默认 0.3。**还有重影或残影就调高**（0.4）；**漏人就调低**（0.2）。\n- **hold_frames**：漏检时，前后各看这么多帧来判断要不要补回。默认 4。**人偶闪烁就调大**。\n- **overlap_iou**：补回的人偶和已保留的人偶重叠超过这个比例，就不补（防止把重影补回来）。默认 0.45，一般不用改。\n\n> 只影响渲染出来的视频。GLB 用的是去重前的数据，这样每个人的编号前后一致。"],"widgets_values_named":{"text":"## ⑨ 去重影（自定义节点）\n**问题**：动作快的时候，SAM3 会把同一个人追成好几条轨迹（实测 2 秒群戏平均每帧 61 个人偶，实际只有约 7 人），渲染出来就是重影；跟丢后留在原地的旧轨迹会变成残影。\n\n**做法**：\n1. 每一帧里，④ 找到的每个真人框只认领**一个**最贴合的人偶，叠在同一个人身上的其余人偶不要。\n2. 动作模糊时 ④ 偶尔会漏人：如果这条轨迹前后几帧都被认领过，就把这一帧补回来，人偶不会闪。\n3. 跟丢后留下的残影，往后不会再被认领，所以会被去掉。\n\n- **min_detection_iou**：人偶的框和真人框至少重叠这么多，才算被认领。默认 0.3。**还有重影或残影就调高**（0.4）；**漏人就调低**（0.2）。\n- **hold_frames**：漏检时，前后各看这么多帧来判断要不要补回。默认 4。**人偶闪烁就调大**。\n- **overlap_iou**：补回的人偶和已保留的人偶重叠超过这个比例，就不补（防止把重影补回来）。默认 0.45，一般不用改。\n\n> 只影响渲染出来的视频。GLB 用的是去重前的数据，这样每个人的编号前后一致。"},"color":"#432","bgcolor":"#653"},{"id":157,"type":"MarkdownNote","pos":[800,4300],"size":[760,780],"flags":{},"order":14,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["## ⑩ 灰底 + ⑪ 渲染\n**⑩ 灰底 0.78**：一张纯灰小图，渲染时会自动放大到视频尺寸、复用到每一帧。\n- **color**：颜色，十进制。13092807 = RGB(199,199,199) = 即梦白模规格的 0.78 灰。换颜色就把 0xRRGGBB 换算成十进制。\n- width、height、batch_size **不用改**。\n\n**⑪ 渲染**（共两个：「白模」接灰底，「核对」接原片）\n- **width / height**：输出尺寸，0 = 跟原片一样。\n- **render_style**：mesh = 人体网格（白模用这个）；silhouette = 纯黑白剪影；openpose_2d / 3d = 骨架；scail = 胶囊人。\n- **shader**：default = 灰色人偶；normals = 彩色法线图；depth = 深度灰度图；rainbow 系列是彩色调试用的。\n- **opacity**：人偶不透明度。白模用 1；核对用 0.7，能透出原片。\n- **person_palette_falloff**：1 = 所有人同一种灰；小于 1 时第 2、3 个人会越来越偏白。\n- **region**：full_body = 全身；hands_only = 只渲手（调试用）。"],"widgets_values_named":{"text":"## ⑩ 灰底 + ⑪ 渲染\n**⑩ 灰底 0.78**：一张纯灰小图，渲染时会自动放大到视频尺寸、复用到每一帧。\n- **color**：颜色，十进制。13092807 = RGB(199,199,199) = 即梦白模规格的 0.78 灰。换颜色就把 0xRRGGBB 换算成十进制。\n- width、height、batch_size **不用改**。\n\n**⑪ 渲染**（共两个：「白模」接灰底，「核对」接原片）\n- **width / height**：输出尺寸，0 = 跟原片一样。\n- **render_style**：mesh = 人体网格（白模用这个）；silhouette = 纯黑白剪影；openpose_2d / 3d = 骨架；scail = 胶囊人。\n- **shader**：default = 灰色人偶；normals = 彩色法线图；depth = 深度灰度图；rainbow 系列是彩色调试用的。\n- **opacity**：人偶不透明度。白模用 1；核对用 0.7，能透出原片。\n- **person_palette_falloff**：1 = 所有人同一种灰；小于 1 时第 2、3 个人会越来越偏白。\n- **region**：full_body = 全身；hands_only = 只渲手（调试用）。"},"color":"#432","bgcolor":"#653"},{"id":158,"type":"MarkdownNote","pos":[1600,4300],"size":[570,780],"flags":{},"order":15,"mode":0,"inputs":[],"outputs":[],"title":"说明","properties":{},"widgets_values":["## ⑫ 保存视频 + ⑬ 导出 GLB\n**合成视频 / ⑫ 保存**\n- 帧率自动跟原片一致。\n- **filename_prefix**：保存在 output 下的路径和文件名前缀，例如 video/SAM3D_gray。\n- format、codec 保持 auto（mp4 / h264）。\n\n**⑬ 生成 3D 动画文件**\n- **format**：glb（推荐）或 bvh（只有骨架动作）。\n- **mesh_style**：**body_mesh = 带骨骼的真人体网格，能在 Blender 里改动作（推荐）**；bones_only = 只看骨架；openpose = 简笔骨架；scail = 胶囊人。\n- **fps**：动画帧率，**要改成和原片一致**（ref105 的片段是 30；默认 24）。\n- **camera_translation**：**absolute = 保留每个人在镜头里的真实位置（多人站位必须选它）**；off = 都放在原点；centered = 相对第一帧。\n- **track_index**：-1 = 导出所有人；填数字 = 只导出那一个人。\n\n**⑬ 保存 GLB**：filename_prefix 是保存路径，例如 3d/ComfyUI。"],"widgets_values_named":{"text":"## ⑫ 保存视频 + ⑬ 导出 GLB\n**合成视频 / ⑫ 保存**\n- 帧率自动跟原片一致。\n- **filename_prefix**：保存在 output 下的路径和文件名前缀，例如 video/SAM3D_gray。\n- format、codec 保持 auto（mp4 / h264）。\n\n**⑬ 生成 3D 动画文件**\n- **format**：glb（推荐）或 bvh（只有骨架动作）。\n- **mesh_style**：**body_mesh = 带骨骼的真人体网格，能在 Blender 里改动作（推荐）**；bones_only = 只看骨架；openpose = 简笔骨架；scail = 胶囊人。\n- **fps**：动画帧率，**要改成和原片一致**（ref105 的片段是 30；默认 24）。\n- **camera_translation**：**absolute = 保留每个人在镜头里的真实位置（多人站位必须选它）**；off = 都放在原点；centered = 相对第一帧。\n- **track_index**：-1 = 导出所有人；填数字 = 只导出那一个人。\n\n**⑬ 保存 GLB**：filename_prefix 是保存路径，例如 3d/ComfyUI。"},"color":"#432","bgcolor":"#653"}],"links":[[15,14,1,15,0,"CLIP"],[33,14,0,18,1,"MODEL"],[34,15,0,18,3,"CONDITIONING"],[232,111,0,109,0,"MODEL"],[242,115,0,114,0,"MOGE_MODEL"],[267,85,0,125,0,"VIDEO"],[268,125,0,86,0,"VIDEO"],[271,114,0,126,0,"MOGE_GEOMETRY"],[279,119,0,128,0,"SAM3D_BODY_MODEL"],[283,119,0,129,0,"SAM3D_BODY_MODEL"],[285,109,0,129,3,"BOUNDING_BOX"],[287,129,0,128,1,"MHR_POSE_DATA"],[288,128,0,130,0,"MHR_POSE_DATA"],[298,131,0,134,0,"IMAGE"],[300,86,2,134,2,"FLOAT"],[303,18,0,129,2,"SAM3_TRACK_DATA"],[304,86,0,18,0,"IMAGE"],[305,86,0,109,1,"IMAGE"],[306,86,0,114,1,"IMAGE"],[307,86,0,128,2,"IMAGE"],[308,86,0,129,1,"IMAGE"],[310,127,0,143,0,"FILE_3D"],[314,145,0,146,0,"IMAGE"],[315,86,2,146,2,"FLOAT"],[286,126,0,129,5,"FLOAT"],[290,130,0,127,0,"MHR_POSE_DATA"],[274,119,0,127,1,"SAM3D_BODY_MODEL"],[299,134,0,135,0,"VIDEO"],[319,148,0,131,0,"MHR_POSE_DATA"],[311,144,0,131,1,"IMAGE"],[320,148,0,145,0,"MHR_POSE_DATA"],[313,86,0,145,1,"IMAGE"],[316,146,0,147,0,"VIDEO"],[317,130,0,148,0,"MHR_POSE_DATA"],[318,109,0,148,4,"BOUNDING_BOX"]],"groups":[{"id":1,"title":"人体框检测（给去重用）","bounding":[-2190,5130,1230,410],"flags":{}},{"id":2,"title":"多人追踪","bounding":[-2190,5570,1230,430],"flags":{}},{"id":3,"title":"视频预处理","bounding":[-2850,5570,600,210],"color":"#3f789e","flags":{}},{"id":4,"title":"镜头视场角（让人偶与原片对齐）","bounding":[-2190,6030,1230,350],"flags":{}},{"id":6,"title":"3D 人体重建","bounding":[-770,5400,1450,810],"color":"#3f789e","flags":{}},{"id":5,"title":"面部表情（白模不需要，已跳过）","bounding":[-390,5750,680,290],"color":"#3f789e","flags":{}},{"id":7,"title":"渲染视频","bounding":[800,5240,760,760],"flags":{}},{"id":8,"title":"导出 3D 动画（GLB，给 Blender 用）","bounding":[800,6020,760,560],"flags":{}}],"config":{},"extra":{"ds":{"scale":0.1833218457608184,"offset":[562.7200765199965,-2837.5324833418053]},"frontendVersion":"1.51.9","VHS_latentpreview":false,"VHS_latentpreviewrate":0,"VHS_MetadataImage":true,"VHS_KeepIntermediate":true},"version":0.4}
+{
+ "id": "76915793-04af-4b60-a2a2-9fd3ebbdc944",
+ "revision": 0,
+ "last_node_id": 158,
+ "last_link_id": 320,
+ "nodes": [
+  {
+   "id": 15,
+   "type": "CLIPTextEncode",
+   "pos": [
+    -1740,
+    5640
+   ],
+   "size": [
+    400,
+    200
+   ],
+   "flags": {},
+   "order": 16,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "clip",
+     "name": "clip",
+     "type": "CLIP",
+     "link": 15
+    },
+    {
+     "localized_name": "文本",
+     "name": "text",
+     "type": "STRING",
+     "widget": {
+      "name": "text"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "条件",
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      34
+     ]
+    }
+   ],
+   "title": "要追踪的东西（英文）",
+   "properties": {
+    "Node name for S&R": "CLIPTextEncode",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    "person"
+   ],
+   "widgets_values_named": {
+    "text": "person"
+   }
+  },
+  {
+   "id": 18,
+   "type": "SAM3_VideoTrack",
+   "pos": [
+    -1290,
+    5640
+   ],
+   "size": [
+    280,
+    240
+   ],
+   "flags": {},
+   "order": 19,
+   "mode": 0,
+   "inputs": [
+    {
+     "label": "images",
+     "localized_name": "图像",
+     "name": "images",
+     "type": "IMAGE",
+     "link": 304
+    },
+    {
+     "label": "model",
+     "localized_name": "model",
+     "name": "model",
+     "type": "MODEL",
+     "link": 33
+    },
+    {
+     "label": "initial_mask",
+     "localized_name": "初始 mask",
+     "name": "initial_mask",
+     "shape": 7,
+     "type": "MASK",
+     "link": null
+    },
+    {
+     "label": "conditioning",
+     "localized_name": "条件",
+     "name": "conditioning",
+     "shape": 7,
+     "type": "CONDITIONING",
+     "link": 34
+    },
+    {
+     "localized_name": "检测阈值",
+     "name": "detection_threshold",
+     "type": "FLOAT",
+     "widget": {
+      "name": "detection_threshold"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "最大对象数",
+     "name": "max_objects",
+     "type": "INT",
+     "widget": {
+      "name": "max_objects"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "检测间隔",
+     "name": "detect_interval",
+     "type": "INT",
+     "widget": {
+      "name": "detect_interval"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "跟踪数据",
+     "name": "track_data",
+     "type": "SAM3_TRACK_DATA",
+     "links": [
+      303
+     ]
+    }
+   ],
+   "title": "⑤ SAM3 视频追踪（给每个人编号）",
+   "properties": {
+    "Node name for S&R": "SAM3_VideoTrack",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    0.5,
+    0,
+    1
+   ],
+   "widgets_values_named": {
+    "detection_threshold": 0.5,
+    "max_objects": 0,
+    "detect_interval": 1
+   }
+  },
+  {
+   "id": 14,
+   "type": "CheckpointLoaderSimple",
+   "pos": [
+    -2180,
+    5640
+   ],
+   "size": [
+    410,
+    150
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "Checkpoint名称",
+     "name": "ckpt_name",
+     "type": "COMBO",
+     "widget": {
+      "name": "ckpt_name"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "模型",
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      33
+     ]
+    },
+    {
+     "localized_name": "CLIP",
+     "name": "CLIP",
+     "type": "CLIP",
+     "links": [
+      15
+     ]
+    },
+    {
+     "localized_name": "VAE",
+     "name": "VAE",
+     "type": "VAE",
+     "links": null
+    }
+   ],
+   "title": "加载 SAM 3.1 追踪模型",
+   "properties": {
+    "Node name for S&R": "CheckpointLoaderSimple",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "models": [
+     {
+      "name": "sam3.1_multiplex_fp16.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/sam3.1/resolve/main/checkpoints/sam3.1_multiplex_fp16.safetensors",
+      "directory": "checkpoints"
+     }
+    ]
+   },
+   "widgets_values": [
+    "sam3.1_multiplex_fp16.safetensors"
+   ],
+   "widgets_values_named": {
+    "ckpt_name": "sam3.1_multiplex_fp16.safetensors"
+   },
+   "color": "#223",
+   "bgcolor": "#335"
+  },
+  {
+   "id": 109,
+   "type": "RTDETR_detect",
+   "pos": [
+    -1580,
+    5200
+   ],
+   "size": [
+    280,
+    162
+   ],
+   "flags": {},
+   "order": 20,
+   "mode": 0,
+   "inputs": [
+    {
+     "label": "model",
+     "localized_name": "模型",
+     "name": "model",
+     "type": "MODEL",
+     "link": 232
+    },
+    {
+     "label": "image",
+     "localized_name": "图像",
+     "name": "image",
+     "type": "IMAGE",
+     "link": 305
+    },
+    {
+     "localized_name": "阈值",
+     "name": "threshold",
+     "type": "FLOAT",
+     "widget": {
+      "name": "threshold"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "类别名称",
+     "name": "class_name",
+     "type": "COMBO",
+     "widget": {
+      "name": "class_name"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "最大检测数",
+     "name": "max_detections",
+     "type": "INT",
+     "widget": {
+      "name": "max_detections"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "边界框",
+     "name": "bboxes",
+     "type": "BOUNDING_BOX",
+     "links": [
+      285,
+      318
+     ]
+    }
+   ],
+   "title": "④ RT-DETR 逐帧找人（画框）",
+   "properties": {
+    "Node name for S&R": "RTDETR_detect",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    0.5,
+    "person",
+    100
+   ],
+   "widgets_values_named": {
+    "threshold": 0.5,
+    "class_name": "person",
+    "max_detections": 100
+   }
+  },
+  {
+   "id": 128,
+   "type": "SAM3DBody_FaceExpression",
+   "pos": [
+    -370,
+    5810
+   ],
+   "size": [
+    310,
+    220
+   ],
+   "flags": {},
+   "order": 24,
+   "mode": 4,
+   "showAdvanced": false,
+   "inputs": [
+    {
+     "localized_name": "sam3d_body_model",
+     "name": "sam3d_body_model",
+     "type": "SAM3D_BODY_MODEL",
+     "link": 279
+    },
+    {
+     "localized_name": "mhr_pose_data",
+     "name": "mhr_pose_data",
+     "type": "MHR_POSE_DATA",
+     "link": 287
+    },
+    {
+     "localized_name": "image",
+     "name": "image",
+     "type": "IMAGE",
+     "link": 307
+    },
+    {
+     "localized_name": "strength",
+     "name": "strength",
+     "type": "FLOAT",
+     "widget": {
+      "name": "strength"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "mouth_strength",
+     "name": "mouth_strength",
+     "type": "FLOAT",
+     "widget": {
+      "name": "mouth_strength"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "eye_strength",
+     "name": "eye_strength",
+     "type": "FLOAT",
+     "widget": {
+      "name": "eye_strength"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "brow_strength",
+     "name": "brow_strength",
+     "type": "FLOAT",
+     "widget": {
+      "name": "brow_strength"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "input_threshold",
+     "name": "input_threshold",
+     "type": "FLOAT",
+     "widget": {
+      "name": "input_threshold"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "blendshape_smooth_window",
+     "name": "blendshape_smooth_window",
+     "type": "INT",
+     "widget": {
+      "name": "blendshape_smooth_window"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "mhr_pose_data",
+     "name": "mhr_pose_data",
+     "type": "MHR_POSE_DATA",
+     "links": [
+      288
+     ]
+    }
+   ],
+   "title": "（已跳过）面部表情",
+   "properties": {
+    "Node name for S&R": "SAM3DBody_FaceExpression",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    1,
+    1,
+    2,
+    2,
+    0.02,
+    7
+   ],
+   "widgets_values_named": {
+    "strength": 1,
+    "mouth_strength": 1,
+    "eye_strength": 2,
+    "brow_strength": 2,
+    "input_threshold": 0.02,
+    "blendshape_smooth_window": 7
+   }
+  },
+  {
+   "id": 129,
+   "type": "SAM3DBody_Predict",
+   "pos": [
+    -730,
+    5830
+   ],
+   "size": [
+    292.378515625,
+    198
+   ],
+   "flags": {},
+   "order": 23,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "sam3d_body_model",
+     "name": "sam3d_body_model",
+     "type": "SAM3D_BODY_MODEL",
+     "link": 283
+    },
+    {
+     "localized_name": "image",
+     "name": "image",
+     "type": "IMAGE",
+     "link": 308
+    },
+    {
+     "localized_name": "track_data",
+     "name": "track_data",
+     "shape": 7,
+     "type": "SAM3_TRACK_DATA",
+     "link": 303
+    },
+    {
+     "localized_name": "bboxes",
+     "name": "bboxes",
+     "shape": 7,
+     "type": "BOUNDING_BOX",
+     "link": 285
+    },
+    {
+     "localized_name": "run_hand_refinement",
+     "name": "run_hand_refinement",
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "run_hand_refinement"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "fov",
+     "name": "fov",
+     "type": "FLOAT",
+     "widget": {
+      "name": "fov"
+     },
+     "link": 286
+    },
+    {
+     "localized_name": "batch_size",
+     "name": "batch_size",
+     "type": "INT",
+     "widget": {
+      "name": "batch_size"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "mhr_pose_data",
+     "name": "mhr_pose_data",
+     "type": "MHR_POSE_DATA",
+     "links": [
+      287
+     ]
+    }
+   ],
+   "title": "⑦ SAM 3D Body 重建每个人的 3D 人体",
+   "properties": {
+    "Node name for S&R": "SAM3DBody_Predict",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    true,
+    0,
+    64
+   ],
+   "widgets_values_named": {
+    "run_hand_refinement": true,
+    "fov": 0,
+    "batch_size": 64
+   }
+  },
+  {
+   "id": 130,
+   "type": "SAM3DBody_Smooth",
+   "pos": [
+    330,
+    5790
+   ],
+   "size": [
+    330,
+    150
+   ],
+   "flags": {},
+   "order": 25,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "mhr_pose_data",
+     "name": "mhr_pose_data",
+     "type": "MHR_POSE_DATA",
+     "link": 288
+    },
+    {
+     "localized_name": "强度",
+     "name": "strength",
+     "type": "FLOAT",
+     "widget": {
+      "name": "strength"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "方法",
+     "name": "method",
+     "type": "COMBO",
+     "widget": {
+      "name": "method"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "窗口",
+     "name": "window",
+     "type": "INT",
+     "widget": {
+      "name": "window"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "旋转阈值（度）",
+     "name": "rotation_threshold_degrees",
+     "type": "FLOAT",
+     "widget": {
+      "name": "rotation_threshold_degrees"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "mhr_pose_data",
+     "name": "mhr_pose_data",
+     "type": "MHR_POSE_DATA",
+     "links": [
+      290,
+      317
+     ]
+    }
+   ],
+   "title": "⑧ 时间平滑（去抖动）",
+   "properties": {
+    "Node name for S&R": "SAM3DBody_Smooth",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    1,
+    "gaussian",
+    7,
+    15
+   ],
+   "widgets_values_named": {
+    "strength": 1,
+    "method": "gaussian",
+    "window": 7,
+    "rotation_threshold_degrees": 15
+   }
+  },
+  {
+   "id": 119,
+   "type": "SAM3DBody_Loader",
+   "pos": [
+    -740,
+    5510
+   ],
+   "size": [
+    510,
+    110
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "model_file",
+     "name": "model_file",
+     "type": "COMBO",
+     "widget": {
+      "name": "model_file"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "sam3d_body_model",
+     "name": "sam3d_body_model",
+     "type": "SAM3D_BODY_MODEL",
+     "links": [
+      274,
+      279,
+      283
+     ]
+    }
+   ],
+   "title": "加载 SAM 3D Body 模型",
+   "properties": {
+    "Node name for S&R": "SAM3DBody_Loader",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "models": [
+     {
+      "name": "sam_3d_body_dinov3_bf16.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/sam-3d-body/resolve/main/detection/sam_3d_body_dinov3_bf16.safetensors",
+      "directory": "detection"
+     }
+    ]
+   },
+   "widgets_values": [
+    "sam_3d_body_dinov3_bf16.safetensors"
+   ],
+   "widgets_values_named": {
+    "model_file": "sam_3d_body_dinov3_bf16.safetensors"
+   },
+   "color": "#223",
+   "bgcolor": "#335"
+  },
+  {
+   "id": 126,
+   "type": "MoGeGeometryToFOV",
+   "pos": [
+    -1380,
+    6110
+   ],
+   "size": [
+    300,
+    134
+   ],
+   "flags": {},
+   "order": 22,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "moge_geometry",
+     "name": "moge_geometry",
+     "type": "MOGE_GEOMETRY",
+     "link": 271
+    },
+    {
+     "localized_name": "轴",
+     "name": "axis",
+     "type": "COMBO",
+     "widget": {
+      "name": "axis"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "单位",
+     "name": "unit",
+     "type": "COMBO",
+     "widget": {
+      "name": "unit"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "视场",
+     "name": "fov",
+     "type": "FLOAT",
+     "links": [
+      286
+     ]
+    },
+    {
+     "localized_name": "焦距（像素）",
+     "name": "focal_pixels",
+     "type": "FLOAT",
+     "links": null
+    }
+   ],
+   "title": "⑥ 换算成镜头视场角",
+   "properties": {
+    "Node name for S&R": "MoGeGeometryToFOV",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    "vertical",
+    "degrees"
+   ],
+   "widgets_values_named": {
+    "axis": "vertical",
+    "unit": "degrees"
+   }
+  },
+  {
+   "id": 114,
+   "type": "MoGeInference",
+   "pos": [
+    -1700,
+    6110
+   ],
+   "size": [
+    270,
+    198
+   ],
+   "flags": {},
+   "order": 21,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "moge_model",
+     "name": "moge_model",
+     "type": "MOGE_MODEL",
+     "link": 242
+    },
+    {
+     "localized_name": "image",
+     "name": "image",
+     "type": "IMAGE",
+     "link": 306
+    },
+    {
+     "localized_name": "resolution_level",
+     "name": "resolution_level",
+     "type": "INT",
+     "widget": {
+      "name": "resolution_level"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "fov_x_degrees",
+     "name": "fov_x_degrees",
+     "type": "FLOAT",
+     "widget": {
+      "name": "fov_x_degrees"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "batch_size",
+     "name": "batch_size",
+     "type": "INT",
+     "widget": {
+      "name": "batch_size"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "force_projection",
+     "name": "force_projection",
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "force_projection"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "apply_mask",
+     "name": "apply_mask",
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "apply_mask"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "refine_steps",
+     "name": "refine_steps",
+     "type": "INT",
+     "widget": {
+      "name": "refine_steps"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "moge_geometry",
+     "name": "moge_geometry",
+     "type": "MOGE_GEOMETRY",
+     "links": [
+      271
+     ]
+    }
+   ],
+   "title": "⑥ MoGe 估算画面几何",
+   "properties": {
+    "Node name for S&R": "MoGeInference",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    9,
+    0,
+    4,
+    true,
+    true,
+    3
+   ],
+   "widgets_values_named": {
+    "resolution_level": 9,
+    "fov_x_degrees": 0,
+    "batch_size": 4,
+    "force_projection": true,
+    "apply_mask": true,
+    "refine_steps": 3
+   }
+  },
+  {
+   "id": 115,
+   "type": "LoadMoGeModel",
+   "pos": [
+    -2160,
+    6110
+   ],
+   "size": [
+    410,
+    110
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "model_name",
+     "name": "model_name",
+     "type": "COMBO",
+     "widget": {
+      "name": "model_name"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "MOGE模型",
+     "name": "MOGE_MODEL",
+     "type": "MOGE_MODEL",
+     "links": [
+      242
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadMoGeModel",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "models": [
+     {
+      "name": "moge_2_vitl_normal_fp16.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/MoGe/resolve/main/geometry_estimation/moge_2_vitl_normal_fp16.safetensors",
+      "directory": "geometry_estimation"
+     }
+    ]
+   },
+   "widgets_values": [
+    "moge_2_vitl_normal_fp16.safetensors"
+   ],
+   "widgets_values_named": {
+    "model_name": "moge_2_vitl_normal_fp16.safetensors"
+   },
+   "color": "#223",
+   "bgcolor": "#335"
+  },
+  {
+   "id": 127,
+   "type": "BuildPoseFile",
+   "pos": [
+    820,
+    6140
+   ],
+   "size": [
+    350,
+    246
+   ],
+   "flags": {},
+   "order": 26,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "pose_data",
+     "name": "pose_data",
+     "type": "MHR_POSE_DATA,KIMODO_POSE_DATA",
+     "link": 290
+    },
+    {
+     "localized_name": "sam3d_body_model",
+     "name": "sam3d_body_model",
+     "shape": 7,
+     "type": "SAM3D_BODY_MODEL",
+     "link": 274
+    },
+    {
+     "localized_name": "格式",
+     "name": "format",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "format"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "mesh_style",
+     "name": "format.mesh_style",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "format.mesh_style"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "bone_vis",
+     "name": "format.mesh_style.bone_vis",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "format.mesh_style.bone_vis"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "shader",
+     "name": "format.mesh_style.shader",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "format.mesh_style.shader"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "bone_smooth_window",
+     "name": "format.bone_smooth_window",
+     "type": "INT",
+     "widget": {
+      "name": "format.bone_smooth_window"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "fps",
+     "name": "fps",
+     "type": "FLOAT",
+     "widget": {
+      "name": "fps"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "camera_translation",
+     "name": "camera_translation",
+     "type": "COMBO",
+     "widget": {
+      "name": "camera_translation"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "track_index",
+     "name": "track_index",
+     "type": "INT",
+     "widget": {
+      "name": "track_index"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "model_3d",
+     "name": "model_3d",
+     "type": "FILE_3D",
+     "links": [
+      310
+     ]
+    }
+   ],
+   "title": "⑬ 生成 3D 动画文件（GLB）",
+   "properties": {
+    "Node name for S&R": "BuildPoseFile",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    "glb",
+    "body_mesh",
+    "off",
+    "default",
+    0,
+    24,
+    "absolute",
+    -1
+   ],
+   "widgets_values_named": {
+    "format": "glb",
+    "format.mesh_style": "body_mesh",
+    "format.mesh_style.bone_vis": "off",
+    "format.mesh_style.shader": "default",
+    "format.bone_smooth_window": 0,
+    "fps": 24,
+    "camera_translation": "absolute",
+    "track_index": -1
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 134,
+   "type": "CreateVideo",
+   "pos": [
+    1230,
+    5320
+   ],
+   "size": [
+    270,
+    162
+   ],
+   "flags": {},
+   "order": 31,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "图像",
+     "name": "images",
+     "type": "IMAGE",
+     "link": 298
+    },
+    {
+     "localized_name": "音频",
+     "name": "audio",
+     "shape": 7,
+     "type": "AUDIO",
+     "link": null
+    },
+    {
+     "localized_name": "帧率",
+     "name": "fps",
+     "type": "FLOAT",
+     "widget": {
+      "name": "fps"
+     },
+     "link": 300
+    },
+    {
+     "localized_name": "bit_depth",
+     "name": "bit_depth",
+     "shape": 7,
+     "type": "COMBO",
+     "widget": {
+      "name": "bit_depth"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "color_space",
+     "name": "color_space",
+     "shape": 7,
+     "type": "COMBO",
+     "widget": {
+      "name": "color_space"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "codec",
+     "name": "codec",
+     "shape": 7,
+     "type": "COMBO",
+     "widget": {
+      "name": "codec"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "视频",
+     "name": "VIDEO",
+     "type": "VIDEO",
+     "links": [
+      299
+     ]
+    }
+   ],
+   "title": "合成视频（白模）",
+   "properties": {
+    "Node name for S&R": "CreateVideo",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    30,
+    8,
+    "sRGB",
+    "none"
+   ],
+   "widgets_values_named": {
+    "fps": 30,
+    "bit_depth": 8,
+    "color_space": "sRGB",
+    "codec": "none"
+   }
+  },
+  {
+   "id": 135,
+   "type": "SaveVideo",
+   "pos": [
+    1600,
+    5320
+   ],
+   "size": [
+    570,
+    150
+   ],
+   "flags": {},
+   "order": 33,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "视频",
+     "name": "video",
+     "type": "VIDEO",
+     "link": 299
+    },
+    {
+     "localized_name": "文件名前缀",
+     "name": "filename_prefix",
+     "type": "STRING",
+     "widget": {
+      "name": "filename_prefix"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "格式",
+     "name": "format",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "format"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "编解码器",
+     "name": "format.codec",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "format.codec"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "编码器",
+     "name": "codec",
+     "shape": 7,
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "codec"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "video",
+     "name": "video",
+     "type": "VIDEO",
+     "links": null
+    }
+   ],
+   "title": "⑫ 保存白模视频",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    "video/SAM3D_gray",
+    "auto",
+    "auto",
+    "auto"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "video/SAM3D_gray",
+    "format": "auto",
+    "format.codec": "auto",
+    "codec": "auto"
+   }
+  },
+  {
+   "id": 85,
+   "type": "LoadVideo",
+   "pos": [
+    -3530,
+    5600
+   ],
+   "size": [
+    590,
+    860
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "文件",
+     "name": "file",
+     "type": "COMBO",
+     "widget": {
+      "name": "file"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "选择要上传的文件",
+     "name": "upload",
+     "type": "IMAGEUPLOAD",
+     "widget": {
+      "name": "upload"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "视频",
+     "name": "VIDEO",
+     "type": "VIDEO",
+     "links": [
+      267
+     ]
+    }
+   ],
+   "title": "① 加载视频",
+   "properties": {
+    "Node name for S&R": "LoadVideo",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    "T2_S03_group.mp4",
+    "image"
+   ],
+   "widgets_values_named": {
+    "file": "T2_S03_group.mp4",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 125,
+   "type": "Video Slice",
+   "pos": [
+    -2840,
+    5640
+   ],
+   "size": [
+    270,
+    142
+   ],
+   "flags": {},
+   "order": 17,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "视频",
+     "name": "video",
+     "type": "VIDEO",
+     "link": 267
+    },
+    {
+     "localized_name": "起始时间",
+     "name": "start_time",
+     "type": "FLOAT",
+     "widget": {
+      "name": "start_time"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "时长",
+     "name": "duration",
+     "type": "FLOAT",
+     "widget": {
+      "name": "duration"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "严格时长",
+     "name": "strict_duration",
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "strict_duration"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "视频",
+     "name": "VIDEO",
+     "type": "VIDEO",
+     "links": [
+      268
+     ]
+    }
+   ],
+   "title": "② 截取片段",
+   "properties": {
+    "Node name for S&R": "Video Slice",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    0,
+    5,
+    false
+   ],
+   "widgets_values_named": {
+    "start_time": 0,
+    "duration": 5,
+    "strict_duration": false
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 86,
+   "type": "GetVideoComponents",
+   "pos": [
+    -2520,
+    5640
+   ],
+   "size": [
+    230,
+    138
+   ],
+   "flags": {},
+   "order": 18,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "视频",
+     "name": "video",
+     "type": "VIDEO",
+     "link": 268
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "图像",
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      304,
+      305,
+      306,
+      307,
+      308,
+      313
+     ]
+    },
+    {
+     "localized_name": "音频",
+     "name": "audio",
+     "type": "AUDIO",
+     "links": null
+    },
+    {
+     "localized_name": "帧率",
+     "name": "fps",
+     "type": "FLOAT",
+     "links": [
+      300,
+      315
+     ]
+    },
+    {
+     "localized_name": "bit_depth",
+     "name": "bit_depth",
+     "type": "COMBO",
+     "links": null
+    },
+    {
+     "localized_name": "color_space",
+     "name": "color_space",
+     "type": "COMBO",
+     "links": null
+    }
+   ],
+   "title": "③ 拆成逐帧",
+   "properties": {
+    "Node name for S&R": "GetVideoComponents",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   }
+  },
+  {
+   "id": 111,
+   "type": "UNETLoader",
+   "pos": [
+    -2180,
+    5200
+   ],
+   "size": [
+    510,
+    110
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "UNet名称",
+     "name": "unet_name",
+     "type": "COMBO",
+     "widget": {
+      "name": "unet_name"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "数据类型",
+     "name": "weight_dtype",
+     "type": "COMBO",
+     "widget": {
+      "name": "weight_dtype"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "模型",
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      232
+     ]
+    }
+   ],
+   "title": "加载 RT-DETR 人体检测模型",
+   "properties": {
+    "Node name for S&R": "UNETLoader",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0",
+    "models": [
+     {
+      "name": "rt_detr_v4-x-hgnet_fp32.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/SDPose/resolve/main/diffusion_models/rt_detr_v4-x-hgnet_fp32.safetensors",
+      "directory": "diffusion_models"
+     }
+    ]
+   },
+   "widgets_values": [
+    "rt_detr_v4-x-hgnet_fp32.safetensors",
+    "default"
+   ],
+   "widgets_values_named": {
+    "unet_name": "rt_detr_v4-x-hgnet_fp32.safetensors",
+    "weight_dtype": "default"
+   },
+   "color": "#223",
+   "bgcolor": "#335"
+  },
+  {
+   "id": 131,
+   "type": "SAM3DBody_Render",
+   "pos": [
+    810,
+    5310
+   ],
+   "size": [
+    370,
+    294
+   ],
+   "flags": {},
+   "order": 29,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "pose_data",
+     "name": "pose_data",
+     "type": "MHR_POSE_DATA,KIMODO_POSE_DATA",
+     "link": 319
+    },
+    {
+     "localized_name": "背景",
+     "name": "background",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 311
+    },
+    {
+     "localized_name": "相机信息",
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": null
+    },
+    {
+     "localized_name": "宽度",
+     "name": "width",
+     "type": "INT",
+     "widget": {
+      "name": "width"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "高度",
+     "name": "height",
+     "type": "INT",
+     "widget": {
+      "name": "height"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "渲染风格",
+     "name": "render_style",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "render_style"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "着色器",
+     "name": "render_style.shader",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "render_style.shader"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "不透明度",
+     "name": "render_style.opacity",
+     "type": "FLOAT",
+     "widget": {
+      "name": "render_style.opacity"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "人物调色板衰减",
+     "name": "render_style.person_palette_falloff",
+     "type": "FLOAT",
+     "widget": {
+      "name": "render_style.person_palette_falloff"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "区域",
+     "name": "render_style.region",
+     "type": "COMBO",
+     "widget": {
+      "name": "render_style.region"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "图像",
+     "name": "image",
+     "type": "IMAGE",
+     "links": [
+      298
+     ]
+    }
+   ],
+   "title": "⑪ 白模渲染（灰底）",
+   "properties": {
+    "Node name for S&R": "SAM3DBody_Render",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    0,
+    0,
+    "mesh",
+    "default",
+    1,
+    1,
+    "full_body"
+   ],
+   "widgets_values_named": {
+    "width": 0,
+    "height": 0,
+    "render_style": "mesh",
+    "render_style.shader": "default",
+    "render_style.opacity": 1,
+    "render_style.person_palette_falloff": 1,
+    "render_style.region": "full_body"
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 143,
+   "type": "Save3DAdvanced",
+   "pos": [
+    1600,
+    6150
+   ],
+   "size": [
+    400,
+    550
+   ],
+   "flags": {},
+   "order": 28,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "model_3d",
+     "name": "model_3d",
+     "type": "FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
+     "link": 310
+    },
+    {
+     "localized_name": "model_3d_info",
+     "name": "model_3d_info",
+     "shape": 7,
+     "type": "LOAD3D_MODEL_INFO",
+     "link": null
+    },
+    {
+     "localized_name": "camera_info",
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": null
+    },
+    {
+     "localized_name": "filename_prefix",
+     "name": "filename_prefix",
+     "type": "STRING",
+     "widget": {
+      "name": "filename_prefix"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "viewport_state",
+     "name": "viewport_state",
+     "type": "LOAD_3D",
+     "widget": {
+      "name": "viewport_state"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "width",
+     "name": "width",
+     "type": "INT",
+     "widget": {
+      "name": "width"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "height",
+     "name": "height",
+     "type": "INT",
+     "widget": {
+      "name": "height"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "model_3d",
+     "name": "model_3d",
+     "type": "FILE_3D",
+     "links": null
+    },
+    {
+     "localized_name": "model_3d_info",
+     "name": "model_3d_info",
+     "type": "LOAD3D_MODEL_INFO",
+     "links": null
+    },
+    {
+     "localized_name": "camera_info",
+     "name": "camera_info",
+     "type": "LOAD3D_CAMERA",
+     "links": null
+    },
+    {
+     "localized_name": "width",
+     "name": "width",
+     "type": "INT",
+     "links": null
+    },
+    {
+     "localized_name": "height",
+     "name": "height",
+     "type": "INT",
+     "links": null
+    }
+   ],
+   "title": "⑬ 保存 GLB",
+   "properties": {},
+   "widgets_values": [
+    "3d/ComfyUI",
+    "",
+    1024,
+    1024
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "3d/ComfyUI",
+    "viewport_state": "",
+    "width": 1024,
+    "height": 1024
+   }
+  },
+  {
+   "id": 144,
+   "type": "EmptyImage",
+   "pos": [
+    430,
+    5570
+   ],
+   "size": [
+    300,
+    130
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "宽度",
+     "name": "width",
+     "type": "INT",
+     "widget": {
+      "name": "width"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "高度",
+     "name": "height",
+     "type": "INT",
+     "widget": {
+      "name": "height"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "批量大小",
+     "name": "batch_size",
+     "type": "INT",
+     "widget": {
+      "name": "batch_size"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "颜色",
+     "name": "color",
+     "type": "INT",
+     "widget": {
+      "name": "color"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "图像",
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      311
+     ]
+    }
+   ],
+   "title": "⑩ 灰底 0.78（白模背景）",
+   "properties": {
+    "Node name for S&R": "EmptyImage"
+   },
+   "widgets_values": [
+    64,
+    64,
+    1,
+    13092807
+   ],
+   "widgets_values_named": {
+    "width": 64,
+    "height": 64,
+    "batch_size": 1,
+    "color": 13092807
+   }
+  },
+  {
+   "id": 145,
+   "type": "SAM3DBody_Render",
+   "pos": [
+    810,
+    5730
+   ],
+   "size": [
+    370,
+    294
+   ],
+   "flags": {},
+   "order": 30,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "pose_data",
+     "name": "pose_data",
+     "type": "MHR_POSE_DATA,KIMODO_POSE_DATA",
+     "link": 320
+    },
+    {
+     "localized_name": "背景",
+     "name": "background",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 313
+    },
+    {
+     "localized_name": "相机信息",
+     "name": "camera_info",
+     "shape": 7,
+     "type": "LOAD3D_CAMERA",
+     "link": null
+    },
+    {
+     "localized_name": "宽度",
+     "name": "width",
+     "type": "INT",
+     "widget": {
+      "name": "width"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "高度",
+     "name": "height",
+     "type": "INT",
+     "widget": {
+      "name": "height"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "渲染风格",
+     "name": "render_style",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "render_style"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "着色器",
+     "name": "render_style.shader",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "render_style.shader"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "不透明度",
+     "name": "render_style.opacity",
+     "type": "FLOAT",
+     "widget": {
+      "name": "render_style.opacity"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "人物调色板衰减",
+     "name": "render_style.person_palette_falloff",
+     "type": "FLOAT",
+     "widget": {
+      "name": "render_style.person_palette_falloff"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "区域",
+     "name": "render_style.region",
+     "type": "COMBO",
+     "widget": {
+      "name": "render_style.region"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "图像",
+     "name": "image",
+     "type": "IMAGE",
+     "links": [
+      314
+     ]
+    }
+   ],
+   "title": "⑪ 核对渲染（半透明叠原片）",
+   "properties": {
+    "Node name for S&R": "SAM3DBody_Render",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    0,
+    0,
+    "mesh",
+    "default",
+    0.7,
+    1,
+    "full_body"
+   ],
+   "widgets_values_named": {
+    "width": 0,
+    "height": 0,
+    "render_style": "mesh",
+    "render_style.shader": "default",
+    "render_style.opacity": 0.7,
+    "render_style.person_palette_falloff": 1,
+    "render_style.region": "full_body"
+   },
+   "color": "#322",
+   "bgcolor": "#533"
+  },
+  {
+   "id": 146,
+   "type": "CreateVideo",
+   "pos": [
+    1230,
+    5740
+   ],
+   "size": [
+    270,
+    162
+   ],
+   "flags": {},
+   "order": 32,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "图像",
+     "name": "images",
+     "type": "IMAGE",
+     "link": 314
+    },
+    {
+     "localized_name": "音频",
+     "name": "audio",
+     "shape": 7,
+     "type": "AUDIO",
+     "link": null
+    },
+    {
+     "localized_name": "帧率",
+     "name": "fps",
+     "type": "FLOAT",
+     "widget": {
+      "name": "fps"
+     },
+     "link": 315
+    },
+    {
+     "localized_name": "bit_depth",
+     "name": "bit_depth",
+     "shape": 7,
+     "type": "COMBO",
+     "widget": {
+      "name": "bit_depth"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "color_space",
+     "name": "color_space",
+     "shape": 7,
+     "type": "COMBO",
+     "widget": {
+      "name": "color_space"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "codec",
+     "name": "codec",
+     "shape": 7,
+     "type": "COMBO",
+     "widget": {
+      "name": "codec"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "视频",
+     "name": "VIDEO",
+     "type": "VIDEO",
+     "links": [
+      316
+     ]
+    }
+   ],
+   "title": "合成视频（核对）",
+   "properties": {
+    "Node name for S&R": "CreateVideo",
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    30,
+    8,
+    "sRGB",
+    "none"
+   ],
+   "widgets_values_named": {
+    "fps": 30,
+    "bit_depth": 8,
+    "color_space": "sRGB",
+    "codec": "none"
+   }
+  },
+  {
+   "id": 147,
+   "type": "SaveVideo",
+   "pos": [
+    1600,
+    5740
+   ],
+   "size": [
+    570,
+    150
+   ],
+   "flags": {},
+   "order": 34,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "视频",
+     "name": "video",
+     "type": "VIDEO",
+     "link": 316
+    },
+    {
+     "localized_name": "文件名前缀",
+     "name": "filename_prefix",
+     "type": "STRING",
+     "widget": {
+      "name": "filename_prefix"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "格式",
+     "name": "format",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "format"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "编解码器",
+     "name": "format.codec",
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "format.codec"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "编码器",
+     "name": "codec",
+     "shape": 7,
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "codec"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "video",
+     "name": "video",
+     "type": "VIDEO",
+     "links": null
+    }
+   ],
+   "title": "⑫ 保存核对视频",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.33.0"
+   },
+   "widgets_values": [
+    "video/SAM3D_overlay",
+    "auto",
+    "auto",
+    "auto"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "video/SAM3D_overlay",
+    "format": "auto",
+    "format.codec": "auto",
+    "codec": "auto"
+   }
+  },
+  {
+   "id": 148,
+   "type": "HypitSAM3DBodyDedupe",
+   "pos": [
+    330,
+    6000
+   ],
+   "size": [
+    330,
+    160
+   ],
+   "flags": {},
+   "order": 27,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "mhr_pose_data",
+     "name": "mhr_pose_data",
+     "type": "MHR_POSE_DATA",
+     "link": 317
+    },
+    {
+     "localized_name": "overlap_iou",
+     "name": "overlap_iou",
+     "type": "FLOAT",
+     "widget": {
+      "name": "overlap_iou"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "min_detection_iou",
+     "name": "min_detection_iou",
+     "type": "FLOAT",
+     "widget": {
+      "name": "min_detection_iou"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "hold_frames",
+     "name": "hold_frames",
+     "type": "INT",
+     "widget": {
+      "name": "hold_frames"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "bboxes",
+     "name": "bboxes",
+     "shape": 7,
+     "type": "BOUNDING_BOX",
+     "widget": {
+      "name": "bboxes"
+     },
+     "link": 318
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "mhr_pose_data",
+     "name": "mhr_pose_data",
+     "type": "MHR_POSE_DATA",
+     "links": [
+      319,
+      320
+     ]
+    }
+   ],
+   "title": "⑨ 去重影（同一人多个人偶只留一个）",
+   "properties": {
+    "Node name for S&R": "HypitSAM3DBodyDedupe"
+   },
+   "widgets_values": [
+    0.45,
+    0.3,
+    4
+   ],
+   "widgets_values_named": {
+    "overlap_iou": 0.45,
+    "min_detection_iou": 0.3,
+    "hold_frames": 4,
+    "bboxes": 4,
+    "x": 0,
+    "y": 512,
+    "width": 512,
+    "height": 512
+   }
+  },
+  {
+   "id": 149,
+   "type": "MarkdownNote",
+   "pos": [
+    -4150,
+    4300
+   ],
+   "size": [
+    560,
+    1600
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "# SAM3D 白膜 · 使用说明\n\n**用途**：把一段真人视频变成灰色白模人偶视频，保留站位、动作和运镜；同时导出能在 Blender 里编辑的 3D 动画文件（GLB）。\n\n## 怎么用（4 步）\n1. 把视频放进 `ComfyUI/input` 文件夹。\n2. 在 **① 加载视频** 里选这个视频；视频超过 5 秒，要改 **② 截取片段** 的 duration。\n3. 点右上角 **运行**。\n4. 去 `ComfyUI/output` 取结果：\n   - `video/SAM3D_gray_*.mp4`：**白模视频**（交给 Seedance 等模型做参考）\n   - `video/SAM3D_overlay_*.mp4`：**核对视频**（白模半透明叠在原片上，用来检查人偶对不对位）\n   - `3d/*.glb`：**3D 动画**，可以导入 Blender 修改\n\n## 耗时（RTX 5090）\n2 秒的群戏约 5 分钟；单人特写约半分钟。一次最好不超过 10 秒。\n\n## 看到问题怎么调\n| 现象 | 去哪改 |\n|---|---|\n| 一个人身上叠了好几个人偶（重影） | ⑨ 去重影：min_detection_iou 调高，比如 0.4 |\n| 人偶留在原地不动（残影） | ⑨ 去重影：min_detection_iou 调高；hold_frames 调小 |\n| 动作模糊时人偶消失或闪烁 | ⑨ 去重影：hold_frames 调大；或 ④ threshold 调低 |\n| 有人没被做成人偶（漏人） | ⑤ SAM3 追踪：detection_threshold 调低，比如 0.4 |\n| 人偶抖 | ⑧ 时间平滑：window 调大，比如 11 |\n| 人偶大小或位置和原片对不上 | 看核对视频；⑥ MoGe 是否接上 |\n\n## 本工作流和官方模板的区别\n- 加了 ⑩ 灰底，输出纯白模（模板默认是叠在原片上）\n- ⑤ 追踪人数不设上限（模板默认最多 4 人）\n- 加了 ⑨ 去重影（自定义节点 `hypit_sam3d_dedupe.py`）\n- 跳过了面部表情（白模不需要脸）\n- GLB 改成真骨骼格式，并保留每个人在画面里的位置\n\n## 用到的模型（都在 ComfyUI/models 下）\n- checkpoints/sam3.1_multiplex_fp16\n- detection/sam_3d_body_dinov3_bf16\n- geometry_estimation/moge_2_vitl_normal_fp16\n- diffusion_models/rt_detr_v4-x-hgnet_fp32"
+   ],
+   "widgets_values_named": {
+    "text": "# SAM3D 白膜 · 使用说明\n\n**用途**：把一段真人视频变成灰色白模人偶视频，保留站位、动作和运镜；同时导出能在 Blender 里编辑的 3D 动画文件（GLB）。\n\n## 怎么用（4 步）\n1. 把视频放进 `ComfyUI/input` 文件夹。\n2. 在 **① 加载视频** 里选这个视频；视频超过 5 秒，要改 **② 截取片段** 的 duration。\n3. 点右上角 **运行**。\n4. 去 `ComfyUI/output` 取结果：\n   - `video/SAM3D_gray_*.mp4`：**白模视频**（交给 Seedance 等模型做参考）\n   - `video/SAM3D_overlay_*.mp4`：**核对视频**（白模半透明叠在原片上，用来检查人偶对不对位）\n   - `3d/*.glb`：**3D 动画**，可以导入 Blender 修改\n\n## 耗时（RTX 5090）\n2 秒的群戏约 5 分钟；单人特写约半分钟。一次最好不超过 10 秒。\n\n## 看到问题怎么调\n| 现象 | 去哪改 |\n|---|---|\n| 一个人身上叠了好几个人偶（重影） | ⑨ 去重影：min_detection_iou 调高，比如 0.4 |\n| 人偶留在原地不动（残影） | ⑨ 去重影：min_detection_iou 调高；hold_frames 调小 |\n| 动作模糊时人偶消失或闪烁 | ⑨ 去重影：hold_frames 调大；或 ④ threshold 调低 |\n| 有人没被做成人偶（漏人） | ⑤ SAM3 追踪：detection_threshold 调低，比如 0.4 |\n| 人偶抖 | ⑧ 时间平滑：window 调大，比如 11 |\n| 人偶大小或位置和原片对不上 | 看核对视频；⑥ MoGe 是否接上 |\n\n## 本工作流和官方模板的区别\n- 加了 ⑩ 灰底，输出纯白模（模板默认是叠在原片上）\n- ⑤ 追踪人数不设上限（模板默认最多 4 人）\n- 加了 ⑨ 去重影（自定义节点 `hypit_sam3d_dedupe.py`）\n- 跳过了面部表情（白模不需要脸）\n- GLB 改成真骨骼格式，并保留每个人在画面里的位置\n\n## 用到的模型（都在 ComfyUI/models 下）\n- checkpoints/sam3.1_multiplex_fp16\n- detection/sam_3d_body_dinov3_bf16\n- geometry_estimation/moge_2_vitl_normal_fp16\n- diffusion_models/rt_detr_v4-x-hgnet_fp32"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  },
+  {
+   "id": 150,
+   "type": "MarkdownNote",
+   "pos": [
+    -3530,
+    4300
+   ],
+   "size": [
+    1270,
+    780
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "## ①②③ 视频输入\n**① 加载视频**\n- **file**：选 input 文件夹里的视频。点下面的「上传」也能直接传。\n\n**② 截取片段**（只处理视频的一段）\n- **start_time**：从第几秒开始，0 = 从头。\n- **duration**：截多长，单位秒。**默认 5 秒，视频更长时要改**；填 0 = 一直到结尾。\n- **strict_duration**：视频不够长时是否报错，一般关着。\n\n**③ 拆成逐帧**：把视频拆成一帧一帧的图片，再取出帧率。后面所有节点都用它，**不用改**。\n\n> 建议一次只处理一个镜头（不跨剪辑切点）、不超过 10 秒；太长会很慢，显存也可能不够。"
+   ],
+   "widgets_values_named": {
+    "text": "## ①②③ 视频输入\n**① 加载视频**\n- **file**：选 input 文件夹里的视频。点下面的「上传」也能直接传。\n\n**② 截取片段**（只处理视频的一段）\n- **start_time**：从第几秒开始，0 = 从头。\n- **duration**：截多长，单位秒。**默认 5 秒，视频更长时要改**；填 0 = 一直到结尾。\n- **strict_duration**：视频不够长时是否报错，一般关着。\n\n**③ 拆成逐帧**：把视频拆成一帧一帧的图片，再取出帧率。后面所有节点都用它，**不用改**。\n\n> 建议一次只处理一个镜头（不跨剪辑切点）、不超过 10 秒；太长会很慢，显存也可能不够。"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  },
+  {
+   "id": 151,
+   "type": "MarkdownNote",
+   "pos": [
+    -2190,
+    4300
+   ],
+   "size": [
+    400,
+    780
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "## ④ RT-DETR 人体框\n逐帧找出画面里每个真人，画一个框。**用途**：给 ⑨ 去重影判断哪个人偶对应真人。\n\n- **threshold**：置信度门槛，默认 0.5。调低能找到更多人（包括模糊的人），但也更容易框错。\n- **class_name**：要找的类别，保持 **person**。\n- **max_detections**：每帧最多找多少个，100 足够。\n\n上面的「加载 RT-DETR 模型」**不用改**。"
+   ],
+   "widgets_values_named": {
+    "text": "## ④ RT-DETR 人体框\n逐帧找出画面里每个真人，画一个框。**用途**：给 ⑨ 去重影判断哪个人偶对应真人。\n\n- **threshold**：置信度门槛，默认 0.5。调低能找到更多人（包括模糊的人），但也更容易框错。\n- **class_name**：要找的类别，保持 **person**。\n- **max_detections**：每帧最多找多少个，100 足够。\n\n上面的「加载 RT-DETR 模型」**不用改**。"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  },
+  {
+   "id": 152,
+   "type": "MarkdownNote",
+   "pos": [
+    -1780,
+    4300
+   ],
+   "size": [
+    410,
+    780
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "## ⑤ SAM3 视频追踪\n给画面里的每个人分配编号，并一帧一帧跟住他们。\n\n- **要追踪的东西**（文本框）：英文写 **person**，表示所有人。\n- **detection_threshold**：认定是人的门槛，默认 0.5。**漏人就调低**（0.4），**把背景误认成人就调高**（0.6）。\n- **max_objects**：最多追踪几个人。**0 = 不限（上限 64）**。单人镜头可以填 1，速度更快，也不会出现多余的人偶。\n- **detect_interval**：隔几帧重新找一次新出现的人。1 = 每帧都找；调大（比如 4）重影会少一些，但中途入画的人要晚几帧才出现。"
+   ],
+   "widgets_values_named": {
+    "text": "## ⑤ SAM3 视频追踪\n给画面里的每个人分配编号，并一帧一帧跟住他们。\n\n- **要追踪的东西**（文本框）：英文写 **person**，表示所有人。\n- **detection_threshold**：认定是人的门槛，默认 0.5。**漏人就调低**（0.4），**把背景误认成人就调高**（0.6）。\n- **max_objects**：最多追踪几个人。**0 = 不限（上限 64）**。单人镜头可以填 1，速度更快，也不会出现多余的人偶。\n- **detect_interval**：隔几帧重新找一次新出现的人。1 = 每帧都找；调大（比如 4）重影会少一些，但中途入画的人要晚几帧才出现。"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  },
+  {
+   "id": 153,
+   "type": "MarkdownNote",
+   "pos": [
+    -1360,
+    4300
+   ],
+   "size": [
+    400,
+    780
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "## ⑥ MoGe 镜头视场角\n估算原片镜头「拍得多广」（视场角），让人偶的大小和透视与原片对上。\n\n**⑥ MoGe 估算画面几何**\n- **resolution_level**：0–9，越大越精细越慢，默认 9。\n- **fov_x_degrees**：已知镜头水平视场角就填上；0 = 自动估。\n- **batch_size**：一次算几帧；显存不够就调小。\n- 其余保持默认。\n\n**⑥ 换算成镜头视场角**：axis 选 vertical、unit 选 degrees，**不用改**。\n\n> 不接 MoGe 也能跑，只是会按约 53° 的默认视场角算，人偶可能偏大或偏小。"
+   ],
+   "widgets_values_named": {
+    "text": "## ⑥ MoGe 镜头视场角\n估算原片镜头「拍得多广」（视场角），让人偶的大小和透视与原片对上。\n\n**⑥ MoGe 估算画面几何**\n- **resolution_level**：0–9，越大越精细越慢，默认 9。\n- **fov_x_degrees**：已知镜头水平视场角就填上；0 = 自动估。\n- **batch_size**：一次算几帧；显存不够就调小。\n- 其余保持默认。\n\n**⑥ 换算成镜头视场角**：axis 选 vertical、unit 选 degrees，**不用改**。\n\n> 不接 MoGe 也能跑，只是会按约 53° 的默认视场角算，人偶可能偏大或偏小。"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  },
+  {
+   "id": 154,
+   "type": "MarkdownNote",
+   "pos": [
+    -770,
+    4300
+   ],
+   "size": [
+    470,
+    780
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "## ⑦ SAM 3D Body：重建 3D 人体\n对每一帧里的每个人，估出一个 3D 人体（身形 + 姿势 + 在镜头里的位置）。这是整条流程的核心。\n\n- **run_hand_refinement**：手部细化。开 = 手指更准，速度更慢；白模一般可以关掉提速。\n- **fov**：镜头视场角，已经由 ⑥ 接入，**不用改**。\n- **batch_size**：一次处理多少个人体，默认 64；显存不够（报 out of memory）就调小，比如 16。\n\n「加载 SAM 3D Body 模型」**不用改**。\n\n> 它的输入优先用 ⑤ 的追踪结果；⑤ 没接时用 ④ 的框；都没有就把整张画面当成一个人。"
+   ],
+   "widgets_values_named": {
+    "text": "## ⑦ SAM 3D Body：重建 3D 人体\n对每一帧里的每个人，估出一个 3D 人体（身形 + 姿势 + 在镜头里的位置）。这是整条流程的核心。\n\n- **run_hand_refinement**：手部细化。开 = 手指更准，速度更慢；白模一般可以关掉提速。\n- **fov**：镜头视场角，已经由 ⑥ 接入，**不用改**。\n- **batch_size**：一次处理多少个人体，默认 64；显存不够（报 out of memory）就调小，比如 16。\n\n「加载 SAM 3D Body 模型」**不用改**。\n\n> 它的输入优先用 ⑤ 的追踪结果；⑤ 没接时用 ④ 的框；都没有就把整张画面当成一个人。"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  },
+  {
+   "id": 155,
+   "type": "MarkdownNote",
+   "pos": [
+    -290,
+    4300
+   ],
+   "size": [
+    470,
+    780
+   ],
+   "flags": {},
+   "order": 12,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "## ⑧ 时间平滑（去抖动）\n逐帧估出来的人偶会抖，这一步把前后几帧平均一下。\n\n- **strength**：平滑强度，0 = 不平滑，1 = 最平滑。\n- **method**：gaussian = 普通平均，最稳；savgol = 能保留出拳、甩头这类尖锐动作。**打戏建议 savgol**。\n- **window**：参考前后多少帧，奇数，默认 7。调大更稳，但动作会发软、滞后。\n- **rotation_threshold_degrees**：人转身快于每帧这么多度时就不平滑，避免把快速旋转抹掉。默认 15。\n\n（灰色的「面部表情」节点已跳过：白模不需要脸。要表情时右键这个节点，取消「绕过」。）"
+   ],
+   "widgets_values_named": {
+    "text": "## ⑧ 时间平滑（去抖动）\n逐帧估出来的人偶会抖，这一步把前后几帧平均一下。\n\n- **strength**：平滑强度，0 = 不平滑，1 = 最平滑。\n- **method**：gaussian = 普通平均，最稳；savgol = 能保留出拳、甩头这类尖锐动作。**打戏建议 savgol**。\n- **window**：参考前后多少帧，奇数，默认 7。调大更稳，但动作会发软、滞后。\n- **rotation_threshold_degrees**：人转身快于每帧这么多度时就不平滑，避免把快速旋转抹掉。默认 15。\n\n（灰色的「面部表情」节点已跳过：白模不需要脸。要表情时右键这个节点，取消「绕过」。）"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  },
+  {
+   "id": 156,
+   "type": "MarkdownNote",
+   "pos": [
+    190,
+    4300
+   ],
+   "size": [
+    470,
+    780
+   ],
+   "flags": {},
+   "order": 13,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "## ⑨ 去重影（自定义节点）\n**问题**：动作快的时候，SAM3 会把同一个人追成好几条轨迹（实测 2 秒群戏平均每帧 61 个人偶，实际只有约 7 人），渲染出来就是重影；跟丢后留在原地的旧轨迹会变成残影。\n\n**做法**：\n1. 每一帧里，④ 找到的每个真人框只认领**一个**最贴合的人偶，叠在同一个人身上的其余人偶不要。\n2. 动作模糊时 ④ 偶尔会漏人：如果这条轨迹前后几帧都被认领过，就把这一帧补回来，人偶不会闪。\n3. 跟丢后留下的残影，往后不会再被认领，所以会被去掉。\n\n- **min_detection_iou**：人偶的框和真人框至少重叠这么多，才算被认领。默认 0.3。**还有重影或残影就调高**（0.4）；**漏人就调低**（0.2）。\n- **hold_frames**：漏检时，前后各看这么多帧来判断要不要补回。默认 4。**人偶闪烁就调大**。\n- **overlap_iou**：补回的人偶和已保留的人偶重叠超过这个比例，就不补（防止把重影补回来）。默认 0.45，一般不用改。\n\n> 只影响渲染出来的视频。GLB 用的是去重前的数据，这样每个人的编号前后一致。"
+   ],
+   "widgets_values_named": {
+    "text": "## ⑨ 去重影（自定义节点）\n**问题**：动作快的时候，SAM3 会把同一个人追成好几条轨迹（实测 2 秒群戏平均每帧 61 个人偶，实际只有约 7 人），渲染出来就是重影；跟丢后留在原地的旧轨迹会变成残影。\n\n**做法**：\n1. 每一帧里，④ 找到的每个真人框只认领**一个**最贴合的人偶，叠在同一个人身上的其余人偶不要。\n2. 动作模糊时 ④ 偶尔会漏人：如果这条轨迹前后几帧都被认领过，就把这一帧补回来，人偶不会闪。\n3. 跟丢后留下的残影，往后不会再被认领，所以会被去掉。\n\n- **min_detection_iou**：人偶的框和真人框至少重叠这么多，才算被认领。默认 0.3。**还有重影或残影就调高**（0.4）；**漏人就调低**（0.2）。\n- **hold_frames**：漏检时，前后各看这么多帧来判断要不要补回。默认 4。**人偶闪烁就调大**。\n- **overlap_iou**：补回的人偶和已保留的人偶重叠超过这个比例，就不补（防止把重影补回来）。默认 0.45，一般不用改。\n\n> 只影响渲染出来的视频。GLB 用的是去重前的数据，这样每个人的编号前后一致。"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  },
+  {
+   "id": 157,
+   "type": "MarkdownNote",
+   "pos": [
+    800,
+    4300
+   ],
+   "size": [
+    760,
+    780
+   ],
+   "flags": {},
+   "order": 14,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "## ⑩ 灰底 + ⑪ 渲染\n**⑩ 灰底 0.78**：一张纯灰小图，渲染时会自动放大到视频尺寸、复用到每一帧。\n- **color**：颜色，十进制。13092807 = RGB(199,199,199) = 即梦白模规格的 0.78 灰。换颜色就把 0xRRGGBB 换算成十进制。\n- width、height、batch_size **不用改**。\n\n**⑪ 渲染**（共两个：「白模」接灰底，「核对」接原片）\n- **width / height**：输出尺寸，0 = 跟原片一样。\n- **render_style**：mesh = 人体网格（白模用这个）；silhouette = 纯黑白剪影；openpose_2d / 3d = 骨架；scail = 胶囊人。\n- **shader**：default = 灰色人偶；normals = 彩色法线图；depth = 深度灰度图；rainbow 系列是彩色调试用的。\n- **opacity**：人偶不透明度。白模用 1；核对用 0.7，能透出原片。\n- **person_palette_falloff**：1 = 所有人同一种灰；小于 1 时第 2、3 个人会越来越偏白。\n- **region**：full_body = 全身；hands_only = 只渲手（调试用）。"
+   ],
+   "widgets_values_named": {
+    "text": "## ⑩ 灰底 + ⑪ 渲染\n**⑩ 灰底 0.78**：一张纯灰小图，渲染时会自动放大到视频尺寸、复用到每一帧。\n- **color**：颜色，十进制。13092807 = RGB(199,199,199) = 即梦白模规格的 0.78 灰。换颜色就把 0xRRGGBB 换算成十进制。\n- width、height、batch_size **不用改**。\n\n**⑪ 渲染**（共两个：「白模」接灰底，「核对」接原片）\n- **width / height**：输出尺寸，0 = 跟原片一样。\n- **render_style**：mesh = 人体网格（白模用这个）；silhouette = 纯黑白剪影；openpose_2d / 3d = 骨架；scail = 胶囊人。\n- **shader**：default = 灰色人偶；normals = 彩色法线图；depth = 深度灰度图；rainbow 系列是彩色调试用的。\n- **opacity**：人偶不透明度。白模用 1；核对用 0.7，能透出原片。\n- **person_palette_falloff**：1 = 所有人同一种灰；小于 1 时第 2、3 个人会越来越偏白。\n- **region**：full_body = 全身；hands_only = 只渲手（调试用）。"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  },
+  {
+   "id": 158,
+   "type": "MarkdownNote",
+   "pos": [
+    1600,
+    4300
+   ],
+   "size": [
+    570,
+    780
+   ],
+   "flags": {},
+   "order": 15,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "说明",
+   "properties": {},
+   "widgets_values": [
+    "## ⑫ 保存视频 + ⑬ 导出 GLB\n**合成视频 / ⑫ 保存**\n- 帧率自动跟原片一致。\n- **filename_prefix**：保存在 output 下的路径和文件名前缀，例如 video/SAM3D_gray。\n- format、codec 保持 auto（mp4 / h264）。\n\n**⑬ 生成 3D 动画文件**\n- **format**：glb（推荐）或 bvh（只有骨架动作）。\n- **mesh_style**：**body_mesh = 带骨骼的真人体网格，能在 Blender 里改动作（推荐）**；bones_only = 只看骨架；openpose = 简笔骨架；scail = 胶囊人。\n- **fps**：动画帧率，**要改成和原片一致**（ref105 的片段是 30；默认 24）。\n- **camera_translation**：**absolute = 保留每个人在镜头里的真实位置（多人站位必须选它）**；off = 都放在原点；centered = 相对第一帧。\n- **track_index**：-1 = 导出所有人；填数字 = 只导出那一个人。\n\n**⑬ 保存 GLB**：filename_prefix 是保存路径，例如 3d/ComfyUI。"
+   ],
+   "widgets_values_named": {
+    "text": "## ⑫ 保存视频 + ⑬ 导出 GLB\n**合成视频 / ⑫ 保存**\n- 帧率自动跟原片一致。\n- **filename_prefix**：保存在 output 下的路径和文件名前缀，例如 video/SAM3D_gray。\n- format、codec 保持 auto（mp4 / h264）。\n\n**⑬ 生成 3D 动画文件**\n- **format**：glb（推荐）或 bvh（只有骨架动作）。\n- **mesh_style**：**body_mesh = 带骨骼的真人体网格，能在 Blender 里改动作（推荐）**；bones_only = 只看骨架；openpose = 简笔骨架；scail = 胶囊人。\n- **fps**：动画帧率，**要改成和原片一致**（ref105 的片段是 30；默认 24）。\n- **camera_translation**：**absolute = 保留每个人在镜头里的真实位置（多人站位必须选它）**；off = 都放在原点；centered = 相对第一帧。\n- **track_index**：-1 = 导出所有人；填数字 = 只导出那一个人。\n\n**⑬ 保存 GLB**：filename_prefix 是保存路径，例如 3d/ComfyUI。"
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  }
+ ],
+ "links": [
+  [
+   15,
+   14,
+   1,
+   15,
+   0,
+   "CLIP"
+  ],
+  [
+   33,
+   14,
+   0,
+   18,
+   1,
+   "MODEL"
+  ],
+  [
+   34,
+   15,
+   0,
+   18,
+   3,
+   "CONDITIONING"
+  ],
+  [
+   232,
+   111,
+   0,
+   109,
+   0,
+   "MODEL"
+  ],
+  [
+   242,
+   115,
+   0,
+   114,
+   0,
+   "MOGE_MODEL"
+  ],
+  [
+   267,
+   85,
+   0,
+   125,
+   0,
+   "VIDEO"
+  ],
+  [
+   268,
+   125,
+   0,
+   86,
+   0,
+   "VIDEO"
+  ],
+  [
+   271,
+   114,
+   0,
+   126,
+   0,
+   "MOGE_GEOMETRY"
+  ],
+  [
+   279,
+   119,
+   0,
+   128,
+   0,
+   "SAM3D_BODY_MODEL"
+  ],
+  [
+   283,
+   119,
+   0,
+   129,
+   0,
+   "SAM3D_BODY_MODEL"
+  ],
+  [
+   285,
+   109,
+   0,
+   129,
+   3,
+   "BOUNDING_BOX"
+  ],
+  [
+   287,
+   129,
+   0,
+   128,
+   1,
+   "MHR_POSE_DATA"
+  ],
+  [
+   288,
+   128,
+   0,
+   130,
+   0,
+   "MHR_POSE_DATA"
+  ],
+  [
+   298,
+   131,
+   0,
+   134,
+   0,
+   "IMAGE"
+  ],
+  [
+   300,
+   86,
+   2,
+   134,
+   2,
+   "FLOAT"
+  ],
+  [
+   303,
+   18,
+   0,
+   129,
+   2,
+   "SAM3_TRACK_DATA"
+  ],
+  [
+   304,
+   86,
+   0,
+   18,
+   0,
+   "IMAGE"
+  ],
+  [
+   305,
+   86,
+   0,
+   109,
+   1,
+   "IMAGE"
+  ],
+  [
+   306,
+   86,
+   0,
+   114,
+   1,
+   "IMAGE"
+  ],
+  [
+   307,
+   86,
+   0,
+   128,
+   2,
+   "IMAGE"
+  ],
+  [
+   308,
+   86,
+   0,
+   129,
+   1,
+   "IMAGE"
+  ],
+  [
+   310,
+   127,
+   0,
+   143,
+   0,
+   "FILE_3D"
+  ],
+  [
+   314,
+   145,
+   0,
+   146,
+   0,
+   "IMAGE"
+  ],
+  [
+   315,
+   86,
+   2,
+   146,
+   2,
+   "FLOAT"
+  ],
+  [
+   286,
+   126,
+   0,
+   129,
+   5,
+   "FLOAT"
+  ],
+  [
+   290,
+   130,
+   0,
+   127,
+   0,
+   "MHR_POSE_DATA"
+  ],
+  [
+   274,
+   119,
+   0,
+   127,
+   1,
+   "SAM3D_BODY_MODEL"
+  ],
+  [
+   299,
+   134,
+   0,
+   135,
+   0,
+   "VIDEO"
+  ],
+  [
+   319,
+   148,
+   0,
+   131,
+   0,
+   "MHR_POSE_DATA"
+  ],
+  [
+   311,
+   144,
+   0,
+   131,
+   1,
+   "IMAGE"
+  ],
+  [
+   320,
+   148,
+   0,
+   145,
+   0,
+   "MHR_POSE_DATA"
+  ],
+  [
+   313,
+   86,
+   0,
+   145,
+   1,
+   "IMAGE"
+  ],
+  [
+   316,
+   146,
+   0,
+   147,
+   0,
+   "VIDEO"
+  ],
+  [
+   317,
+   130,
+   0,
+   148,
+   0,
+   "MHR_POSE_DATA"
+  ],
+  [
+   318,
+   109,
+   0,
+   148,
+   4,
+   "BOUNDING_BOX"
+  ]
+ ],
+ "groups": [
+  {
+   "id": 1,
+   "title": "人体框检测（给去重用）",
+   "bounding": [
+    -2190,
+    5130,
+    1230,
+    410
+   ],
+   "flags": {}
+  },
+  {
+   "id": 2,
+   "title": "多人追踪",
+   "bounding": [
+    -2190,
+    5570,
+    1230,
+    430
+   ],
+   "flags": {}
+  },
+  {
+   "id": 3,
+   "title": "视频预处理",
+   "bounding": [
+    -2850,
+    5570,
+    600,
+    210
+   ],
+   "color": "#3f789e",
+   "flags": {}
+  },
+  {
+   "id": 4,
+   "title": "镜头视场角（让人偶与原片对齐）",
+   "bounding": [
+    -2190,
+    6030,
+    1230,
+    350
+   ],
+   "flags": {}
+  },
+  {
+   "id": 6,
+   "title": "3D 人体重建",
+   "bounding": [
+    -770,
+    5400,
+    1450,
+    810
+   ],
+   "color": "#3f789e",
+   "flags": {}
+  },
+  {
+   "id": 5,
+   "title": "面部表情（白模不需要，已跳过）",
+   "bounding": [
+    -390,
+    5750,
+    680,
+    290
+   ],
+   "color": "#3f789e",
+   "flags": {}
+  },
+  {
+   "id": 7,
+   "title": "渲染视频",
+   "bounding": [
+    800,
+    5240,
+    760,
+    760
+   ],
+   "flags": {}
+  },
+  {
+   "id": 8,
+   "title": "导出 3D 动画（GLB，给 Blender 用）",
+   "bounding": [
+    800,
+    6020,
+    760,
+    560
+   ],
+   "flags": {}
+  }
+ ],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.1833218457608184,
+   "offset": [
+    562.7200765199965,
+    -2837.5324833418053
+   ]
+  },
+  "frontendVersion": "1.51.9",
+  "VHS_latentpreview": false,
+  "VHS_latentpreviewrate": 0,
+  "VHS_MetadataImage": true,
+  "VHS_KeepIntermediate": true
+ },
+ "version": 0.4
+}
