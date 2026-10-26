@@ -10,7 +10,7 @@ REMOTE_NODES="D:/Apps/ComfyUI_windows_portable/ComfyUI/custom_nodes"
 
 (cd "$HERE/web-src" && { [ -d node_modules ] || npm ci --no-audit --no-fund; } && npm run build)
 
-tar -C "$HERE" -czf /tmp/hypit_studio.tgz --exclude='__pycache__' hypit_studio
-scp -q /tmp/hypit_studio.tgz "$TARGET:D:/Downloads/hypit_studio.tgz"
-ssh "$TARGET" "tar -xzf D:/Downloads/hypit_studio.tgz -C $REMOTE_NODES && del D:\\Downloads\\hypit_studio.tgz"
+COPYFILE_DISABLE=1 tar -C "$HERE" -czf /tmp/hypit_studio.tgz --exclude='__pycache__' hypit_studio
+scp -q -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519 /tmp/hypit_studio.tgz "$TARGET:D:/Downloads/hypit_studio.tgz"
+ssh -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519 "$TARGET" "tar -xzf D:/Downloads/hypit_studio.tgz -C $REMOTE_NODES && del D:\\Downloads\\hypit_studio.tgz"
 echo "deployed to $TARGET:$REMOTE_NODES/hypit_studio — restart ComfyUI if Python files changed, then open http://<5090>:8188/studio"
