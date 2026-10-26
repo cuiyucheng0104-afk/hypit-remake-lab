@@ -320,6 +320,7 @@ const VIDEO_TIPS = {
 export const VideoGenNode = memo(({ id, data, selected }) => {
   const rf = useReactFlow()
   const set = patch => rf.updateNodeData(id, patch)
+  const options = useContext(OptionsContext)
   const inputs = useInputs(id)
   const run = useRunner(id, data)
   const busy = ['submitting', 'queued', 'running'].includes(data.status?.state)
@@ -335,14 +336,14 @@ export const VideoGenNode = memo(({ id, data, selected }) => {
     const payload = {
       mode, prompt: data.prompt, seconds: data.seconds, aspect: data.aspect, megapixels: data.megapixels,
       turbo: data.turbo, steps: data.steps, upscale: data.upscale, seed: data.seed || 0,
-      use_video_audio: data.useVideoAudio, loras,
+      use_video_audio: data.useVideoAudio, rtx_sr: !!(options.rtx_sr && data.rtxSr), loras,
       first_frame: refs('first')[0]?.ref, last_frame: refs('last')[0]?.ref,
       ref_images: refs('images').map(r => r.ref), ref_videos: refs('videos').map(r => r.ref),
       ref_audios: refs('audios').map(r => r.ref), source_video: refs('source')[0]?.ref,
       keyframes: refs('keyframes').map(r => ({ image: r.ref, time: r.edge.data?.time ?? 0 })),
     }
     const lab = VIDEO_MODES.find(m => m.value === mode).label.split('（')[0]
-    run(payload, `${lab} · ${data.seconds} 秒${data.upscale ? ' · 二采' : ''}${loras.length ? ` · LoRA×${loras.length}` : ''}`)
+    run(payload, `${lab} · ${data.seconds} 秒${data.upscale ? ' · 二采' : ''}${payload.rtx_sr ? ' · RTX 超分' : ''}${loras.length ? ` · LoRA×${loras.length}` : ''}`)
   }
 
   return (
@@ -370,6 +371,7 @@ export const VideoGenNode = memo(({ id, data, selected }) => {
         {!data.turbo && <Field label="步数"><Num value={data.steps} min={4} max={50} onChange={v => set({ steps: v })} /></Field>}
         <Toggle value={data.upscale} onChange={v => set({ upscale: v })} label="二采高清" />
       </div>
+      {options.rtx_sr && <Toggle value={data.rtxSr} onChange={v => set({ rtxSr: v })} label="RTX 超分 ×2（出片后用 NVIDIA RTX 放大，最高 4K）" />}
       {data.upscale && <div className="tip">二采：先按上面的「清晰度」完整出片，再在潜空间把每边放大 1.5 倍、低噪声精修补细节（0.9 → 约 1920×1080）。时间约为不开二采的 1.5–2 倍。</div>}
       {mode === 'r2v' && refs('videos').length > 0 && <Toggle value={data.useVideoAudio} onChange={v => set({ useVideoAudio: v })} label="同时参考视频里的原声" />}
       <SeedField value={data.seed} onChange={v => set({ seed: v })} />

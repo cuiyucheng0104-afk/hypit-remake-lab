@@ -34,7 +34,8 @@ H3_VIDEO_VAE = "minimax_h3_video_vae_fp16.safetensors"  # int8 版解码会损�
 H3_AUDIO_VAE = "minimax_h3_audio_vae_fp32.safetensors"
 H3_UPSCALER = "minimax_h3_latent_upscaler_3d_conv_v1_fp16.safetensors"
 UPSCALE_BY = 1.5  # 二采放大倍数（每边）
-REFINE_SIGMAS = "0.667, 0.462, 0.0"  # 二采精修：Turbo 8 步网格（shift 6）的最后两步
+REFINE_SIGMAS = "0.667, 0.462, 0.0"
+RTX_SR_MAX_SIDE = 3840  # RTX 超分后长边上限（4K），防止二采 + 超分把内存撑爆  # 二采精修：Turbo 8 步网格（shift 6）的最后两步
 
 QWEN_UNET = {
     "censored": "qwen_image_2.1_int8_convrot.safetensors",
@@ -64,6 +65,14 @@ class Graph:
         nid = str(len(self.nodes) + 1)
         self.nodes[nid] = {"class_type": class_type, "inputs": inputs}
         return nid
+
+
+def resolution(aspect, megapixels, multiple=32):
+    """和 ComfyUI 的 ResolutionSelector 一样的算法，返回 (宽, 高)。"""
+    import math
+    w, h = (float(x) for x in aspect.split(" ")[0].split(":"))
+    scale = math.sqrt(megapixels * 1024 * 1024 / (w * h))
+    return round(w * scale / multiple) * multiple, round(h * scale / multiple) * multiple
 
 
 def h3_frames(seconds):
@@ -215,9 +224,16 @@ def build_h3(p, lora_choices):
                       guider=[g.add("BasicGuider", model=model, conditioning=hi_pos), 0],
                       sampler=sampler, sigmas=[sig2, 0], latent_image=[cat, 0])
 
-    frames_img = g.add("VAEDecode", samples=[final, 0], vae=vvae)
+    frames_img = [g.add("VAEDecode", samples=[final, 0], vae=vvae), 0]
+    if p.get("rtx_sr"):
+        # RTX 视频超分（NVIDIA VFX，ComfyUI_Nvidia_VFX_Nodes）：像素空间每边 ×2，长边不超过 4K
+        w, _ = resolution(aspect, base_mp * (UPSCALE_BY ** 2 if upscale else 1))
+        scale = round(min(2.0, RTX_SR_MAX_SIDE / max(w, 1)), 2)
+        if scale > 1.0:
+            frames_img = [g.add("RTXVideoSuperResolution", images=frames_img, resize_type="scale by multiplier",
+                                **{"resize_type.scale": scale}, quality="ULTRA"), 0]
     audio = g.add("VAEDecodeAudio", samples=[final, 0], vae=avae)
-    video = g.add("CreateVideo", images=[frames_img, 0], audio=[audio, 0], fps=24.0, bit_depth=8,
+    video = g.add("CreateVideo", images=frames_img, audio=[audio, 0], fps=24.0, bit_depth=8,
                   color_space="sRGB", codec="none")
     _save_video(g, video, f"studio/{mode}")
     return g.nodes, {"seed": seed, "frames": frames, "steps": steps}

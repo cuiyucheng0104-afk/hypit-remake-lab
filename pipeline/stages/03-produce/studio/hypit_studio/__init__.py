@@ -61,7 +61,9 @@ async def studio_page(request):
 
 @routes.get("/studio/api/options")
 async def studio_options(request):
-    return web.json_response({"loras": _loras(), "aspects": list(graphs.ASPECTS)})
+    import nodes
+    return web.json_response({"loras": _loras(), "aspects": list(graphs.ASPECTS),
+                              "rtx_sr": "RTXVideoSuperResolution" in nodes.NODE_CLASS_MAPPINGS})
 
 
 FILE_KEYS = ("first_frame", "last_frame", "source_video", "ref_images", "ref_videos", "ref_audios")
