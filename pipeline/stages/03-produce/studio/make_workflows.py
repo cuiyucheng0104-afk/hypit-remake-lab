@@ -19,6 +19,7 @@ COMMON_NOTE = """- **清晰度**：「画幅与清晰度」里 megapixels 默认
 - **画质要点**（2026-10-26 对照 YZ 整合包优化）：768p 加速 LoRA、fp16 视频 VAE、H.264 CRF 16 输出；旧的 544p 加速 LoRA 叠在上面会糊，别再接。
 """
 UPSCALE_NOTE = "- **二采**：先按清晰度完整出片，再潜空间每边放大 1.5 倍（按放大后的尺寸重建条件），用 Turbo 网格最后两步（0.667→0.462→0）精修补细节。0.9 → 约 1952×1088。\n"
+RTX_NOTE = "- **RTX 超分**：解码后的「RTX 超分 ×2」默认绕过（紫色），选中按 Ctrl+B 打开，每边放大 2 倍（1280×736 → 2560×1472），只锐化不改内容；和二采一起开约 4K。需要 ComfyUI_Nvidia_VFX_Nodes。\n"
 LORA_NOTE = "\n**所有 LoRA 节点默认是「绕过」（紫色）**：要用哪个，选中后按 Ctrl+B 点亮，再调 strength_model（0.6–1.0 常用）。可以同时点亮多个叠加。\n- 输出在 ComfyUI/output/studio/ 下。\n"
 
 FLOWS = [
@@ -45,7 +46,7 @@ def spec(research_loras):
     for folder, extra in (("H3", []), ("H3-研究用", research_loras)):
         names = ACTION + extra
         for title, p, usage in FLOWS:
-            p = dict(p, seconds=3, aspect="16:9", megapixels=0.9, turbo=True, seed=7,
+            p = dict(p, seconds=3, aspect="16:9", megapixels=0.9, turbo=True, seed=7, rtx_sr=True,
                      loras=[{"name": n, "strength": 1.0} for n in names])
             api, _ = graphs.build_h3(p, set(names))
             titles, bypass = {}, []
@@ -71,10 +72,13 @@ def spec(research_loras):
                     titles[nid] = "二采：潜空间放大 ×1.5"
                 elif c == "ManualSigmas":
                     titles[nid] = "二采：精修噪声"
+                elif c == "RTXVideoSuperResolution":
+                    titles[nid] = "RTX 超分 ×2（默认绕过，Ctrl+B 打开）"
+                    bypass.append(nid)
             lora_kind = "动作类（打斗 Combat、动作修复 Motion_Repair V1/V2、武术 wushu）" + (
                 f"和研究用（成人内容）全部 {len(extra)} 个" if extra else "")
             note = (f"# {title}{'（研究用）' if extra else ''}\n\n- **用法**：{usage}\n" + COMMON_NOTE
-                    + (UPSCALE_NOTE if p.get("upscale") else "") + f"- **LoRA**：已接好{lora_kind}。\n" + LORA_NOTE)
+                    + (UPSCALE_NOTE if p.get("upscale") else "") + RTX_NOTE + f"- **LoRA**：已接好{lora_kind}。\n" + LORA_NOTE)
             out.append({"path": f"{folder}/{title}.json", "api": api, "titles": titles, "bypass": bypass, "note": note})
     return out
 

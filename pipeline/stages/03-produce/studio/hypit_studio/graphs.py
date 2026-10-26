@@ -231,7 +231,8 @@ def build_h3(p, lora_choices):
         scale = round(min(2.0, RTX_SR_MAX_SIDE / max(w, 1)), 2)
         if scale > 1.0:
             frames_img = [g.add("RTXVideoSuperResolution", images=frames_img, resize_type="scale by multiplier",
-                                **{"resize_type.scale": scale}, quality="ULTRA"), 0]
+                                **{"resize_type.scale": scale}, quality="ULTRA",
+                                strength=1.0, image_encoding="8-bit RGB"), 0]
     audio = g.add("VAEDecodeAudio", samples=[final, 0], vae=avae)
     video = g.add("CreateVideo", images=frames_img, audio=[audio, 0], fps=24.0, bit_depth=8,
                   color_space="sRGB", codec="none")
