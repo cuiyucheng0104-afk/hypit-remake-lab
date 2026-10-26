@@ -6,9 +6,15 @@ SAM3 视频追踪在快动作时，旧追踪的遮罩跟不上，新检测与它
 
 本节点放在 Smooth 之后、Render 之前：
 1. 用每个人偶的 2D 关键点算出它在画面里的框。
-2. 每一帧里，RT-DETR 找到的每个真人框只认领一个最贴合的人偶（重叠至少 min_detection_iou），叠在同一个人身上的其余人偶不要。
+2. 每一帧里，RT-DETR 找到的每个真人框只认领一个最贴合的人偶，叠在同一个人身上的其余人偶不要。
+   认领条件：框重叠（IoU）至少 min_detection_iou；或者人偶大部分（≥70%）落在真人框里、且不小于框的 15%——
+   长袍、披风甩开时真人框比身体关键点框大得多，IoU 达不到，但人偶确实在框里（实测：只按 IoU 时甩袍的主角整个被删）。
+   小框先认领，免得大框把旁边的小人抢走。
 3. 检测器漏掉某帧时（动作模糊），若这条轨迹前后 hold_frames 帧内都被认领过，且不和已保留的人偶重叠，就补回这一帧，避免闪烁。
 跟丢后留下的残影往后不会再被认领，所以不会被补回。
+4. 「只留主角」：在去重之后，从画面最大的几个人偶分别出发，向前、向后逐帧跟住框最连贯（重叠且大小相近）的人偶，取覆盖面积总和最大的那条链，其余不画；主角糊到认不出的帧就空着，不跳到路人身上。
+   不按轨迹编号挑：快动作时主角会被 SAM3 切成很多段短轨迹，按「整段最稳的轨迹」挑会挑到站着不动的路人。
+   用来代替 SAM3 的 max_objects=1——那个只取最先检测到的人，常常锁到背景里的路人，还会在几个人之间跳。
 （不按「重叠就合并」做轨迹分组：那样会连锁，群戏里所有人会被并成一个，实测踩过。）
 
 只改渲染用的数据；导出 GLB 请接去重前的数据，保持每个人的编号前后一致。
@@ -31,12 +37,55 @@ def _kp_box(person):
     return None if bb is None else np.asarray(bb, dtype=np.float32).reshape(4)
 
 
+def _area(b):
+    return max(0.0, float(b[2] - b[0])) * max(0.0, float(b[3] - b[1]))
+
+
+def _inside(a, b):
+    """a 有多大比例落在 b 里。"""
+    x1, y1 = max(a[0], b[0]), max(a[1], b[1])
+    x2, y2 = min(a[2], b[2]), min(a[3], b[3])
+    inter = max(0.0, x2 - x1) * max(0.0, y2 - y1)
+    return float(inter / _area(a)) if _area(a) > 0 else 0.0
+
+
 def _iou(a, b):
     x1, y1 = max(a[0], b[0]), max(a[1], b[1])
     x2, y2 = min(a[2], b[2]), min(a[3], b[3])
     inter = max(0.0, x2 - x1) * max(0.0, y2 - y1)
     ua = (a[2] - a[0]) * (a[3] - a[1]) + (b[2] - b[0]) * (b[3] - b[1]) - inter
     return float(inter / ua) if ua > 0 else 0.0
+
+
+def _follow_main(boxes, kept):
+    """只留主角：从几个最大的人偶分别出发，向前、向后逐帧跟住重叠且大小相近的人偶，取覆盖面积总和最大的那条链。"""
+    F = len(kept)
+    cand = sorted(((_area(boxes[fi][pid]), fi, pid) for fi in range(F) for pid in kept[fi]), reverse=True)
+    anchors, seen = [], set()
+    for _, fi, pid in cand:
+        if fi not in seen:
+            anchors.append((fi, pid)); seen.add(fi)
+        if len(anchors) == 8:
+            break
+    best, best_score = [None] * F, -1.0
+    for fa, pa in anchors:
+        pick = [None] * F
+        pick[fa] = pa
+        for order in (range(fa + 1, F), range(fa - 1, -1, -1)):
+            prev, last = boxes[fa][pa], fa
+            for fi in order:
+                gap = abs(fi - last)
+                lim = 2.5 * (1 + gap / 4)  # the longer the figure was missing, the more its size may have changed
+                scored = [(_iou(boxes[fi][pid], prev), pid) for pid in kept[fi]
+                          if 1 / lim <= _area(boxes[fi][pid]) / max(_area(prev), 1e-6) <= lim]
+                scored = [c for c in scored if c[0] >= 0.1]
+                if scored:
+                    pick[fi] = max(scored)[1]
+                    prev, last = boxes[fi][pick[fi]], fi
+        score = sum(_area(boxes[fi][p]) for fi, p in enumerate(pick) if p is not None)
+        if score > best_score:
+            best, best_score = pick, score
+    return [{best[fi]} if best[fi] is not None else set() for fi in range(F)]
 
 
 class SAM3DBodyDedupe:
@@ -53,6 +102,8 @@ class SAM3DBodyDedupe:
                                         "tooltip": "检测器漏掉某帧时，前后各这么多帧内这条轨迹都被认领过，就把这一帧补回来。人偶闪烁就调大。"}),
             },
             "optional": {
+                "main_only": ("BOOLEAN", {"default": False,
+                                          "tooltip": "只留主角：整段里画面占比最大的那个人。画面里只有一个主要人物时打开。"}),
                 "bboxes": ("BOUNDING_BOX", {"tooltip": "接 RT-DETR Detect 的 bboxes（逐帧真人框）。不接时退化为按框大小去重。"}),
             },
         }
@@ -63,7 +114,7 @@ class SAM3DBodyDedupe:
     CATEGORY = "image/detection"
     DESCRIPTION = "每个真人框只认领一个人偶，去掉重影和残影；检测器偶尔漏帧时按轨迹补回，不闪烁。"
 
-    def run(self, mhr_pose_data, overlap_iou, min_detection_iou, hold_frames, bboxes=None):
+    def run(self, mhr_pose_data, overlap_iou, min_detection_iou, hold_frames, main_only=False, bboxes=None):
         from comfy_extras.nodes_sam3d_body import _per_frame_bboxes_from_detections
 
         frames = mhr_pose_data["frames"]
@@ -77,14 +128,16 @@ class SAM3DBodyDedupe:
             fb = boxes[fi]
             if dets is not None:
                 # each detected person claims the single best-fitting figure
-                det = dets[fi].cpu().numpy()
+                det = sorted(dets[fi].cpu().numpy(), key=_area)  # small boxes claim first
                 for d in det:
-                    best, best_iou = None, min_detection_iou
+                    best, best_iou = None, -1.0
                     for pid, b in enumerate(fb):
-                        if b is not None and pid not in kept[fi]:
-                            v = _iou(b, d)
-                            if v >= best_iou:
-                                best, best_iou = pid, v
+                        if b is None or pid in kept[fi]:
+                            continue
+                        v = _iou(b, d)
+                        fits = v >= min_detection_iou or (_inside(b, d) >= 0.7 and _area(b) >= 0.15 * _area(d))
+                        if fits and v > best_iou:
+                            best, best_iou = pid, v
                     if best is not None:
                         kept[fi].add(best)
             else:
@@ -107,6 +160,9 @@ class SAM3DBodyDedupe:
                     after_ok = any(pid in claimed[j] for j in range(fi + 1, min(F, fi + hold_frames + 1)))
                     if before_ok and after_ok and all(_iou(b, boxes[fi][j]) <= overlap_iou for j in kept[fi]):
                         kept[fi].add(pid); filled += 1
+
+        if main_only:
+            kept = _follow_main(boxes, kept)
 
         out_frames = [[frames[fi][pid] for pid in sorted(kept[fi])] for fi in range(F)]
         after = sum(len(f) for f in out_frames)

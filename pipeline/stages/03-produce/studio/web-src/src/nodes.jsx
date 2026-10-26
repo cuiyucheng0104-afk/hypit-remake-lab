@@ -363,14 +363,14 @@ export const VideoGenNode = memo(({ id, data, selected }) => {
       <div className="row">
         <Field label="时长" hint="秒（最长 15）"><Num value={data.seconds} min={1} max={15} step={0.5} onChange={v => set({ seconds: v })} /></Field>
         <Field label="画幅"><Select value={data.aspect} onChange={v => set({ aspect: v })} options={ASPECTS} /></Field>
-        <Field label="清晰度" hint="百万像素"><Num value={data.megapixels} min={0.2} max={2} step={0.1} onChange={v => set({ megapixels: v })} /></Field>
+        <Field label="清晰度" hint="百万像素，0.9 ≈ 1280×720"><Num value={data.megapixels} min={0.2} max={1.5} step={0.1} onChange={v => set({ megapixels: v })} /></Field>
       </div>
       <div className="row">
-        <Toggle value={data.turbo} onChange={v => set({ turbo: v })} label="加速（4–8 步）" />
+        <Toggle value={data.turbo} onChange={v => set({ turbo: v })} label="加速（8 步）" />
         {!data.turbo && <Field label="步数"><Num value={data.steps} min={4} max={50} onChange={v => set({ steps: v })} /></Field>}
-        <Toggle value={data.upscale} onChange={v => set(v && Number(data.megapixels) < 0.9 ? { upscale: v, megapixels: 0.9 } : { upscale: v })} label="二采高清" />
+        <Toggle value={data.upscale} onChange={v => set({ upscale: v })} label="二采高清" />
       </div>
-      {data.upscale && <div className="tip">二采：先以 0.25 百万像素低分辨率出片，再潜空间放大到上面的「清晰度」，最后低噪声精修。清晰度建议 0.9–1.4。</div>}
+      {data.upscale && <div className="tip">二采：先按上面的「清晰度」完整出片，再在潜空间把每边放大 1.5 倍、低噪声精修补细节（0.9 → 约 1920×1080）。时间约为不开二采的 1.5–2 倍。</div>}
       {mode === 'r2v' && refs('videos').length > 0 && <Toggle value={data.useVideoAudio} onChange={v => set({ useVideoAudio: v })} label="同时参考视频里的原声" />}
       <SeedField value={data.seed} onChange={v => set({ seed: v })} />
       <LoraPicker family="h3" value={data.loras} onChange={v => set({ loras: v })} />
@@ -403,7 +403,7 @@ export const WhiteboxNode = memo(({ id, data, selected }) => {
         <Field label="从第几秒开始"><Num value={data.start} min={0} max={3600} step={0.5} onChange={v => set({ start: v })} /></Field>
         <Field label="处理多长" hint="秒（0 = 到结尾）"><Num value={data.seconds} min={0} max={60} step={0.5} onChange={v => set({ seconds: v })} /></Field>
       </div>
-      <Toggle value={data.single} onChange={v => set({ single: v })} label="画面里只有一个人（更快、更稳）" />
+      <Toggle value={data.single} onChange={v => set({ single: v })} label="只要主角（画面里最显眼的那个人，其他人不画）" />
       <button className="nodrag go" disabled={busy || !src.length} onClick={go}>{busy ? '处理中…' : '转白膜'}</button>
       <Status status={data.status} />
       <Handle type="source" position={Position.Right} id="out" isConnectable={false} />
@@ -415,7 +415,7 @@ export const nodeTypes = { asset: AssetNode, result: ResultNode, imageGen: Image
 
 export const DEFAULTS = {
   imageGen: { prompt: '', uncensored: false, enhance: false, aspect: '16:9', megapixels: 1.0, steps: 25, seed: 0, loras: {} },
-  videoGen: { mode: 't2v', prompt: '', seconds: 5, aspect: '16:9', megapixels: 0.4, turbo: true, steps: 20, upscale: false, seed: 0, loras: {} },
+  videoGen: { mode: 't2v', prompt: '', seconds: 5, aspect: '16:9', megapixels: 0.9, turbo: true, steps: 20, upscale: false, seed: 0, loras: {} },
   whitebox: { start: 0, seconds: 10, single: false },
 }
 
