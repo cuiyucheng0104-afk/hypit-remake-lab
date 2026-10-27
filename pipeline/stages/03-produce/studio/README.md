@@ -22,7 +22,7 @@
   - `web/index.html`：打包好的单文件网页（JS/CSS 全内联，内网电脑不需要外网）
 - `web-src/` —— 网页源码（React 18 + @xyflow/react 12 + Vite），`npm run build` 输出到 `hypit_studio/web/`
 - `deploy.sh` —— 打包并复制到 5090：`./deploy.sh ROG@<5090内网IP>`
-- `make_workflows.py` —— 用 `graphs.py` 重新生成 ComfyUI 侧边栏里的 H3/ 与 H3-研究用/ 共 12 个工作流（参数和网页完全一致）
+- `make_workflows.py` —— 用 `graphs.py` 重新生成 ComfyUI 侧边栏里的 H3/ 与 H3-研究用/ 共 16 个工作流（含 FastH3 Omni 版，参数和网页完全一致）
 
 ## H3 画质设置（2026-10-26 对照 YZ 金鱼整合包优化）
 
@@ -36,6 +36,7 @@
 | 输出 | SaveVideo auto | **H.264 CRF 16** |
 | 二采 | 先 0.25 MP 半程出片 → 放大 → 0.90 起精修；图生 / 续写 / 多参考开二采会报错 | 先完整出片 → 潜空间 ×1.5（按放大后尺寸**重建条件**）→ Turbo 网格最后两步 0.667/0.462 精修；五种方式都能开 |
 
+| 参考生 / 多参考的主模型 | ref2va + 加速 LoRA | 默认 **FastH3 Omni**（hao-ai-lab/FastVideo 整模型蒸馏的参考生视频模型，`fasth3_omniref_8step_pruned_int8_convrot`，8 步、shift 12/3、不接加速 LoRA；文本编码器和 VAE 与官方 H3 完全相同），网页「模型」下拉可切回 H3 + 加速 LoRA。同种子实测：人脸、皮肤、衣服暗纹更清楚，更像参考图；动作 LoRA 照样能叠 |
 | RTX 超分 | 无 | 可选「RTX 超分 ×2」（Comfy-Org/ComfyUI_Nvidia_VFX_Nodes，nvidia-vfx，ULTRA）：解码后像素空间每边 ×2，只锐化不改内容；和二采一起开约 4K（长边上限 3840）。节点没装时网页不显示这个开关 |
 
 5090 实测（3 秒片段）：默认 0.9 MP 约 45–50 秒；RTX ×2（2560×1472）约 70 秒；二采 + RTX（3848×2144）约 70 秒；二采到 1952×1088 约 50–100 秒（参考视频 / 多参考约 3 分钟）。

@@ -336,6 +336,7 @@ export const VideoGenNode = memo(({ id, data, selected }) => {
     const payload = {
       mode, prompt: data.prompt, seconds: data.seconds, aspect: data.aspect, megapixels: data.megapixels,
       turbo: data.turbo, steps: data.steps, upscale: data.upscale, seed: data.seed || 0,
+      engine: options.fast_omni && ['r2v', 'multiref'].includes(mode) ? (data.engine || 'fasth3_omni') : 'turbo',
       use_video_audio: data.useVideoAudio, rtx_sr: !!(options.rtx_sr && data.rtxSr), loras,
       first_frame: refs('first')[0]?.ref, last_frame: refs('last')[0]?.ref,
       ref_images: refs('images').map(r => r.ref), ref_videos: refs('videos').map(r => r.ref),
@@ -343,7 +344,7 @@ export const VideoGenNode = memo(({ id, data, selected }) => {
       keyframes: refs('keyframes').map(r => ({ image: r.ref, time: r.edge.data?.time ?? 0 })),
     }
     const lab = VIDEO_MODES.find(m => m.value === mode).label.split('（')[0]
-    run(payload, `${lab} · ${data.seconds} 秒${data.upscale ? ' · 二采' : ''}${payload.rtx_sr ? ' · RTX 超分' : ''}${loras.length ? ` · LoRA×${loras.length}` : ''}`)
+    run(payload, `${lab}${payload.engine === 'fasth3_omni' ? ' · FastH3 Omni' : ''} · ${data.seconds} 秒${data.upscale ? ' · 二采' : ''}${payload.rtx_sr ? ' · RTX 超分' : ''}${loras.length ? ` · LoRA×${loras.length}` : ''}`)
   }
 
   return (
@@ -371,6 +372,12 @@ export const VideoGenNode = memo(({ id, data, selected }) => {
         {!data.turbo && <Field label="步数"><Num value={data.steps} min={4} max={50} onChange={v => set({ steps: v })} /></Field>}
         <Toggle value={data.upscale} onChange={v => set({ upscale: v })} label="二采高清" />
       </div>
+      {options.fast_omni && ['r2v', 'multiref'].includes(mode) && (
+        <Field label="模型" hint="FastH3 Omni：整模型蒸馏的参考生视频专用模型（FastVideo），8 步">
+          <Select value={data.engine || 'fasth3_omni'} onChange={v => set({ engine: v })}
+            options={[{ value: 'fasth3_omni', label: 'FastH3 Omni（蒸馏版，推荐）' }, { value: 'turbo', label: 'H3 + 768p 加速 LoRA' }]} />
+        </Field>
+      )}
       {options.rtx_sr && <Toggle value={data.rtxSr} onChange={v => set({ rtxSr: v })} label="RTX 超分 ×2（出片后用 NVIDIA RTX 放大，最高 4K）" />}
       {data.upscale && <div className="tip">二采：先按上面的「清晰度」完整出片，再在潜空间把每边放大 1.5 倍、低噪声精修补细节（0.9 → 约 1920×1080）。时间约为不开二采的 1.5–2 倍。</div>}
       {mode === 'r2v' && refs('videos').length > 0 && <Toggle value={data.useVideoAudio} onChange={v => set({ useVideoAudio: v })} label="同时参考视频里的原声" />}

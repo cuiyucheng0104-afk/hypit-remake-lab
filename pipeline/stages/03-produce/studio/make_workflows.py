@@ -15,7 +15,7 @@ ACTION = ["minimax\\H3_Combat_V2.safetensors", "minimax\\Motion_Repair_V2.safete
           "minimax\\wushu_h3_v8_5000step.safetensors", "minimax\\wushu_h3_r2v_v7_2000.safetensors"]
 COMMON_NOTE = """- **清晰度**：「画幅与清晰度」里 megapixels 默认 0.9（≈1280×720）；越大越清楚也越慢，最大建议 1.5。
 - **时长**：H3 节点的 length，24 帧 = 1 秒，取 17k+5（73≈3 秒，124≈5 秒，最长约 15 秒）。
-- **加速**：已接 768p 版加速 LoRA（lightx2v Turbo v1.1，8 步，shift 6/3）。不想加速：把它和 SigmaShift 设为绕过，「步数」改成 20。
+- **加速**：已接 768p 版加速 LoRA（lightx2v Turbo v1.1，8 步，shift 6/3）。不想加速：把它和 SigmaShift 设为绕过，「步数」改成 20。（FastH3 Omni 版本身就是 8 步蒸馏模型，没有加速 LoRA，shift 12/3。）
 - **画质要点**（2026-10-26 对照 YZ 整合包优化）：768p 加速 LoRA、fp16 视频 VAE、H.264 CRF 16 输出；旧的 544p 加速 LoRA 叠在上面会糊，别再接。
 """
 UPSCALE_NOTE = "- **二采**：先按清晰度完整出片，再潜空间每边放大 1.5 倍（按放大后的尺寸重建条件），用 Turbo 网格最后两步（0.667→0.462→0）精修补细节。0.9 → 约 1952×1088。\n"
@@ -33,6 +33,12 @@ FLOWS = [
     ("H3 参考生视频·二采高清", dict(mode="r2v", upscale=True, prompt="<Picture 1> is the swordsman. He spins and strikes with his sword, following the motion and camera of <Video 1>.",
                                  ref_images=["hero.jpg"], ref_videos=["spin.mp4"]),
      "同「参考生视频」，多一道二采高清。"),
+    ("H3 参考生视频·FastH3 Omni", dict(mode="r2v", engine="fasth3_omni", prompt="<Picture 1> is the swordsman. He spins and strikes with his sword, following the motion and camera of <Video 1>.",
+                                     ref_images=["hero.jpg"], ref_videos=["spin.mp4"]),
+     "同「参考生视频」，主模型换成 FastH3 Omni（FastVideo 整模型蒸馏的参考生视频专用模型，8 步、shift 12/3、不接加速 LoRA）。实测人脸、皮肤和衣服纹理比「H3 + 加速 LoRA」更清楚、更像参考图。"),
+    ("H3 多参考·FastH3 Omni", dict(mode="multiref", engine="fasth3_omni", prompt="<Picture 1> is the swordsman. He walks through the rainy courtyard toward the camera.",
+                                 ref_images=["hero.jpg"], keyframes=[{"image": "scene.jpg", "time": 0}]),
+     "同「多参考」，主模型换成 FastH3 Omni。"),
     ("H3 多参考（关键帧钉时间点）", dict(mode="multiref", prompt="<Picture 1> is the swordsman. He walks through the rainy courtyard toward the camera.",
                                    ref_images=["hero.jpg"], keyframes=[{"image": "scene.jpg", "time": 0}]),
      "参考图定人物和风格；每个 MiniMaxH3AddGuide 把一张关键帧钉在 frame_idx（= 秒数 × 24）上，可以串多个。"),
@@ -59,7 +65,7 @@ def spec(research_loras):
                     else:
                         titles[nid] = "加速 LoRA（768p Turbo，8 步）"
                 elif c == "UNETLoader":
-                    titles[nid] = "主模型"
+                    titles[nid] = "主模型（FastH3 Omni，8 步蒸馏）" if p.get("engine") == "fasth3_omni" else "主模型"
                 elif c == "ResolutionSelector":
                     titles[nid] = "画幅与清晰度（megapixels 越大越清晰越慢）"
                 elif c in ("MiniMaxH3ImageToVideo", "MiniMaxH3ReferenceToVideo"):

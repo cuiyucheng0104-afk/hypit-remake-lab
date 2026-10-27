@@ -63,7 +63,8 @@ async def studio_page(request):
 async def studio_options(request):
     import nodes
     return web.json_response({"loras": _loras(), "aspects": list(graphs.ASPECTS),
-                              "rtx_sr": "RTXVideoSuperResolution" in nodes.NODE_CLASS_MAPPINGS})
+                              "rtx_sr": "RTXVideoSuperResolution" in nodes.NODE_CLASS_MAPPINGS,
+                              "fast_omni": graphs.FAST_OMNI_UNET in folder_paths.get_filename_list("diffusion_models")})
 
 
 FILE_KEYS = ("first_frame", "last_frame", "source_video", "ref_images", "ref_videos", "ref_audios")

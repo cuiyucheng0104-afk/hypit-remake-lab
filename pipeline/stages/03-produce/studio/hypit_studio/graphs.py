@@ -24,6 +24,9 @@ H3_TURBO = {
     "ref2va": ("minimax_h3_ref2v_turbo_8step_v1.1_768p_comfyui_bf16.safetensors", 8),
 }
 TURBO_SHIFT = (6.0, 3.0)  # 768p 版 Turbo 训练时的 video / audio shift
+# FastH3 Omni（hao-ai-lab FastVideo）：整模型蒸馏的参考生视频模型，8 步，shift 12/3，不叠加速 LoRA；只用于参考生 / 多参考
+FAST_OMNI_UNET = "fasth3_omniref_8step_pruned_int8_convrot.safetensors"
+FAST_OMNI = (8, 12.0, 3.0)
 # 旧的 544p 版加速 LoRA 也不放进 LoRA 列表（叠在新的上面会糊）
 TURBO_FILES = {f for f, _ in H3_TURBO.values()} | {
     "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
@@ -132,12 +135,18 @@ def build_h3(p, lora_choices):
     upscale = bool(p.get("upscale"))
     seed = _seed(p)
 
+    omni = kind == "ref2va" and p.get("engine") == "fasth3_omni"
+    if omni:
+        turbo = True  # 本身就是 8 步蒸馏模型
+
     g = Graph()
-    model = [g.add("UNETLoader", unet_name=H3_UNET[kind], weight_dtype="default"), 0]
-    if turbo:
+    model = [g.add("UNETLoader", unet_name=FAST_OMNI_UNET if omni else H3_UNET[kind], weight_dtype="default"), 0]
+    if turbo and not omni:
         model = [g.add("LoraLoaderModelOnly", model=model, lora_name=H3_TURBO[kind][0], strength_model=1.0), 0]
     model = _apply_loras(g, model, p, lora_choices)
-    if turbo:
+    if omni:
+        model = [g.add("MiniMaxH3SigmaShift", model=model, shift_video=FAST_OMNI[1], shift_audio=FAST_OMNI[2]), 0]
+    elif turbo:
         model = [g.add("MiniMaxH3SigmaShift", model=model, shift_video=TURBO_SHIFT[0], shift_audio=TURBO_SHIFT[1]), 0]
 
     clip = [g.add("CLIPLoader", clip_name=H3_TEXT_ENCODER, type="minimax", device="default"), 0]
@@ -207,7 +216,7 @@ def build_h3(p, lora_choices):
     noise = [g.add("RandomNoise", noise_seed=seed), 0]
     # 第一遍：完整出片（Turbo 用 euler 走蒸馏时的步数网格）
     sampler = [g.add("KSamplerSelect", sampler_name="euler" if turbo else "res_multistep"), 0]
-    steps = H3_TURBO[kind][1] if turbo else int(_num(p.get("steps"), 4, 50, 20))
+    steps = FAST_OMNI[0] if omni else H3_TURBO[kind][1] if turbo else int(_num(p.get("steps"), 4, 50, 20))
     sched = g.add("BasicScheduler", model=model, scheduler="simple", steps=steps, denoise=1.0)
     final = g.add("SamplerCustomAdvanced", noise=noise, guider=[g.add("BasicGuider", model=model, conditioning=positive), 0],
                   sampler=sampler, sigmas=[sched, 0], latent_image=latent)
